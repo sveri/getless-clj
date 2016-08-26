@@ -1,0 +1,8 @@
+{:jdbc-url               "jdbc:sqlite:./db/closp-crud-webinterface.sqlite"
+ :migrations-output-path "./resources/migrators/sqlite"
+ :clj-src                "src/clj"
+ :ns-db                  "de.sveri.getless.db"
+ :ns-db-entities         "de.sveri.getless.db.entities"
+ :ns-routes              "de.sveri.getless.routes"
+ :ns-layout              "de.sveri.getless.layout"
+ :templates              "resources/templates"}
