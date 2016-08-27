@@ -9,7 +9,7 @@
 
 (deftest find-off-steak
   (let [steaks (off/search-products "Steak" off-url off-user off-password)]
-    (clojure.pprint/pprint (first (:products steaks)))
+    (clojure.pprint/pprint steaks)
     (is (< 0 (count (:products steaks))))))
 
 
