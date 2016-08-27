@@ -7,7 +7,15 @@
 {% block content %}
 
     <form class="form" action="/off/search" method="get">
-
+        <input type="text" name="search" class="form-control" value="{{search}}" autofocus/>
+        <input type="button" value="Suchen" class="btn btn-default" />
     </form>
+
+    <table>
+        <thead>
+            <tr></tr>
+        </thead>
+    </table>
+
 
 {% endblock %}
