@@ -30,7 +30,7 @@
 
 (s/def ::product (s/keys :req-un [::id ::code ::lang ::image_thumb_url ::image_small_url ::rev]
                          :opt-un [::product_name ::product_name_de ::brands ::ingredients_text_de ::packaging
-                                  ::serving_quantity ::nutrition_data_per ::quantity ::ingredients] ::_keywords))
+                                  ::serving_quantity ::nutrition_data_per ::quantity ::ingredients ::_keywords]))
 (s/def ::products (s/cat :product (s/* ::product)))
 
 (s/def ::search-result (s/keys :req-un [::page-size ::count ::skip ::page ::products]))

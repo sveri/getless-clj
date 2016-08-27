@@ -8,6 +8,7 @@
             [compojure.route :as route]
             [com.stuartsierra.component :as comp]
             [de.sveri.getless.routes.home :refer [home-routes]]
+            [de.sveri.getless.routes.off :refer [off-routes]]
             [de.sveri.getless.routes.cc :refer [cc-routes]]
             [de.sveri.getless.routes.user :refer [user-routes registration-routes]]
             [de.sveri.getless.middleware :refer [load-middleware]]))
@@ -32,7 +33,7 @@
   (-> (app-handler
         (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
                          ;; add your application routes here
-                         [(cc-routes config) home-routes (user-routes config) base-routes]))
+                         [(cc-routes config) off-routes home-routes (user-routes config) base-routes]))
         ;; add custom middleware here
         :middleware (load-middleware config (:tconfig locale))
         :ring-defaults (mk-defaults false)
