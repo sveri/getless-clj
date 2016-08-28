@@ -13,7 +13,8 @@
             [ring.middleware.transit :refer [wrap-transit-response]]
             [ring.middleware.reload :refer [wrap-reload]]
             [de.sveri.getless.service.auth :refer [auth-backend]]
-            [de.sveri.getless.service.auth :as auth]))
+            [de.sveri.getless.service.auth :as auth]
+            [clojure.spec.test :as stest]))
 
 (defonce in-memory-store-instance (in-memory-store))
 
@@ -36,7 +37,7 @@
 
 (defn production-middleware [config tconfig]
   [#(add-req-properties % config)
-   #(wrap-access-rules % {:rules auth/rules })
+   #(wrap-access-rules % {:rules auth/rules})
    #(wrap-authorization % auth/auth-backend)
    #(wrap-internal-error % :log (fn [e] (timbre/error e)))
    #(wrap-tower % tconfig)
@@ -45,5 +46,6 @@
    wrap-trimmings])
 
 (defn load-middleware [config tconfig]
+  (when (= (:env config) :dev) (stest/instrument))
   (concat (production-middleware config tconfig)
           (when (= (:env config) :dev) development-middleware)))

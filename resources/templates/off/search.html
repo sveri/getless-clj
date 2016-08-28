@@ -8,7 +8,7 @@
 
     <form class="form" action="/off/search" method="get">
         <input type="text" name="search" class="form-control" value="{{search}}" autofocus/>
-        <input type="button" value="Suchen" class="btn btn-default" />
+        <input type="submit" value="Suchen" class="btn btn-default" />
     </form>
 
     <table class="table" style="margin-top: 30px;">
@@ -17,7 +17,7 @@
                 <tr>
                     <td>{{product.product_name}}</td>
                     <td><img src="{{product.image_small_url}}" alt="{{product.product_name}}"/></td>
-                    <td><a href="/meal/add/product" class="btn btn-primary">Hinzufügen </a></td>
+                    <td><a href="/meal/add/product/{{product.id}}" class="btn btn-primary">Hinzufügen </a></td>
                 </tr>
             {% endfor %}
             <tr></tr>
