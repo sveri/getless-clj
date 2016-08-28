@@ -1,0 +1,17 @@
+{% extends "templates/base.html" %}
+
+{% block add-css %}
+{% style "/css/home.css" %}
+{% endblock %}
+
+{% block content %}
+
+    Add to foobar
+
+    <form class="form" action="/off/search" method="get">
+        <input type="text" name="search" class="form-control" value="{{search}}" autofocus/>
+        <input type="button" value="Suchen" class="btn btn-default" />
+    </form>
+
+
+{% endblock %}
