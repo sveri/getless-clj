@@ -5,8 +5,8 @@
 
 
 (deftest save-meal-in-session
-  (meal/save-new-meal)
-  (let [meal (meal/get-meal)]
+  (let [session (meal/save-new-meal {})
+        meal (meal/get-meal session)]
     (is (= "BREAKFAST" (:type meal)))))
 
 (stest/instrument)

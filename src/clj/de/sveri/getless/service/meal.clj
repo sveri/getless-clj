@@ -11,15 +11,18 @@
 (s/def ::launch #(= % launch))
 (s/def ::supper #(= % supper))
 (s/def ::snack #(= % snack))
-(s/def ::breakfast-type #{::snack ::supper ::launch ::breakfast})
+(s/def ::meal-type (s/or :snack ::snack :supper ::supper :launch ::launch :breakfast ::breakfast))
 
 (s/def ::session-map (s/keys))
 
 
-(s/fdef save-new-meal :args (s/cat :session ::session-map :breakfast-type (s/nilable ::breakfast-type))
+(s/fdef save-new-meal :args (s/cat :session ::session-map :breakfast-type (s/? ::meal-type))
         :ret any?)
 (defn save-new-meal [session & [breakfast-type]]
-  (assoc-in session [:meal :type] breakfast))
+  (assoc-in session [:meal :type] (or breakfast-type breakfast)))
 
+
+(defn get-meal [session]
+  (get session :meal {}))
 
 (stest/instrument)
