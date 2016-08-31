@@ -8,12 +8,41 @@
 
     <h3>Neue Mahlzeit hinzufügen</h3>
 
-    <a href="/off/search" class="btn btn-primary">Produkt hinzufügen</a>
+    <a href="/off/search" class="btn btn-primary" style="margin-bottom: 10px;">Produkt hinzufügen</a>
 
 
-    <form class="form" action="/off/search" method="get">
-        <input type="text" name="search" class="form-control" value="{{search}}" autofocus/>
-        <input type="button" value="Suchen" class="btn btn-default" />
+    <form class="form" action="/meal/new" method="post">
+
+        <input class="form-control" type="text" name="name" value="{{meal.name}}" placeholder="Name" style="margin-bottom:10px;"/>
+
+        <select name="type" class="form-control">
+            <option value="BREAKFAST">Frühstück</option>
+            <option value="LAUNCH">Mittag</option>
+            <option value="SUPPER">Abendbrot</option>
+            <option value="SNACK">Snack</option>
+        </select>
+
+        <h4>Produkte</h4>
+
+        <table class="table" style="margin-top: 30px;">
+            <tbody>
+            {% for product in meal.products %}
+            <tr>
+                <td>{{product.product_name}}</td>
+                <td><img src="{{product.image_small_url}}" alt="{{product.product_name}}"/></td>
+                <td>{{product.ingredients_text}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% for product in meal.products %}
+            <ul>
+                <li>{{product.product_name}}</li>
+            </ul>
+        {% endfor %}
+
+        <input type="button" value="Speichern" class="btn btn-default" style="margin-top:15px; "/>
     </form>
 
 
