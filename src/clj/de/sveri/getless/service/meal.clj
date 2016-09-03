@@ -34,3 +34,4 @@
 (s/fdef add-product-to-meal :args (s/cat :session ::session-map :product ::s-off/product) :ret ::session-map)
 (defn add-product-to-meal [session product]
   (update-in session [:getless :meal :products] conj product))
+

@@ -18,7 +18,7 @@
     (is (= meal/launch (:type meal)))))
 
 
-(deftest add-product-to-meal
+(deftest ^:integration add-product-to-meal
   (let [off-product (off/get-by-id 22114166 offh/off-url offh/off-user offh/off-password)
         session (meal/add-product-to-meal {} off-product)
         meal (meal/get-meal session)]
