@@ -1,6 +1,6 @@
 (ns de.sveri.getless.db.entities
   (:require [korma.core :refer [defentity]]))
 
-(declare user)
+(declare users)
 
-(defentity user)
+(defentity users)
