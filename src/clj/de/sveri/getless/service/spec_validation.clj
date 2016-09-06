@@ -1,5 +1,6 @@
 (ns de.sveri.getless.service.spec-validation
-  (:require [clojure.spec :as s]))
+  (:require [clojure.spec :as s]
+            [clojure.string :as str]))
 
 (def not-blank '(not (blank? %)))
 
@@ -9,8 +10,12 @@
 (defmethod parse-pred not-blank [_]
   " should not be empty.")
 
+(defmethod parse-pred :default [_]
+  "")
+
 (defn get-via [problem]
   (str "\"" (-> problem :via first name) "\""))
+
 
 (defn parse-problem [problem]
   (let [via (get-via problem)
@@ -21,11 +26,43 @@
   (reduce (fn [acc b] (parse-problem b)) "" problems))
 
 
+(defmulti dispatch-on-spec-type (fn [to-validate spec problems] (first (s/describe spec))))
+
+(defmethod dispatch-on-spec-type 'or [to-validate spec problems]
+  (str "\""to-validate"\" is not a valid type. Expecting: " (get-via (first problems))))
+
+
+(defmethod dispatch-on-spec-type :default [to-validate spec problems]
+  (parse-problems problems))
+
+
 
 
 ;(s/fdef validate-new-meal :args (s/cat :to-validate any? :spec any? :argss (s/& (s/* any?) #(even? (count %)))))
-(s/fdef validate-new-meal :args (s/cat :to-validate any? :spec any?))
+(s/fdef validate :args (s/cat :to-validate any? :spec any?))
 (defn validate [to-validate spec]
   (when-let [expl (s/explain-data spec to-validate)]
     (let [problems (::s/problems expl)]
-      (parse-problems problems))))
+      (dispatch-on-spec-type to-validate spec problems))))
+
+
+;(s/* (s/cat :x1 any? :x2 any?))
+
+(s/fdef validate-specs :args (s/cat :v (s/* (s/cat :to-validate any? :spec any?))))
+(defn validate-specs [ & v]
+  (reduce (fn [acc [to-validate spec]] (str acc "\n" (validate to-validate spec))) ""(partition 2 v))
+  (str/join "\n" (map (fn [[to-validate spec]] (validate to-validate spec)) (partition 2 v))))
+
+
+
+
+;(s/fdef validate :args (s/cat :to-validate any? :spec any?))
+;
+;(defmulti validate (fn [_ spec] spec))
+
+
+;(defmethod validate [to-validate spec]
+;  (when-let [expl (s/explain-data spec to-validate)]
+;    (let [problems (::s/problems expl)]
+;      (clojure.pprint/pprint expl)
+;      (parse-problems problems))))
