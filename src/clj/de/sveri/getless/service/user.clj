@@ -3,7 +3,8 @@
             [taoensso.timbre :as timbre]
             [noir.session :as sess]
             [clojure.core.typed :as t]
-            [de.sveri.getless.types :as ty]))
+            [de.sveri.getless.types :as ty]
+            [de.sveri.getless.db.user :as db-u]))
 
 (defmulti send-mail-by-type (fn [m _] (get m :prot)))
 
@@ -54,3 +55,6 @@
 
 (t/ann ^:no-check get-logged-in-username [-> String])
 (defn get-logged-in-username [] (:email (get-logged-in-user)))
+
+(defn get-logged-in-user-id []
+  (:id (db-u/get-user-by-email (:email (get-logged-in-user)))))

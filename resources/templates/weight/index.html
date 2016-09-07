@@ -8,7 +8,13 @@
 
     <h3>Gewichtsverlauf</h3>
 
+    {% for weight in weights %}
+        {{weight.id}}
+    {% endfor %}
 
+
+
+    <h3>Messung hinzufügen</h3>
     <form class="form" action="/weight/add" method="post">
         <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
