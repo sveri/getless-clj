@@ -8,9 +8,14 @@
 
     <h3>Gewichtsverlauf</h3>
 
-    {% for weight in weights %}
-        {{weight.id}}
-    {% endfor %}
+{% for weight in weights %}
+{{weight}}
+{% endfor %}
+{% for weight in dates %}
+{{weight}}
+{% endfor %}
+
+    <canvas id="weight-chart" width="600" height="100"></canvas>
 
 
 
@@ -26,4 +31,9 @@
     </form>
 
 
+{% endblock %}
+
+{% block js-bottom %}
+<script src="/js/Chart.min.js"></script>
+<script src="/js/weight/index.js"></script>
 {% endblock %}

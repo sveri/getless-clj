@@ -7,7 +7,11 @@
             [clojure.spec :as s]))
 
 (defn weight-page [_]
-  (layout/render "weight/index.html" {:weights (db-w/get-weights (s-u/get-logged-in-user-id))}))
+  (let [weights_complete (db-w/get-weights (s-u/get-logged-in-user-id))
+        dates (map :weighted_at weights_complete)
+        weights (map :weight weights_complete)]
+
+    (layout/render "weight/index.html" {:weights weights :dates dates})))
 
 
 (defn add [date weight])

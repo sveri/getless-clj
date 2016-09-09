@@ -5,8 +5,10 @@
             <a href="/example">Example Page</a></li>
 
         {% if identity %}
-            <li field="link-list" {% ifequal page "meal/new.html" %} class="active"{%endifequal%}>
-                <a href="/meal/new">Neue Mahlzeit</a></li>
+        <li field="link-list" {% ifequal page "meal/new.html" %} class="active"{%endifequal%}>
+            <a href="/meal/new">Neue Mahlzeit</a></li>
+        <li field="link-list" {% ifequal page "weight/index.html" %} class="active"{%endifequal%}>
+            <a href="/weight">Gewichtsverlauf</a></li>
 
         {% endif %}
 
