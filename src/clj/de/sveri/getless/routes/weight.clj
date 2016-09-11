@@ -4,14 +4,14 @@
             [ring.util.response :refer [response redirect]]
             [de.sveri.getless.db.weight :as db-w]
             [de.sveri.getless.service.user :as s-u]
+            [de.sveri.getless.service.weight :as s-w]
             [clojure.spec :as s]))
 
 (defn weight-page [_]
-  (let [weights_complete (db-w/get-weights (s-u/get-logged-in-user-id))
-        dates (map :weighted_at weights_complete)
-        weights (map :weight weights_complete)]
-
-    (layout/render "weight/index.html" {:weights weights :dates dates})))
+  (let [weights-map (s-w/format-weighted-at (db-w/get-weights (s-u/get-logged-in-user-id))
+                                            s-w/postgres-date-formatter s-w/weight-date-format)]
+    (layout/render "weight/index.html" {:weights (s-w/weight->js-string :weight weights-map)
+                                        :dates   (s-w/weight->js-string :weighted-at weights-map)})))
 
 
 (defn add [date weight])
