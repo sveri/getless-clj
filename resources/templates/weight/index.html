@@ -6,6 +6,9 @@
 
 {% block content %}
 
+<input type="hidden" id="weighted_at" value="{{dates}}"/>
+<input type="hidden" id="weights" value="{{weights}}"/>
+
     <h3>Gewichtsverlauf</h3>
 
 {% for weight in weights %}
