@@ -2,7 +2,6 @@ var ctx=$("#weight-chart");
 
 var data = {
     labels: JSON.parse($("#weighted_at").val()),
-//    labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
         {
             label: "Gewichtsverlauf",
@@ -32,6 +31,5 @@ var data = {
 var myLineChart = new Chart(ctx, {
     type: 'line',
     data: data,
-//    options: options
 });
 

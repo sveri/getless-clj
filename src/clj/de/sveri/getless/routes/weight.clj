@@ -14,11 +14,13 @@
                                         :dates   (s-w/weight->js-string :weighted_at weights-map)})))
 
 
-(defn add [date weight])
+(defn add [date weight req]
+  (clojure.pprint/pprint req)
+  (redirect "/weight"))
 
 
 (defn weight-routes [config]
   (routes
     (GET "/weight" req (weight-page req))
-    (POST "/weight/add" [date weight] (add date weight))))
+    (POST "/weight/add" [date weight :as req] (add date weight req))))
 

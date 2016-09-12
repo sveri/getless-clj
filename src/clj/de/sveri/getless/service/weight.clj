@@ -5,7 +5,7 @@
 
 (def weight-date-format (time-f/formatter "dd.MM.yyyy"))
 
-(s/def ::weighted_at inst?)
+(s/def ::weighted_at (s/or :instant inst? :string string?))
 (s/def ::weight number?)
 (s/def ::weight-map (s/keys :req-un [::weight ::weighted_at]))
 (s/def ::weights (s/cat :weight-map (s/* ::weight-map)))
