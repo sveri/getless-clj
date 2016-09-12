@@ -5,7 +5,7 @@
 
 (defn get-weights [users_id]
   (select weight (where {:users_id users_id})
-          (order :weighted-at :asc)))
+          (order :weighted_at :asc)))
 
 ;(defn get-user-by-email [email] (first (select users (where {:email email}) (limit 1))))
 ;(defn get-user-by-act-id [id] (first (select users (where {:activationid id}) (limit 1))))
