@@ -50,19 +50,4 @@
 
 (s/fdef validate-specs :args (s/cat :v (s/* (s/cat :to-validate any? :spec any?))))
 (defn validate-specs [ & v]
-  (reduce (fn [acc [to-validate spec]] (str acc "\n" (validate to-validate spec))) ""(partition 2 v))
-  (str/join "\n" (map (fn [[to-validate spec]] (validate to-validate spec)) (partition 2 v))))
-
-
-
-
-;(s/fdef validate :args (s/cat :to-validate any? :spec any?))
-;
-;(defmulti validate (fn [_ spec] spec))
-
-
-;(defmethod validate [to-validate spec]
-;  (when-let [expl (s/explain-data spec to-validate)]
-;    (let [problems (::s/problems expl)]
-;      (clojure.pprint/pprint expl)
-;      (parse-problems problems))))
+  (str/trim (str/join "\n" (map (fn [[to-validate spec]] (validate to-validate spec)) (partition 2 v)))))

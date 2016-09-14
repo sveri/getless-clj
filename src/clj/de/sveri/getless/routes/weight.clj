@@ -5,7 +5,9 @@
             [de.sveri.getless.db.weight :as db-w]
             [de.sveri.getless.service.user :as s-u]
             [de.sveri.getless.service.weight :as s-w]
-            [clojure.spec :as s]))
+            [clojure.instant :as inst]
+            [de.sveri.getless.service.spec-validation :as validation]
+            [clojure.string :as str]))
 
 (defn weight-page [_]
   (let [weights-map (s-w/format-weighted-at (db-w/get-weights (s-u/get-logged-in-user-id))
@@ -15,8 +17,16 @@
 
 
 (defn add [date weight req]
-  (clojure.pprint/pprint req)
-  (redirect "/weight"))
+  (let [date-date (inst/read-instant-date date)
+        weight-weight (read-string weight)
+        validation-result (validation/validate-specs date-date ::s-w/weighted_at
+                                                     weight-weight ::s-w/weight)]
+    (if (str/blank? validation-result)
+      (do (db-w/save-weight weight-weight date-date (s-u/get-logged-in-user-id))
+          (redirect "/weight"))
+      (assoc (redirect "/weight") :flash validation-result))))
+
+
 
 
 (defn weight-routes [config]

@@ -15,7 +15,7 @@
              :handler admin-access}
             {:pattern #"^/user/changepassword"
              :handler loggedin-access}
-            {:pattern #"^/weight"
+            {:pattern #"^/weight.*"
              :handler loggedin-access}
             {:pattern #"^/user.*"
              :handler unauthorized-access}
