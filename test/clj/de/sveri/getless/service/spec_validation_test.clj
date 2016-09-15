@@ -5,6 +5,7 @@
             [de.sveri.getless.service.spec-common :as s-comm]
             [de.sveri.getless.service.meal :as s-meal]
             [de.sveri.getless.service.weight :as sw]
+            [de.sveri.getless.db.weight :as db-w]
             [clojure.instant :as ci]))
 
 
@@ -21,9 +22,9 @@
          (sv/validate-specs "" ::s-meal/meal-type "" ::s-comm/required-name))))
 
 (deftest date-param
-  (is (nil? (sv/validate (ci/read-instant-date "2016-09-03") ::sw/weighted_at)))
-  (is (nil? (sv/validate (read-string "99") ::sw/weight)))
-  (is (= "" (sv/validate-specs (ci/read-instant-date "2016-09-03") ::sw/weighted_at (read-string "99") ::sw/weight))))
+  (is (nil? (sv/validate (ci/read-instant-date "2016-09-03") ::db-w/weighted_at)))
+  (is (nil? (sv/validate (read-string "99") ::db-w/weight)))
+  (is (= "" (sv/validate-specs (ci/read-instant-date "2016-09-03") ::db-w/weighted_at (read-string "99") ::db-w/weight))))
 
 
 
