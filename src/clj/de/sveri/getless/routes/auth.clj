@@ -1,5 +1,5 @@
 (ns de.sveri.getless.routes.auth
-  (:require [compojure.core :refer [routes GET]]
+  (:require [compojure.core :refer [routes POST]]
             [buddy.sign.jwt :as jwt]
             [ring.util.response :refer [response status]]
             [buddy.hashers :as hashers]
@@ -16,4 +16,4 @@
 
 (defn auth-routes [config]
   (routes
-    (GET "/api/login" req (login-handler config (-> req :headers (get "username")) (-> req :headers (get "password"))))))
+    (POST "/api/login" [username password] (login-handler config username password))))
