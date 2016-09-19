@@ -1,19 +1,14 @@
 (ns de.sveri.getless.routes.rest
   (:require [compojure.core :refer [routes GET]]
-            [buddy.sign.jwt :as jwt]
             [buddy.auth :refer [authenticated? throw-unauthorized]]
-            [ring.util.response :refer [response]]))
+            [ring.util.response :refer [response]]
+            [de.sveri.getless.db.weight :as db-w]))
 
-(defn login-handler
-  [config req]
-  (response {:success :success}))
-;(if-not (authenticated? req)
-;  (throw-unauthorized)
-;  (response {:success :success}))
-    ;{:status  200
-    ; :body    {:token token}
-    ; :headers {:content-type "application/json"}}))
+(defn login-handler [req]
+  (let [user-id (-> req :identity :user-id)
+        weights (db-w/get-weights user-id)]
+    (response weights)))
 
-(defn rest-routes [config]
-      (routes
-        (GET "/api/weight" req (login-handler config req))))
+(defn rest-routes [_]
+  (routes
+    (GET "/api/weight" req (login-handler req))))

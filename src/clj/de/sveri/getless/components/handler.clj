@@ -7,6 +7,7 @@
             [buddy.auth.accessrules :refer [wrap-access-rules]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.file :refer [wrap-file]]
+            [ring.middleware.format :refer [wrap-restful-format]]
             [compojure.route :as route]
             [com.stuartsierra.component :as comp]
             [de.sveri.getless.routes.home :refer [home-routes]]
@@ -44,8 +45,10 @@
 
 (defn get-handler [config locale]
   (routes
-    (auth-routes config)
+    (-> (auth-routes config)
+        (wrap-routes wrap-restful-format :formats [:json-kw]))
     (-> (rest-routes config)
+        (wrap-routes wrap-restful-format :formats [:json-kw])
         (wrap-routes wrap-authentication jws-backend)
         (wrap-routes wrap-authorization jws-backend)
         (wrap-routes wrap-access-rules {:rules s-auth/rest-rules}))
