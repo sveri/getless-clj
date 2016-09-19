@@ -3,8 +3,6 @@
             [noir.response :refer [redirect]]
             [noir.util.middleware :refer [app-handler]]
             [ring.middleware.defaults :refer [site-defaults]]
-    ;[ring.middleware.params :refer [wrap-params]]
-    ;[ring.middleware.keyword-params :refer [wrap-keyword-params]]
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [buddy.auth.accessrules :refer [wrap-access-rules]]
             [ring.middleware.file-info :refer [wrap-file-info]]
@@ -46,6 +44,7 @@
 
 (defn get-handler [config locale]
   (routes
+    (auth-routes config)
     (-> (rest-routes config)
         (wrap-routes wrap-authentication jws-backend)
         (wrap-routes wrap-authorization jws-backend)
@@ -54,7 +53,7 @@
           (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
                          ;; add your application routes here
                          [(cc-routes config) (weight-routes config) (off-routes config) home-routes
-                          (auth-routes config) (user-routes config) (meal-routes config)
+                          (user-routes config) (meal-routes config)
                           base-routes]))
           ;; add custom middleware here
           :middleware (load-middleware config (:tconfig locale))
