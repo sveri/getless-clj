@@ -1,8 +1,12 @@
 (ns de.sveri.getless.components.handler
-  (:require [compojure.core :refer [defroutes]]
+  (:require [compojure.core :refer [defroutes routes wrap-routes]]
             [noir.response :refer [redirect]]
             [noir.util.middleware :refer [app-handler]]
             [ring.middleware.defaults :refer [site-defaults]]
+    ;[ring.middleware.params :refer [wrap-params]]
+    ;[ring.middleware.keyword-params :refer [wrap-keyword-params]]
+            [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
+            [buddy.auth.accessrules :refer [wrap-access-rules]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.file :refer [wrap-file]]
             [compojure.route :as route]
@@ -11,9 +15,14 @@
             [de.sveri.getless.routes.off :refer [off-routes]]
             [de.sveri.getless.routes.meal :refer [meal-routes]]
             [de.sveri.getless.routes.weight :refer [weight-routes]]
+            [de.sveri.getless.routes.auth :refer [auth-routes]]
+            [de.sveri.getless.routes.rest :refer [rest-routes]]
             [de.sveri.getless.routes.cc :refer [cc-routes]]
             [de.sveri.getless.routes.user :refer [user-routes registration-routes]]
-            [de.sveri.getless.middleware :refer [load-middleware]]))
+            [de.sveri.getless.middleware :refer [load-middleware]]
+            [de.sveri.getless.service.config :as s-c]
+            [de.sveri.getless.service.auth :as s-auth]
+            [buddy.auth.backends :as backends]))
 
 (defroutes base-routes
   (route/resources "/")
@@ -31,26 +40,35 @@
            (update-in [:session] merge session-defaults)
            (assoc-in [:security :anti-forgery] xss-protection?)))
 
+
+(def secret (:jwt-secret (s-c/read-config-from-nomad)))
+(def jws-backend (backends/jws {:secret secret}))
+
 (defn get-handler [config locale]
-  (-> (app-handler
-        (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
+  (routes
+    (-> (rest-routes config)
+        (wrap-routes wrap-authentication jws-backend)
+        (wrap-routes wrap-authorization jws-backend)
+        (wrap-routes wrap-access-rules {:rules s-auth/rest-rules}))
+    (-> (app-handler
+          (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
                          ;; add your application routes here
-                         [(cc-routes config) (weight-routes config) (off-routes config) home-routes (user-routes config)
-                          (meal-routes config)
+                         [(cc-routes config) (weight-routes config) (off-routes config) home-routes
+                          (auth-routes config) (user-routes config) (meal-routes config)
                           base-routes]))
-        ;; add custom middleware here
-        :middleware (load-middleware config (:tconfig locale))
-        :ring-defaults (mk-defaults false)
-        ;; add access rules here
-        :access-rules []
-        ;; serialize/deserialize the following data formats
-        ;; available formats:
-        ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
-        :formats [:json-kw :edn :transit-json])
-      ; Makes static assets in $PROJECT_DIR/resources/public/ available.
-      (wrap-file "resources")
-      ; Content-Type, Content-Length, and Last Modified headers for files in body
-      (wrap-file-info)))
+          ;; add custom middleware here
+          :middleware (load-middleware config (:tconfig locale))
+          :ring-defaults (mk-defaults false)
+          ;; add access rules here
+          :access-rules []
+          ;; serialize/deserialize the following data formats
+          ;; available formats:
+          ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
+          :formats [:json-kw :edn :transit-json])
+        ; Makes static assets in $PROJECT_DIR/resources/public/ available.
+        (wrap-file "resources")
+        ; Content-Type, Content-Length, and Last Modified headers for files in body
+        (wrap-file-info))))
 
 (defrecord Handler [config locale]
   comp/Lifecycle

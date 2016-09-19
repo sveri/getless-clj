@@ -1,12 +1,10 @@
 (ns de.sveri.getless.components.config
   (:require [com.stuartsierra.component :as component]
-            [nomad :refer [read-config]]
-            [clojure.java.io :as io]))
+            [de.sveri.getless.service.config :as s-c]))
 
 (defn prod-conf-or-dev []
-  (if-let [config-path (System/getProperty "closp-config-path")]
-    (read-config (io/file config-path))
-    (read-config (io/resource "closp.edn"))))
+  (s-c/read-config-from-nomad))
+
 
 (defrecord Config [config]
   component/Lifecycle

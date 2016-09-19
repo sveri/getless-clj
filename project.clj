@@ -26,8 +26,8 @@
                  [com.taoensso/timbre "4.1.4"]
                  [noir-exception "0.2.5"]
 
-                 [buddy/buddy-auth "0.6.0"]
-                 [buddy/buddy-hashers "0.6.0"]
+                 [buddy/buddy-auth "1.1.0"]
+                 [buddy/buddy-hashers "1.0.0"]
 
                  [log4j "1.2.17" :exclusions [javax.mail/mail
                                               javax.jms/jms
@@ -67,8 +67,8 @@
                  [joplin.jdbc "0.3.6"]
                  [joplin.core "0.3.6"]
                  [de.sveri/closp-crud "0.3.0"]
-                 [clj-time "0.12.0"]
-                 [org.clojure/java.jdbc "0.6.2-alpha3"]]
+                 [clj-time "0.12.0"]]
+                 ;[org.clojure/java.jdbc "0.6.2-alpha3"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]]
 
@@ -100,7 +100,8 @@
                                       [lein-figwheel "0.5.0-2"]
                                       [test2junit "1.1.1"]]
 
-                       :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
+                       :dependencies [
+                                      ;[org.bouncycastle/bcprov-jdk15on "1.52"]
 
                                       [org.apache.httpcomponents/httpclient "4.5.1"]
                                       [clj-webdriver "0.7.2"]

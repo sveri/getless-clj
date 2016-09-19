@@ -1,5 +1,5 @@
 (ns de.sveri.getless.middleware
-  (:require [taoensso.timbre :as timbre]
+  (:require [buddy.auth.backends :as backends]
             [selmer.middleware :refer [wrap-error-page]]
             [prone.middleware :refer [wrap-exceptions]]
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
@@ -11,7 +11,7 @@
             [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
             [ring.middleware.transit :refer [wrap-transit-response]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [de.sveri.getless.service.auth :refer [auth-backend]]
+            [de.sveri.getless.service.auth :refer [auth-session-backend]]
             [de.sveri.getless.service.auth :as auth]
             [clojure.spec.test :as stest]))
 
@@ -32,7 +32,7 @@
 (defn production-middleware [config tconfig]
   [#(add-req-properties % config)
    #(wrap-access-rules % {:rules auth/rules})
-   #(wrap-authorization % auth/auth-backend)
+   #(wrap-authorization % auth/auth-session-backend)
    #(wrap-tower % tconfig)
    #(wrap-transit-response % {:encoding :json :opts {}})
    wrap-anti-forgery
