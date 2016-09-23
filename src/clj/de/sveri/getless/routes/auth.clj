@@ -3,15 +3,26 @@
             [buddy.sign.jwt :as jwt]
             [ring.util.response :refer [response status]]
             [buddy.hashers :as hashers]
+            [clojure.tools.logging :as log]
             [de.sveri.getless.db.user :as db]))
+
 
 (defn login-handler
   [config username password]
   (if-let [user (db/get-user-by-email username)]
     (cond
-      (= false (hashers/check password (get user :pass ""))) (status (response {:error "Unauthorized"}) 401)
+      (or (= 0 (:is_active user)) (= false (:is_active user)))
+      (do (log/info "Inactive user tried to access /api/login: " username)
+          (status (response {:error "Unauthorized"}) 401))
+
+      (= false (hashers/check password (get user :pass "")))
+      (do (log/info "Wrong password tried to access /api/login: " username)
+          (status (response {:error "Unauthorized"}) 401))
+
       :else (response {:token (jwt/sign {:user-id (:id user)} (:jwt-secret config))}))
-    (status (response {:error "Unauthorized"}) 401)))
+
+    (do (log/info "Non existent user tried to access /api/login: " username)
+        (status (response {:error "Unauthorized"}) 401))))
 
 (defn auth-routes [config]
   (routes
