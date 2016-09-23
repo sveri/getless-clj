@@ -7,7 +7,6 @@
 (def weight-date-format (time-f/formatter "dd.MM.yyyy"))
 
 
-
 (s/fdef weight->js-string :args (s/cat :k #{:weighted_at :weight} :weights (s/spec ::db-w/weights))
         :ret string?)
 (defn weight->js-string [k weights]

@@ -19,8 +19,8 @@
 (defn add [date weight req]
   (let [date-date (inst/read-instant-date date)
         weight-weight (read-string weight)
-        validation-result (validation/validate-specs date-date ::s-w/weighted_at
-                                                     weight-weight ::s-w/weight)]
+        validation-result (validation/validate-specs date-date ::db-w/weighted_at
+                                                     weight-weight ::db-w/weight)]
     (if (str/blank? validation-result)
       (do (db-w/save-weight weight-weight date-date (s-u/get-logged-in-user-id))
           (redirect "/weight"))

@@ -2,7 +2,6 @@
   (:require [korma.core :refer [select where insert delete values update set-fields defentity limit order]]
             [korma.db :refer [h2]]
             [de.sveri.getless.db.entities :refer [weight]]
-            
             [clojure.spec :as s])
   (:import (java.sql Timestamp)))
 
