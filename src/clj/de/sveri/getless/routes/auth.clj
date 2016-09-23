@@ -7,6 +7,7 @@
 
 (defn login-handler
   [config username password]
+  (println username password)
   (if-let [user (db/get-user-by-email username)]
     (cond
       (or (= 0 (:is_active user)) (= false (:is_active user))) (status (response {:error "Unauthorized"}) 401)

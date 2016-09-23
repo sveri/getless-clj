@@ -4,11 +4,12 @@
             [ring.util.response :refer [response]]
             [de.sveri.getless.db.weight :as db-w]))
 
-(defn login-handler [req]
+(defn get-weights [req]
   (let [user-id (-> req :identity :user-id)
-        weights (db-w/get-weights user-id)]
-    (response weights)))
+        weights (db-w/get-weights user-id)
+        weights-cleaned (mapv #(dissoc % :id :users_id) weights)]
+    (response weights-cleaned)))
 
 (defn rest-routes [_]
   (routes
-    (GET "/api/weight" req (login-handler req))))
+    (GET "/api/weight" req (get-weights req))))
