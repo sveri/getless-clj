@@ -7,10 +7,8 @@
 
 (defn login-handler
   [config username password]
-  (println username password)
   (if-let [user (db/get-user-by-email username)]
     (cond
-      (or (= 0 (:is_active user)) (= false (:is_active user))) (status (response {:error "Unauthorized"}) 401)
       (= false (hashers/check password (get user :pass ""))) (status (response {:error "Unauthorized"}) 401)
       :else (response {:token (jwt/sign {:user-id (:id user)} (:jwt-secret config))}))
     (status (response {:error "Unauthorized"}) 401)))
