@@ -15,12 +15,6 @@
 (defn cookies-page []
   (layout/render "home/cookies.html"))
 
-(defn example-page []
-  (layout/render "home/example.html"))
-
-(defn ajax-page []
-  (layout/render "home/ajax-example.html"))
-
 (defn ajax-initial-data []
   (response {:ok "fooo" :loaded true}))
 
@@ -29,6 +23,4 @@
            (GET "/tos" [] (tos-page))
            (GET "/cookies" [] (cookies-page))
            (GET "/" [] (home-page))
-           (GET "/example" [] (example-page))
-           (GET "/ajax/page" [] (ajax-page))
            (GET "/ajax/page/init" [] (ajax-initial-data)))

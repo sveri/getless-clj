@@ -6,17 +6,13 @@ role character varying(30),
 email character varying(30) NOT NULL,
 last_login time,
 is_active BOOLEAN DEFAULT FALSE NOT NULL,
-pass character varying(200),
-activationid character varying(100)
+pass character varying(200)
 );
 
 ALTER TABLE users OWNER TO getless;
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT uk_6dotkott2kjsp8vw4d0m25fb7 UNIQUE (email);
-
-ALTER TABLE ONLY users
-    ADD CONSTRAINT uk_k8d0f2n7n88w1a16yhua64onx UNIQUE (activationid);
 
 --;;
 INSERT INTO users (first_name, last_name, email, role, is_active, pass) VALUES
