@@ -43,9 +43,9 @@
 (def secret (:jwt-secret (s-c/read-config-from-nomad)))
 (def jws-backend (backends/jws {:secret secret}))
 
-(defn get-handler [config locale]
+(defn get-handler [config locale {:keys [db]}]
   (routes
-    (-> (auth-routes config)
+    (-> (auth-routes config db)
         (wrap-routes wrap-restful-format :formats [:json-kw]))
     (-> (rest-routes config)
         (wrap-routes wrap-restful-format :formats [:json-kw])
@@ -53,10 +53,10 @@
         (wrap-routes wrap-authorization jws-backend)
         (wrap-routes wrap-access-rules {:rules s-auth/rest-rules}))
     (-> (app-handler
-          (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
+          (into [] (concat (when (:registration-allowed? config) [(registration-routes config db)])
                          ;; add your application routes here
-                         [(cc-routes config) (weight-routes config) (off-routes config) home-routes
-                          (user-routes config) (meal-routes config)
+                         [(cc-routes config) (weight-routes config db) (off-routes config) home-routes
+                          (user-routes config db) (meal-routes config)
                           base-routes]))
           ;; add custom middleware here
           :middleware (load-middleware config (:tconfig locale))
@@ -72,10 +72,10 @@
         ; Content-Type, Content-Length, and Last Modified headers for files in body
         (wrap-file-info))))
 
-(defrecord Handler [config locale]
+(defrecord Handler [config locale db]
   comp/Lifecycle
   (start [comp]
-    (assoc comp :handler (get-handler (:config config) locale)))
+    (assoc comp :handler (get-handler (:config config) locale db)))
   (stop [comp]
     (assoc comp :handler nil)))
 

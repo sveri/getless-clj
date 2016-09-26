@@ -1,27 +1,21 @@
 (ns de.sveri.getless.db.user-test
   (:require [clojure.test :refer :all]
-    [korma.db :as k]
-    [joplin.alias :as a]
-    [joplin.repl :as r]
-    [joplin.jdbc.database]
-    [de.sveri.getless.db.user :as u]))
+            [clojure.java.jdbc :as j]
+            [de.sveri.getless.db.user :as u]))
 
-(def db-uri "jdbc:sqlite:./db/getless-test.sqlite")
-(def jop-config (a/*load-config* "joplin.edn"))
+(def db {:connection-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless"})
 
 ; This fixture is intended to perform setup/teardown for each individual test in the namespace.
 ; Note that it assumes the :once fixture will handle creating/destroying the DB,
 ; while we only create/drop tables within the DB.
 (defn db-setup [f]
-  (do
-    (k/defdb temp-db db-uri)
-    (r/reset jop-config :sqlite-test-env :sqlite-test))
+  (j/execute! db ["truncate table users cascade"])
   (f))
 
-; Here we register another-fixture to wrap each test in the namespace
+;; Here we register another-fixture to wrap each test in the namespace
 (use-fixtures :each db-setup)
 
-;(deftest get-all-users
-;  (u/create-user "email" "pw" "id")
-;  (let [users (u/get-all-users)]
-;    (is (= 2 (count users)))))
+(deftest get-all-users
+  (u/create-user db "email" "pw")
+  (let [users (u/get-all-users db)]
+    (is (= 1 (count users)))))

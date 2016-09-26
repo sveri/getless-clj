@@ -31,5 +31,5 @@
 (s/fdef get-logged-in-username :ret string?)
 (defn get-logged-in-username [] (:email (get-logged-in-user)))
 
-(defn get-logged-in-user-id []
-  (:id (db-u/get-user-by-email (:email (get-logged-in-user)))))
+(defn get-logged-in-user-id [db]
+  (:id (db-u/get-user-by-email db (:email (get-logged-in-user)))))

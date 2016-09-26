@@ -34,10 +34,10 @@
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]
 
-                 [org.clojure/java.jdbc "0.3.7"]
-                 [korma "0.4.2"]
-                 [com.h2database/h2 "1.4.187"]
-                 [org.xerial/sqlite-jdbc "3.8.10.1"]
+                 ;[org.clojure/java.jdbc "0.3.7"]
+                 ;[korma "0.4.2"]
+                 ;[com.h2database/h2 "1.4.187"]
+                 ;[org.xerial/sqlite-jdbc "3.8.10.1"]
 
                  [com.draines/postal "1.11.3"]
 
@@ -64,12 +64,13 @@
 
                  [com.rpl/specter "0.8.0"]
 
-                 [joplin.jdbc "0.3.6"]
-                 [joplin.core "0.3.6"]
+                 ;[joplin.jdbc "0.3.6"]
+                 ;[joplin.core "0.3.6"]
                  [de.sveri/closp-crud "0.3.0"]
                  [clj-time "0.12.0"]
-                 [org.clojure/tools.logging "0.3.1"]]
-                 ;[org.clojure/java.jdbc "0.6.2-alpha3"]]
+                 [org.clojure/tools.logging "0.3.1"]
+                 [org.postgresql/postgresql "9.4-1205-jdbc42"]
+                 [org.clojure/java.jdbc "0.6.2-alpha3"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]]
 
@@ -103,10 +104,14 @@
 
                        :dependencies [
                                       ;[org.bouncycastle/bcprov-jdk15on "1.52"]
-
+                                      ;[ring/ring-mock "0.3.0"]
                                       [org.apache.httpcomponents/httpclient "4.5.1"]
+                                      ;[org.seleniumhq.selenium/htmlunit-driver "2.53.1"]
+                                      [org.seleniumhq.selenium/selenium-htmlunit-driver "2.52.0"]
+                                      [org.seleniumhq.selenium/selenium-firefox-driver "2.52.0"]
+                                      [org.seleniumhq.selenium/selenium-java "2.52.0"]
+                                      ;[org.seleniumhq.selenium/selenium-server "2.52.0"]
                                       [clj-webdriver "0.7.2"]
-                                      [org.seleniumhq.selenium/selenium-java "2.48.2"]
 
                                       [ring-mock "0.1.5"]
                                       [ring/ring-devel "1.4.0"]
@@ -135,9 +140,9 @@
 
   :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "uberjar"]
             "unit" ["do" "test" ":unit"]
-            "integ" ["do" "test" ":integration"]
+            "integ" ["do" "test" ":integration"]})
 
             ; migration utilities
-            "migrate" ["run" "-m" "joplin.alias/migrate" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
-            "rollback" ["run" "-m" "joplin.alias/rollback" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
-            "reset" ["run" "-m" "joplin.alias/reset" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]})
+            ;"migrate" ["run" "-m" "joplin.alias/migrate" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
+            ;"rollback" ["run" "-m" "joplin.alias/rollback" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
+            ;"reset" ["run" "-m" "joplin.alias/reset" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]})

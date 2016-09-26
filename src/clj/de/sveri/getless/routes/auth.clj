@@ -8,8 +8,8 @@
 
 
 (defn login-handler
-  [config username password]
-  (if-let [user (db/get-user-by-email username)]
+  [config username password db]
+  (if-let [user (db/get-user-by-email db username)]
     (cond
       (or (= 0 (:is_active user)) (= false (:is_active user)))
       (do (log/info "Inactive user tried to access /api/login: " username)
@@ -24,6 +24,6 @@
     (do (log/info "Non existent user tried to access /api/login: " username)
         (status (response {:error "Unauthorized"}) 401))))
 
-(defn auth-routes [config]
+(defn auth-routes [config db]
   (routes
-    (POST "/api/login" [username password] (login-handler config username password))))
+    (POST "/api/login" [username password] (login-handler config username password db))))

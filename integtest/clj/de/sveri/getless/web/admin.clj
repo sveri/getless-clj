@@ -57,7 +57,7 @@
     (is (.contains (text "body") uname))
     (is (.contains (text "body") (s/t :en :generic/deletion_canceled)))))
 
-(deftest ^:integration delete-user
+(deftest ^:cur delete-user
   (sign-in)
   (let [uname "_foo@bar.de"]
     (->user uname)

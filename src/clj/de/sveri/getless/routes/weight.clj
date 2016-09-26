@@ -9,28 +9,26 @@
             [de.sveri.getless.service.spec-validation :as validation]
             [clojure.string :as str]))
 
-(defn weight-page [_]
-  (let [weights-map (s-w/format-weighted-at (db-w/get-weights (s-u/get-logged-in-user-id))
+(defn weight-page [_ db]
+  (let [weights-map (s-w/format-weighted-at (db-w/get-weights db (s-u/get-logged-in-user-id db))
                                             s-w/weight-date-format)]
     (layout/render "weight/index.html" {:weights (s-w/weight->js-string :weight weights-map)
                                         :dates   (s-w/weight->js-string :weighted_at weights-map)})))
 
 
-(defn add [date weight req]
+(defn add [date weight db]
   (let [date-date (inst/read-instant-date date)
         weight-weight (read-string weight)
         validation-result (validation/validate-specs date-date ::db-w/weighted_at
                                                      weight-weight ::db-w/weight)]
     (if (str/blank? validation-result)
-      (do (db-w/save-weight weight-weight date-date (s-u/get-logged-in-user-id))
+      (do (db-w/save-weight db weight-weight date-date (s-u/get-logged-in-user-id db))
           (redirect "/weight"))
       (assoc (redirect "/weight") :flash validation-result))))
 
 
-
-
-(defn weight-routes [config]
+(defn weight-routes [_ db]
   (routes
-    (GET "/weight" req (weight-page req))
-    (POST "/weight/add" [date weight :as req] (add date weight req))))
+    (GET "/weight" req (weight-page req db))
+    (POST "/weight/add" [date weight] (add date weight db))))
 
