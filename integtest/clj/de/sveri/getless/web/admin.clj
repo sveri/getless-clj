@@ -1,7 +1,7 @@
 (ns de.sveri.getless.web.admin
   (:require [clojure.test :refer :all]
             [clj-webdriver.taxi :refer :all]
-            [de.sveri.getless.web.setup :as s]))
+            [de.sveri.getless.setup :as s]))
 
 (use-fixtures :each s/browser-setup)
 (use-fixtures :once s/server-setup)
@@ -18,13 +18,13 @@
                      {"#upper_password" (or pw "admin")}
                      {"#upper_password" submit}))
 
-(deftest ^:integration add-user
+(deftest ^:selenium add-user
   (sign-in)
   (->user "foo@bar.de")
   (is (.contains (text "body") (s/t :en :user/user_added)))
   (is (find-element {:css "div#flash-message.alert-success"})))
 
-(deftest ^:integration add-user-invalid-mail
+(deftest ^:selenium add-user-invalid-mail
   (sign-in)
   (quick-fill-submit {"#email" "foo"}
                      {"#password" "bbbbbb"}
@@ -32,7 +32,7 @@
                      {"#email" submit})
   (is (.contains (text "body") (s/t :en :user/email_invalid))))
 
-(deftest ^:integration pass-min-length
+(deftest ^:selenium pass-min-length
   (sign-in)
   (quick-fill-submit {"#email" "foo"}
                      {"#password" "bb"}
@@ -40,7 +40,7 @@
                      {"#email" submit})
   (is (.contains (text "body") (s/t :en :user/pass_min_length))))
 
-(deftest ^:integration pass-dont-match
+(deftest ^:selenium pass-dont-match
   (sign-in)
   (quick-fill-submit {"#email" "foo"}
                      {"#password" "bbuaeuiae"}
@@ -48,7 +48,7 @@
                      {"#email" submit})
   (is (.contains (text "body") (s/t :en :user/pass_match))))
 
-(deftest ^:integration cancel-delete-user
+(deftest ^:selenium cancel-delete-user
   (sign-in)
   (let [uname "_foo@bar.de"]
     (->user uname)
@@ -57,16 +57,16 @@
     (is (.contains (text "body") uname))
     (is (.contains (text "body") (s/t :en :generic/deletion_canceled)))))
 
-(deftest ^:cur delete-user
+(deftest ^:selenium delete-user
   (sign-in)
-  (let [uname "_foo@bar.de"]
+  (let [uname "_aadmin@bar.de"]
     (->user uname)
     (click (find-element {:css "input.btn.btn-danger"}))
     (click (find-element {:css "input.btn.btn-danger"}))
     (is (not (.contains (text "body") uname)))
     (is (.contains (text "body") (s/t :en :user/deleted)))))
 
-(deftest ^:integration set-active->logout->change_password
+(deftest ^:selenium set-active->logout->change_password
   (sign-in)
   (let [uname "_foo@bar.de"]
     (->user uname)

@@ -1,4 +1,4 @@
-(ns de.sveri.getless.web.setup
+(ns de.sveri.getless.setup
   (:require [clj-webdriver.taxi :as w]
             [taoensso.tower :as tower]
             [clojure.java.jdbc :as j]
@@ -59,6 +59,12 @@
   (start-server)
   (f)
   (stop-server))
+
+(defn clean-db [f]
+  (j/execute! db ["truncate table users cascade"])
+  (j/insert! db :users {:email "admin@localhost.de" :pass "bcrypt+sha512$d6d175aaa9c525174d817a74$12$24326124313224314d345444356149457a67516150447967517a67472e717a2e777047565a7071495330625441704f46686a556b5535376849743575"
+                        :is_active true :role "admin"})
+  (f))
 
 (defn browser-setup [f]
   (j/execute! db ["truncate table users cascade"])

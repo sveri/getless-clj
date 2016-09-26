@@ -113,7 +113,7 @@
                                       ;[org.seleniumhq.selenium/selenium-server "2.52.0"]
                                       [clj-webdriver "0.7.2"]
 
-                                      [ring-mock "0.1.5"]
+                                      ;[ring-mock "0.3.0"]
                                       [ring/ring-devel "1.4.0"]
                                       [pjstadig/humane-test-output "0.7.0"]]
 
@@ -126,8 +126,10 @@
 
   :test-paths ["test/clj" "integtest/clj"]
 
-  :test-selectors {:unit (complement :integration)
+  :test-selectors {:unit :unit
                    :integration :integration
+                   :selenium :selenium
+                   :rest :rest
                    :cur :cur                                ; one more selector for, give it freely to run only
                                                             ; the ones you need currently
                    :all (constantly true)}

@@ -47,7 +47,7 @@
   (routes
     (-> (auth-routes config db)
         (wrap-routes wrap-restful-format :formats [:json-kw]))
-    (-> (rest-routes config)
+    (-> (rest-routes config db)
         (wrap-routes wrap-restful-format :formats [:json-kw])
         (wrap-routes wrap-authentication jws-backend)
         (wrap-routes wrap-authorization jws-backend)
