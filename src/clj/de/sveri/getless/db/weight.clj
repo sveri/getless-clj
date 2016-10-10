@@ -1,8 +1,5 @@
 (ns de.sveri.getless.db.weight
   (:require [clojure.java.jdbc :as j]
-    ;[korma.core :refer [select where insert delete values update set-fields defentity limit order]
-    ;        [korma.db :refer [h2]]
-    ;        [de.sveri.getless.db.entities :refer [weight]]
             [clojure.spec :as s])
   (:import (java.sql Timestamp)))
 
@@ -14,18 +11,16 @@
                             :opt-un [::id ::users_id]))
 (s/def ::weights (s/cat :weight-map (s/* ::weight-map)))
 
+
 (s/fdef get-weights :args (:users_id number?)
         :ret ::weights)
 (defn get-weights [db users_id]
   (j/query db ["select * from weight where users_id = ? order by weighted_at asc" users_id]))
-  ;(select weight (where {:users_id users_id})
-  ;        (order :weighted_at :asc)))
 
-(s/fdef save-weight :args (s/cat :weight-measure number? :date inst? :users_id number?))
+
+(s/fdef save-weight :args (s/cat :db any? :weight-measure number?
+                                 :date number? :users_id number?))
 (defn save-weight [db weight-measure date users_id]
   (j/insert! db :weight {:weight weight-measure
-                         :weighted_at (new Timestamp (.getTime date))
+                         :weighted_at (new Timestamp date)
                          :users_id users_id}))
-  ;(insert weight (values {:weight weight-measure
-  ;                        :weighted_at (new Timestamp (.getTime date))
-  ;                        :users_id users_id})))

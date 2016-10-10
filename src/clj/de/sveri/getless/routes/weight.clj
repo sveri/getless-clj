@@ -17,9 +17,9 @@
 
 
 (defn add [date weight db]
-  (let [date-date (inst/read-instant-date date)
+  (let [date-date (.getTime (inst/read-instant-date date))
         weight-weight (read-string weight)
-        validation-result (validation/validate-specs date-date ::db-w/weighted_at
+        validation-result (validation/validate-specs date-date ::db-w/weight
                                                      weight-weight ::db-w/weight)]
     (if (str/blank? validation-result)
       (do (db-w/save-weight db weight-weight date-date (s-u/get-logged-in-user-id db))

@@ -27,10 +27,17 @@
    :captcha-public-key      "your public captcha key"
    :private-recaptcha-key   "your private captcha key"
    :recaptcha-domain        "yourdomain"
-   :port                    3001})
+   :port                    3001
+   :jwt-secret              "asldkfjoiaujxcvioub8903u4534mnlkjiu23904u23"})
 
 
 (defn test-system []
+  (component/system-map
+    :locale (l/new-locale)
+    :config (c/new-config test-config)
+    :db (component/using (new-db) [:config])
+    :handler (component/using (new-handler) [:config :locale :db])
+    :web (component/using (new-web-server) [:handler :config]))
   (component/system-map
     :locale (l/new-locale)
     :config (c/new-config test-config)

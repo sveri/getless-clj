@@ -23,13 +23,21 @@
     (str via pred)))
 
 (defn parse-problems [problems]
-  (reduce (fn [acc b] (parse-problem b)) "" problems))
+  (reduce (fn [_ problem] (parse-problem problem)) "" problems))
 
 
-(defmulti dispatch-on-spec-type (fn [to-validate spec problems] (first (s/describe spec))))
+(defmulti dispatch-on-spec-type
+          (fn [_ spec _]
+            (let [description (s/describe spec)]
+              (if (seq? description)
+                (first description)
+                description))))
 
 (defmethod dispatch-on-spec-type 'or [to-validate spec problems]
   (str "\""to-validate"\" is not a valid type. Expecting: " (get-via (first problems))))
+
+(defmethod dispatch-on-spec-type 'number? [to-validate spec problems]
+  (str "\""to-validate"\" is not a number."))
 
 
 (defmethod dispatch-on-spec-type :default [to-validate spec problems]

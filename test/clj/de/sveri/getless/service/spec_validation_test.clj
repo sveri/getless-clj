@@ -21,6 +21,10 @@
   (is (= "\"\" is not a valid type. Expecting: \"meal-type\"\n\"required-name\" should not be empty."
          (sv/validate-specs "" ::s-meal/meal-type "" ::s-comm/required-name))))
 
+(deftest validate-numbers
+  (is (= "\"50\" is not a number."
+         (sv/validate "50" ::db-w/id))))
+
 (deftest date-param
   (is (nil? (sv/validate (ci/read-instant-date "2016-09-03") ::db-w/weighted_at)))
   (is (nil? (sv/validate (read-string "99") ::db-w/weight)))
