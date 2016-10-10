@@ -19,8 +19,8 @@
   @(cl/request {:method  :post :url (->url url) :body params
                 :headers (->headers auth-header)}))
 
-(defn http-get [url & [auth-header]]
-  @(cl/request {:method :get :url (->url url) :headers (->headers auth-header)}))
+;(defn http-get [url & [auth-header]]
+;  @(cl/request {:method :get :url (->url url) :headers (->headers auth-header)}))
 
 (defn get-body [response]
   (-> response :body (json/read-str :key-fn keyword)))

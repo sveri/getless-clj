@@ -24,7 +24,8 @@
     (if (str/blank? validation-result)
       (do (db-w/save-weight db weight-weight date-date (s-u/get-logged-in-user-id db))
           (redirect "/weight"))
-      (assoc (redirect "/weight") :flash validation-result))))
+      (do (layout/flash-result "error" "alert-error")
+          (assoc (redirect "/weight") :flash validation-result)))))
 
 
 (defn weight-routes [_ db]

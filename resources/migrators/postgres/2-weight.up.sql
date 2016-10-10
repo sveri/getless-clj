@@ -21,3 +21,6 @@ INSERT INTO weight (weight, weighted_at, users_id) VALUES
 (90, '2016-08-15 00:00:00-00', 1),
 (92, '2016-08-20 00:00:00-00', 1),
 (89, '2016-09-03 00:00:00-00', 1)
+
+
+ALTER TABLE weight ALTER COLUMN weight TYPE real;

@@ -19,9 +19,9 @@
     <form class="form" action="/weight/add" method="post">
         <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
-        <input class="form-control" type="date" name="date" placeholder="Datum" style="margin-bottom:10px" />
+        <input class="form-control" type="date" name="date" placeholder="Datum" style="margin-bottom:10px" value="{% now yyyy-MM-dd %}"/>
 
-        <input class="form-control" type="number" name="weight" placeholder="kg" style="margin-bottom:10px" />
+        <input class="form-control" type="number" name="weight" placeholder="kg" style="margin-bottom:10px" step="0.1"/>
 
         <input type="submit" value="Speichern" class="btn btn-primary" style="margin-top:15px; "/>
     </form>
