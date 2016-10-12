@@ -15,7 +15,7 @@
                  [ring "1.4.0"]
                  [lib-noir "0.9.9"]
                  [ring/ring-anti-forgery "1.0.0"]
-                 [compojure "1.4.0"]
+                 [compojure "1.5.1"]
                  [reagent "0.5.1"]
                  [http-kit "2.2.0"]
                  [selmer "0.8.5"]
@@ -48,7 +48,7 @@
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
-                 [com.taoensso/tower "3.0.2"]
+                 [com.taoensso/tower "3.1.0-beta4"]
 
                  [org.clojure/core.typed "0.3.11"]
                  [prismatic/plumbing "0.5.0"]
@@ -56,8 +56,6 @@
 
                  [com.rpl/specter "0.8.0"]
 
-                 ;[joplin.jdbc "0.3.6"]
-                 ;[joplin.core "0.3.6"]
                  [de.sveri/closp-crud "0.3.0"]
                  [clj-time "0.12.0"]
                  [org.clojure/tools.logging "0.3.1"]
