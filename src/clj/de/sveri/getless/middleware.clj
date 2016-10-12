@@ -24,7 +24,8 @@
     (handler req)))
 
 (def development-middleware
-  [wrap-error-page
+  [
+   ;wrap-error-page
    wrap-exceptions
    wrap-reload
    #(wrap-miniprofiler % {:store in-memory-store-instance})])
