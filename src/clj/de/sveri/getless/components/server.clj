@@ -1,6 +1,6 @@
 (ns de.sveri.getless.components.server
   (:require [com.stuartsierra.component :as component]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [org.httpkit.server :refer [run-server]]
             [hara.io.scheduler :as sched]
             [selmer.parser :as parser]
@@ -11,10 +11,10 @@
   "destroy will be called when your application
    shuts down, put any clean up code here"
   []
-  (timbre/info "getless is shutting down...")
+  (log/info "getless is shutting down...")
   (sched/shutdown! session/cleanup-job)
   ;(cronj/shutdown! session/cleanup-job)
-  (timbre/info "shutdown complete!"))
+  (log/info "shutdown complete!"))
 
 (defn init
   "init will be called once when
@@ -26,7 +26,7 @@
   ;;start the expired session cleanup job
   (sched/start! session/cleanup-job)
   ;(cronj/start! session/cleanup-job)
-  (timbre/info "\n-=[ getless started successfully"
+  (log/info "\n-=[ getless started successfully"
                (when (= (:env config) :dev) "using the development profile") "]=-"))
 
 (defrecord WebServer [handler config]
