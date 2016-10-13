@@ -1,7 +1,7 @@
 (ns de.sveri.getless.middleware
-  (:require [buddy.auth.backends :as backends]
-            [selmer.middleware :refer [wrap-error-page]]
-            [prone.middleware :refer [wrap-exceptions]]
+  (:require [prone.middleware :as prone]
+            ;[selmer.middleware :refer [wrap-error-page]]
+            ;[prone.middleware :refer [wrap-exceptions]]
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [buddy.auth.accessrules :refer [wrap-access-rules]]
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
@@ -24,11 +24,9 @@
     (handler req)))
 
 (def development-middleware
-  [
-   ;wrap-error-page
-   wrap-exceptions
-   wrap-reload
-   #(wrap-miniprofiler % {:store in-memory-store-instance})])
+  [#(wrap-miniprofiler % {:store in-memory-store-instance})
+   prone/wrap-exceptions
+   wrap-reload])
 
 (defn production-middleware [config tconfig]
   [#(add-req-properties % config)

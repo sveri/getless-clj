@@ -12,7 +12,7 @@
 (s/def ::weights (s/cat :weight-map (s/* ::weight-map)))
 
 
-(s/fdef get-weights :args (:users_id number?)
+(s/fdef get-weights :args (s/cat :db any? :users_id number?)
         :ret ::weights)
 (defn get-weights [db users_id]
   (j/query db ["select * from weight where users_id = ? order by weighted_at asc" users_id]))

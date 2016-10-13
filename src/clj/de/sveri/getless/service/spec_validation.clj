@@ -28,7 +28,7 @@
 
 (defmulti dispatch-on-spec-type
           (fn [_ spec _]
-            (let [description (s/describe spec)]
+            (let [description (s/describe spec)] ; use explain-date
               (if (seq? description)
                 (first description)
                 description))))

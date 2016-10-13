@@ -19,7 +19,7 @@
                  [reagent "0.5.1"]
                  [http-kit "2.2.0"]
                  [selmer "0.8.5"]
-                 [prone "0.8.2"]
+                 [prone "1.1.2"]
                  [im.chit/hara.io.scheduler "2.4.5"]
                  [noir-exception "0.2.5"]
 
@@ -109,6 +109,7 @@
 
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]}
+                       ;:ring {:stacktrace-middleware prone.middleware/wrap-exceptions}}
 
              :uberjar {:auto-clean false                    ; not sure about this one
                        :omit-source true

@@ -43,7 +43,7 @@
          "Unauthorized")))
 
 (deftest ^:rest add-weight
-  (is (= 90 (-> (post "weight" (json/write-str {:weight 90 :date 1475842686})
+  (is (= 90.0 (-> (post "weight" (json/write-str {:weight 90 :date 1475842686})
                       (->token-for-admin))
                 get-body
                 :weight))))
