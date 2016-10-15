@@ -117,13 +117,13 @@
 
   :test-paths ["test/clj" "integtest/clj"]
 
-  :test-selectors {:unit :unit
+  :test-selectors {:unit        (fn [m] (not (or (:selenium m) (:integration m) (:rest m))))
                    :integration :integration
-                   :selenium :selenium
-                   :rest :rest
-                   :cur :cur                                ; one more selector for, give it freely to run only
-                                                            ; the ones you need currently
-                   :all (constantly true)}
+                   :selenium    :selenium
+                   :rest        :rest
+                   :cur         :cur                                ; one more selector for, give it freely to run only
+                   ; the ones you need currently
+                   :all         (constantly true)}
 
   :test2junit-output-dir "test-results"
 

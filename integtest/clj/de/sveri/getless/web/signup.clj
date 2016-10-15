@@ -14,10 +14,6 @@
                      {"#confirm" "bbbbbb"}
                      {"#email" submit}))
 
-(deftest ^:selenium homepage-greeting
-  (to s/test-base-url)
-  (is (.contains (text "body") "Foo!")))
-
 (deftest ^:selenium wrong_email
   (to (str s/test-base-url "user/signup"))
   (quick-fill-submit {"#email" "foo"}
