@@ -1,6 +1,7 @@
 (ns de.sveri.getless.service.meal-test
   (:require [clojure.test :refer :all]
             [de.sveri.getless.service.meal :as meal]
+            [de.sveri.getless.db.meal :as db-meal]
             [clojure.spec.test :as stest]
             [de.sveri.getless.service.off :as off]
             [de.sveri.getless.service.off-helper :as offh]))
@@ -13,9 +14,9 @@
 
 
 (deftest save-meal-in-session-with-launch
-  (let [session (meal/save-new-meal {} meal/launch)
+  (let [session (meal/save-new-meal {} db-meal/launch)
         meal (meal/get-meal session)]
-    (is (= meal/launch (:type meal)))))
+    (is (= db-meal/launch (:type meal)))))
 
 
 (deftest ^:integration add-product-to-meal
