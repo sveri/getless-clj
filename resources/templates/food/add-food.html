@@ -1,0 +1,23 @@
+{% extends "templates/base.html" %}
+
+{% block add-css %}
+{% style "/css/home.css" %}
+{% endblock %}
+
+{% block content %}
+
+<h3>Essen hinzufügen</h3>
+
+<a href="/off/search" class="btn btn-primary">Produkt auswählen</a>
+
+<form class="form" action="/food/add" method="post">
+    <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+
+    <input class="form-control" type="date" name="date" placeholder="Datum" style="margin-bottom:10px"
+           value="{% now yyyy-MM-dd %}"/>
+
+    <input type="submit" value="Speichern" class="btn btn-primary" style="margin-top:15px; "/>
+</form>
+
+
+{% endblock %}

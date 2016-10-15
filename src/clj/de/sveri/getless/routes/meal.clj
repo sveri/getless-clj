@@ -1,12 +1,10 @@
 (ns de.sveri.getless.routes.meal
   (:require [compojure.core :refer [routes GET POST]]
-    ;[clojure.string :as s]
             [de.sveri.getless.layout :as layout]
             [de.sveri.getless.service.spec-validation :as validation]
             [de.sveri.getless.service.spec-common :as spec-comm]
             [de.sveri.getless.service.meal :as s-meal]
             [de.sveri.getless.service.off :as s-off]
-    ;[de.sveri.getless.service.off :as off]
             [compojure.response]
             [ring.util.response :refer [response redirect]]
             [clojure.spec :as s]))

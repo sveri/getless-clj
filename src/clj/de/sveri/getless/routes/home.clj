@@ -1,26 +1,22 @@
 (ns de.sveri.getless.routes.home
   (:require [compojure.core :refer [defroutes GET]]
             [de.sveri.getless.layout :as layout]
-            [ring.util.response :refer [response]]))
+            [ring.util.response :refer [response redirect]]))
 
 (defn home-page []
-  (layout/render "home/index.html"))
+  (redirect "/weight"))
 
 (defn contact-page []
   (layout/render "home/contact.html"))
 
 (defn tos-page []
-  (layout/render "home/tos.html"))
-
-(defn cookies-page []
-  (layout/render "home/cookies.html"))
+  (layout/render "home/dataprivacypolicy.html"))
 
 (defn ajax-initial-data []
   (response {:ok "fooo" :loaded true}))
 
 (defroutes home-routes
            (GET "/contact" [] (contact-page))
-           (GET "/tos" [] (tos-page))
-           (GET "/cookies" [] (cookies-page))
+           (GET "/dataprivacypolicy" [] (tos-page))
            (GET "/" [] (home-page))
            (GET "/ajax/page/init" [] (ajax-initial-data)))

@@ -16,6 +16,7 @@
             [de.sveri.getless.routes.weight :refer [weight-routes]]
             [de.sveri.getless.routes.auth :refer [auth-routes]]
             [de.sveri.getless.routes.rest :refer [rest-routes]]
+            [de.sveri.getless.routes.food :refer [food-routes]]
             [de.sveri.getless.routes.cc :refer [cc-routes]]
             [de.sveri.getless.routes.user :refer [user-routes registration-routes]]
             [de.sveri.getless.middleware :refer [load-middleware]]
@@ -56,7 +57,7 @@
           (into [] (concat (when (:registration-allowed? config) [(registration-routes config db)])
                          ;; add your application routes here
                          [(cc-routes config) (weight-routes config db) (off-routes config) home-routes
-                          (user-routes config db) (meal-routes config)
+                          (user-routes config db) (food-routes config) (meal-routes config)
                           base-routes]))
           ;; add custom middleware here
           :middleware (load-middleware config (:tconfig locale))

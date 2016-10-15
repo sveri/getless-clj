@@ -7,6 +7,7 @@
 {% block content %}
 
     <form class="form" action="/off/search" method="get">
+        <input type="hidden" name="referer" class="form-control" value="{{referer}}"/>
         <input type="text" name="search" class="form-control" value="{{search}}" autofocus/>
         <input type="submit" value="Suchen" class="btn btn-default" />
     </form>
@@ -17,7 +18,7 @@
                 <tr>
                     <td>{{product.product_name}}</td>
                     <td><img src="{{product.image_small_url}}" alt="{{product.product_name}}"/></td>
-                    <td><a href="/meal/add/product/{{product.id}}" class="btn btn-primary">Hinzufügen </a></td>
+                    <td><a href="/{{referer}}/add/product/{{product.id}}" class="btn btn-primary">Hinzufügen </a></td>
                 </tr>
             {% endfor %}
         </tbody>

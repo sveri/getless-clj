@@ -20,6 +20,8 @@
              :handler loggedin-access}
             {:pattern #"^/meal.*"
              :handler loggedin-access}
+            {:pattern #"^/food.*"
+             :handler loggedin-access}
             {:pattern #"^/rest/api/.*"
              :handler loggedin-access}
             {:pattern #"^/user.*"
