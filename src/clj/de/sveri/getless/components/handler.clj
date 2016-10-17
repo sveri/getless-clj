@@ -57,7 +57,7 @@
           (into [] (concat (when (:registration-allowed? config) [(registration-routes config db)])
                          ;; add your application routes here
                          [(cc-routes config) (weight-routes config db) (off-routes config) home-routes
-                          (user-routes config db) (food-routes config) (meal-routes config)
+                          (user-routes config db) (food-routes config db) (meal-routes config)
                           base-routes]))
           ;; add custom middleware here
           :middleware (load-middleware config (:tconfig locale))

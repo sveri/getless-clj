@@ -38,7 +38,7 @@
                          :opt-un [::product_name ::product_name_de ::brands ::ingredients_text_de ::packaging
                                   ::serving_quantity ::nutrition_data_per ::quantity ::ingredients ::_keywords
                                   ::name ::ingredients_text]))
-(s/def ::products (s/cat :product (s/* ::product)))
+(s/def ::products (s/coll-of ::product))
 
 (s/def ::search-result (s/keys :req-un [::page-size ::count ::skip ::page ::products]))
 

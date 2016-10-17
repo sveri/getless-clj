@@ -1,0 +1,16 @@
+{% extends "templates/base.html" %}
+
+
+{% block content %}
+
+<a href="/food/add" class="btn btn-primary">Neues Essen</a>
+
+<br />
+
+{% for product in products %}
+
+    {{product.id}}
+
+{% endfor %}
+
+{% endblock %}

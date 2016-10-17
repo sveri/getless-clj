@@ -11,7 +11,7 @@
 
 (defn new-page [{:keys [session]}]
   (let [meal (s-meal/get-meal session)]
-    (layout/render "meal/index.html" {:meal meal})))
+    (layout/render "meal/new.html" {:meal meal :products (:products meal)})))
 
 (defn add-product [productid {:keys [session]} {:keys [off-url off-user off-password]}]
   (let [session (s-meal/add-product-to-meal session (s-off/get-by-id productid off-url off-user off-password))]

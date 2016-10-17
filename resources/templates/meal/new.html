@@ -23,19 +23,7 @@
             <option value="SNACK">Snack</option>
         </select>
 
-        <h4>Produkte</h4>
-
-        <table class="table" style="margin-top: 30px;">
-            <tbody>
-            {% for product in meal.products %}
-            <tr>
-                <td>{{product.product_name}}</td>
-                <td><img src="{{product.image_small_url}}" alt="{{product.product_name}}"/></td>
-                <td>{{product.ingredients_text}}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        {% include "templates/food/products.html"  %}
 
         <input type="submit" value="Speichern" class="btn btn-primary" style="margin-top:15px; "/>
     </form>
