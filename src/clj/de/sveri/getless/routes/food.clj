@@ -10,8 +10,10 @@
             [clojure.tools.logging :as log]))
 
 (defn index-page [db]
-  (clojure.pprint/pprint (db-food/->food-by-user-id db (s-user/get-logged-in-user-id db)))
-  (layout/render "food/index.html" {:products (db-food/->food-by-user-id db (s-user/get-logged-in-user-id db))}))
+  (layout/render "food/index.html" {:products-by-date
+                                    (s-food/foods->group-by-date
+                                      (db-food/->food-by-user-id
+                                        db (s-user/get-logged-in-user-id db)))}))
 
 (defn add-food-page [{:keys [session]}]
   (layout/render "food/add-food.html" {:products (s-food/get-food-from-session session)}))

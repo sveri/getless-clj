@@ -23,4 +23,4 @@
   (let [admin-user (first (insert-admin-user db))
         _ (db-food/insert-food db 1476576000000 (:id admin-user) [test-product])
         foods (db-food/->food-by-user-id db (:id admin-user))]
-    (is (= 1 (-> foods first :product_id)))))
+    (is (= 1 (-> foods first :product-id)))))

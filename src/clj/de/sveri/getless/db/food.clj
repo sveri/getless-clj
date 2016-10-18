@@ -4,10 +4,12 @@
             [de.sveri.getless.service.off :as s-off])
   (:import (java.sql Timestamp)))
 
+(s/def ::id number?)
 (s/def ::users-id number?)
 (s/def ::product-id number?)
 (s/def ::eaten-at inst?)
-(s/def ::food (s/keys :req-un [::eaten-at ::product-id ::users-id]))
+(s/def ::food (s/keys :req-un [::eaten-at ::product-id ::users-id]
+                      :opt-un [::id]))
 (s/def ::foods (s/coll-of ::food))
 
 (s/fdef ->food-by-user-id :args (s/cat :db any? :users-id number?) :ret ::foods)
