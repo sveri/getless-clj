@@ -5,10 +5,6 @@
             [de.sveri.getless.service.off :as s-off])
   (:import (java.text SimpleDateFormat)))
 
-;(s/def ::food (s/keys :req))
-;(s/def ::eaten-at (s/keys :req-un [::db-food/food]))
-;(s/def ::foods (s/coll-of ::eaten-at))
-
 (s/fdef get-food-from-session :args (s/cat :session ::sess/session-map))
 (defn get-food-from-session [session]
   (get-in session [:getless :food :products] {}))
@@ -18,7 +14,7 @@
   (update-in session [:getless :food :products] conj product))
 
 
-(s/fdef foods->group-by-date :args (s/cat :foods ::db-food/foods))
+(s/fdef foods->group-by-date :args (s/cat :foods ::db-food/foods) :ret (s/coll-of (s/coll-of ::db-food/foods)))
 (defn foods->group-by-date [foods]
   (map (fn [[_ s]] s)
        (seq

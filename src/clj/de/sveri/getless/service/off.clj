@@ -85,3 +85,12 @@
 
 
 
+(defn add-product [map-or-list off-url off-user off-password]
+  (let [f #(assoc % :product (get-by-id (:product-id %) off-url off-user off-password))]
+    (if (map? map-or-list)
+      (f map-or-list)
+      (map f map-or-list))))
+
+
+
+
