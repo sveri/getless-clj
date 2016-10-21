@@ -11,21 +11,34 @@
 (s/def ::food (s/keys :req-un [::eaten-at ::product-id ::users-id]
                       :opt-un [::id]))
 (s/def ::foods (s/coll-of ::food))
+(s/def ::unit #{"gramm" "liter"})
 
 (s/fdef ->food-by-user-id :args (s/cat :db any? :users-id number?) :ret ::foods)
 (defn ->food-by-user-id [db users-id]
-  (j/query db ["select * from food where users_id = ? order by eaten_at asc" users-id]
+  (j/query db ["select * from food where users_id = ? order by eaten_at desc" users-id]
               {:identifiers #(.replace % \_ \-)}))
 
-(s/fdef insert-food :args (s/cat :db any? :date number? :users-id number? :products ::s-off/products))
-(defn insert-food [db date users-id products]
+
+
+
+(defn enum->pg-enum
+  "Convert a keyword value into an enum-compatible object."
+  [enum-type enum]
+  (doto (org.postgresql.util.PGobject.)
+    (.setType enum-type)
+    (.setValue enum)))
+
+(def ->unit
+  "Convert a unit into a unit_enum enum object"
+  (partial enum->pg-enum "unit_enum"))
+
+
+(s/fdef insert-food :args (s/cat :db any? :date number? :users-id number? :products (s/coll-of number?)
+                                 :amounts (s/coll-of number?) :units (s/coll-of ::unit)))
+(defn insert-food [db date users-id products amounts units]
   (let [sql-timestamp (new Timestamp date)
-        rows (mapv (fn [p] {:users_id users-id :eaten_at sql-timestamp :product_id (read-string (:id p))}) products)]
+        rows (vec (for [i (range 0 (count products))]
+                    {:users_id users-id :eaten_at sql-timestamp :product_id (get products i) :amount (get amounts i)
+                     :unit (-> (get units i) ->unit)}))]
     (j/insert-multi! db :food rows)))
 
-;(defn update-user [db id fields]
-;  (j/update! db :users fields ["id = ?" id]))
-;
-;(defn delete-user [db id] (j/delete! db :users ["id = ?" id]))
-;
-;(defn change-password [db email pw] (j/update! db :users {:pass pw} ["email = ?" email]))

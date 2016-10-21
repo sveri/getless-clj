@@ -23,3 +23,6 @@
              (.format (SimpleDateFormat. "yyyyMMdd") eaten-at))
            foods))))
 
+(defn delete-food-from-session [session]
+  (update-in session [:getless :food] dissoc :products))
+

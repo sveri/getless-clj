@@ -12,11 +12,12 @@
 
 <br />
 
-{% include "templates/food/products.html"  %}
 
 
 <form class="form" action="/food/add" method="post">
     <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+
+    {% include "templates/food/products.html"  %}
 
     <label for="date" >Datum</label>
     <input class="form-control" type="date" name="date" id="date" placeholder="Datum" style="margin-bottom:10px"
