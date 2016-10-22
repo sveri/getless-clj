@@ -68,7 +68,8 @@
 (s/fdef search-products :args (s/cat :search string? :off-ur string? :off-user string? :off-password string?)
         :ret ::search-result)
 (defn search-products [search off-url off-user off-password]
-  (let [search-uri (str off-url "cgi/search.pl?search_terms="  search "&search_simple=1&json=1&page_size=1000")
+  (let [sanitized-search-term (.replace search " " "%20")
+        search-uri (str off-url "cgi/search.pl?search_terms="  sanitized-search-term "&search_simple=1&json=1&page_size=1000")
         json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password]}))
                                  :key-fn keyword)
         sanitized-products (sanitize-products (get json-body :products))]

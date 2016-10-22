@@ -12,7 +12,7 @@
  :recaptcha-domain        "yourdomain"
  :port                    3000
  :closp-definitions       "env/dev/entities"
- :off-url                 "http://de.world.openfoodfacts.net/"
+ :off-url                 "http://de.openfoodfacts.net/"
  :off-user                "off"
  :off-password            "off"
  :jwt-secret              "asldkfjoiaujxcvioub8903u4534mnlkjiu23904u23"}

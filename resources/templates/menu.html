@@ -5,6 +5,8 @@
         {% if identity %}
         <li field="link-list" {% ifequal page "food/index.html" %} class="active"{%endifequal%}>
             <a href="/food">Essen</a></li>
+        <li field="link-list" {% ifequal page "food/contents.html" %} class="active"{%endifequal%}>
+            <a href="/food/contents">Inhaltsstoffe</a></li>
         <li field="link-list" {% ifequal page "meal/new.html" %} class="active"{%endifequal%}>
             <a href="/meal/new">Neue Mahlzeit</a></li>
         <li field="link-list" {% ifequal page "weight/index.html" %} class="active"{%endifequal%}>

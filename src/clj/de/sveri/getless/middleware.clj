@@ -25,7 +25,7 @@
 
 (def development-middleware
   [#(wrap-miniprofiler % {:store in-memory-store-instance})
-   prone/wrap-exceptions
+   #(prone/wrap-exceptions % {:app-namespaces ['de.sveri]})
    wrap-reload])
 
 (defn production-middleware [config tconfig]

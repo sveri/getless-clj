@@ -24,7 +24,7 @@
   (let [session (s-food/add-food-to-session session (s-off/get-by-id productid off-url off-user off-password))]
     (assoc (redirect "/food/add") :session session)))
 
-(defn add-food [date productids amounts units {:keys [session] :as req} db]
+(defn add-food [date productids amounts units {:keys [session]} db]
   (let [user-id (s-user/get-logged-in-user-id db)]
     (try
       (db-food/insert-food db (.getTime (inst/read-instant-date date)) user-id (mapv read-string productids)
@@ -35,9 +35,13 @@
         (.printStackTrace e)))))
 
 
+(defn contents-page [db]
+  (layout/render "food/contents.html"))
+
 (defn food-routes [config db]
   (routes
     (GET "/food" [] (index-page db config))
     (GET "/food/add" req (add-food-page req))
     (POST "/food/add" [date productid amount unit :as req] (add-food date productid amount unit req db))
-    (GET "/food/add/product/:productid" [productid :as req] (add-product productid req config))))
+    (GET "/food/add/product/:productid" [productid :as req] (add-product productid req config))
+    (GET "/food/contents" [] (contents-page db))))

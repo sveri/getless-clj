@@ -1,0 +1,28 @@
+{% extends "templates/base.html" %}
+
+
+{% block content %}
+
+
+{% for products in products-list %}
+
+    <table class="table">
+
+
+        <tbody>
+            {% for product in products %}
+                {% if forloop.first %}
+                    <tr>
+                        <td colspan="5"><h3>{{product.eaten-at|date:"dd.MM.yyyy"}}</h3></td>
+                    </tr>
+                {% endif %}
+
+                {% include "templates/food/product.html" %}
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endfor %}
+
+{% endblock %}
