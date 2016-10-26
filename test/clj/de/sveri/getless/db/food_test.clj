@@ -11,7 +11,7 @@
 
 (use-fixtures :each db-setup)
 
-(def test-product {:id "1" :image_small_url "" :image_thumb_url "" :code "1" :rev 1 :lang "de"})
+;(def test-product {:id "1" :image_small_url "" :image_thumb_url "" :code "1" :rev 1 :lang "de"})
 
 (defn insert-admin-user [db]
   (j/insert! db :users {:email "admin@localhost.de" :pass "bcrypt+sha512$d6d175aaa9c525174d817a74$12$24326124313224314d345444356149457a67516150447967517a67472e717a2e777047565a7071495330625441704f46686a556b5535376849743575"
@@ -21,6 +21,6 @@
 
 (deftest insert-food
   (let [admin-user (first (insert-admin-user db))
-        _ (db-food/insert-food db 1476576000000 (:id admin-user) [test-product])
+        _ (db-food/insert-food db 1476576000000 (:id admin-user) [1] [100] ["gramm"])
         foods (db-food/->food-by-user-id db (:id admin-user))]
     (is (= 1 (-> foods first :product-id)))))

@@ -11,11 +11,7 @@
 
 (defn index-page [db {:keys [off-url off-user off-password]}]
   (layout/render "food/index.html" {:products-list
-                                      (s-food/foods->group-by-date
-                                        (s-off/add-product
-                                          (db-food/->food-by-user-id
-                                            db (s-user/get-logged-in-user-id db))
-                                          off-url off-user off-password))}))
+                                      (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)}))
 
 (defn add-food-page [{:keys [session]}]
   (layout/render "food/add-food.html" {:products (s-food/get-food-from-session session)}))

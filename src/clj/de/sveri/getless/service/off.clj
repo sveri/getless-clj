@@ -34,10 +34,24 @@
 (s/def ::ingredients (s/* ::ingredient))
 (s/def ::ingredients_text string?)
 
+(s/def ::unit #{"g" "mg" "kJ" "kCal"})
+
+(s/def ::sugars_100g string?)
+(s/def ::sugars_unit ::unit)
+(s/def ::fat_100g string?)
+(s/def ::fat_unit ::unit)
+(s/def ::salt string?)
+(s/def ::fat_unit ::unit)
+(s/def ::energy_100g string?)
+(s/def ::energy_unit ::unit)
+(s/def ::energy-kcal string?)
+(s/def ::nutriments (s/coll-of (s/keys :req-un [::sugars_100g ::sugars_unit ::fat_100g ::fat_unit
+                                                ::energy_100g ::energy_unit ::salt])))
+
 (s/def ::product (s/keys :req-un [::id ::code ::lang ::image_thumb_url ::image_small_url ::rev]
                          :opt-un [::product_name ::product_name_de ::brands ::ingredients_text_de ::packaging
                                   ::serving_quantity ::nutrition_data_per ::quantity ::ingredients ::_keywords
-                                  ::name ::ingredients_text]))
+                                  ::name ::ingredients_text ::nutriments]))
 (s/def ::products (s/coll-of ::product))
 
 (s/def ::search-result (s/keys :req-un [::page-size ::count ::skip ::page ::products]))
@@ -53,12 +67,22 @@
                              (str a (when-not (str/blank? a) ", ") (:text b)))
                            "" ordered_ingredients))))
 
+;(s/fdef kJ->kCal :args (s/cat :product ::product))
+(defn kJ->kCal
+  "adds a :energy-kcal key / value to the :nutriements map"
+  [product]
+  (if-let [kj (-> product :nutriments :energy_100g)]
+    (assoc-in product [:nutriments :energy-kcal] (str (/ (read-string kj) 4.187)))
+    (assoc-in product [:nutriments :energy-kcal] "0")))
+
+
 (defn sanitize-product [product]
   (-> product
       (select-keys [:id :code :product_name :product_name_de :quantity :brands :image_thumb_url :image_small_url
-                            :lang :ingredients :ingredients_text_de :packaging :serving_quantity :nutrition_data_per
-                            :rev :_keywords :name])
-      add-string-fields))
+                    :lang :ingredients :ingredients_text_de :packaging :serving_quantity :nutrition_data_per
+                    :rev :_keywords :name :nutriments])
+      add-string-fields
+      kJ->kCal))
 
 
 (s/fdef sanitize-products :args (s/cat :products any?) :ret ::products)
@@ -86,7 +110,9 @@
 
 
 
-(defn add-product [map-or-list off-url off-user off-password]
+(defn add-product 
+  "adds the off product to the given map or maps. The map must contain the key :product-id"
+  [map-or-list off-url off-user off-password]
   (let [f #(assoc % :product (get-by-id (:product-id %) off-url off-user off-password))]
     (if (map? map-or-list)
       (f map-or-list)
@@ -95,3 +121,71 @@
 
 
 
+
+;{:salt "1.905",
+; :sugars_unit "g",
+; :cholesterol_label "Cholestérol",
+; :energy_unit "kJ",
+; :cholesterol_serving "0",
+; :energy_value "692",
+; :fat_serving "6.5",
+; :nutrition-score-uk "6",
+; :proteins_value "16.5",
+; :monounsaturated-fat_label "Acides gras monoinsaturés",
+; :proteins_unit "g",
+; :carbohydrates_unit "g",
+; :sodium_value "0.75",
+; :cholesterol_100g "0",
+; :monounsaturated-fat_100g "4.3",
+; :salt_serving "1.91",
+; :saturated-fat_value "0.7",
+; :fat "6.5",
+; :fiber "7.6",
+; :energy "692",
+; :salt_value "1.905",
+; :fiber_unit "g",
+; :cholesterol_value "0",
+; :fiber_serving "7.6",
+; :polyunsaturated-fat_100g "1.5",
+; :proteins_serving "16.5",
+; :saturated-fat_unit "g",
+; :fat_100g "6.5",
+; :sugars_serving "5.2",
+; :monounsaturated-fat_value "4.3",
+; :saturated-fat_serving "0.7",
+; :sugars_value "5.2",
+; :sodium_100g "0.75",
+; :carbohydrates_value "6.5",
+; :sodium_serving "0.75",
+; :cholesterol "0",
+; :proteins_100g "16.5",
+; :fat_unit "g",
+; :saturated-fat "0.7",
+; :sugars_100g "5.2",
+; :monounsaturated-fat "4.3",
+; :cholesterol_unit "g",
+; :fiber_value "7.6",
+; :sodium "0.75",
+; :polyunsaturated-fat_unit "g",
+; :polyunsaturated-fat_label "Acides gras polyinsaturés",
+; :fiber_100g "7.6",
+; :monounsaturated-fat_unit "g",
+; :nutrition-score-fr "6",
+; :sugars "5.2",
+; :carbohydrates "6.5",
+; :polyunsaturated-fat "1.5",
+; :monounsaturated-fat_serving "4.3",
+; :energy_100g "692",
+; :polyunsaturated-fat_value "1.5",
+; :energy_serving "692",
+; :salt_100g "1.905",
+; :saturated-fat_100g "0.7",
+; :nutrition-score-uk_100g "6",
+; :sodium_unit "g",
+; :salt_unit "g",
+; :carbohydrates_serving "6.5",
+; :carbohydrates_100g "6.5",
+; :proteins "16.5",
+; :fat_value "6.5",
+; :nutrition-score-fr_100g "6",
+; :polyunsaturated-fat_serving "1.5"}

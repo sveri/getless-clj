@@ -2,7 +2,8 @@
   (:require [clojure.spec :as s]
             [de.sveri.getless.service.session :as sess]
             [de.sveri.getless.db.food :as db-food]
-            [de.sveri.getless.service.off :as s-off])
+            [de.sveri.getless.service.off :as s-off]
+            [de.sveri.getless.service.user :as s-user])
   (:import (java.text SimpleDateFormat)))
 
 (s/fdef get-food-from-session :args (s/cat :session ::sess/session-map))
@@ -25,4 +26,13 @@
 
 (defn delete-food-from-session [session]
   (update-in session [:getless :food] dissoc :products))
+
+
+(defn ->foods-with-product-grouped-by-date
+  [db off-url off-user off-password]
+  (foods->group-by-date
+    (s-off/add-product
+      (db-food/->food-by-user-id
+        db (s-user/get-logged-in-user-id db))
+      off-url off-user off-password)))
 
