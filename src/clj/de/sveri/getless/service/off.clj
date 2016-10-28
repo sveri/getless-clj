@@ -67,7 +67,6 @@
                              (str a (when-not (str/blank? a) ", ") (:text b)))
                            "" ordered_ingredients))))
 
-;(s/fdef kJ->kCal :args (s/cat :product ::product))
 (defn kJ->kCal
   "adds a :energy-kcal key / value to the :nutriements map"
   [product]
