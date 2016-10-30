@@ -37,4 +37,22 @@
       off-url off-user off-password)))
 
 
-(defn ->nutriments-grouped-by-date [])
+(s/fdef add-nutriment :args (s/cat :nutriments ::s-off/nutriments :amount number? :summarized_nutriment number?
+                                   :nutriment_key keyword?))
+(defn add-nutriment [nutriments amount summarized_nutriment nutriment_key]
+  (let [nutriment_all (or summarized_nutriment 0)
+        cur_nutriment_number (if (number? (nutriment_key nutriments))
+                               (nutriment_key nutriments)
+                               (read-string (or (nutriment_key nutriments) "0")))
+        nutriment (* cur_nutriment_number (/ amount 100))]
+    (+ nutriment_all nutriment)))
+
+(defn ->nutriments-grouped-by-date [foods]
+  (let [foods-by-date (foods->group-by-date foods)]
+    (mapv #(reduce
+            (fn [{:keys [sugars_100g energy-kcal fat_100g]} {:keys [amount eaten-at nutriments]}]
+              (let [part-add-nutr-fn (partial add-nutriment nutriments amount)]
+                {:eaten-at    eaten-at :sugars_100g (part-add-nutr-fn sugars_100g :sugars_100g)
+                 :energy-kcal (part-add-nutr-fn energy-kcal :energy-kcal)
+                 :fat_100g (part-add-nutr-fn fat_100g :fat_100g)}))
+            {} %) foods-by-date)))
