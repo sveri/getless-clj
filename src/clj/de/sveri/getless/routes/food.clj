@@ -31,8 +31,8 @@
         (.printStackTrace e)))))
 
 
-(defn contents-page [db]
-  (layout/render "food/contents.html"))
+(defn contents-page [db {:keys [off-url off-user off-password]}]
+  (layout/render "food/contents.html" {:nutriments (s-food/->nutriments-grouped-by-date (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password))}))
 
 (defn food-routes [config db]
   (routes
@@ -40,4 +40,4 @@
     (GET "/food/add" req (add-food-page req))
     (POST "/food/add" [date productid amount unit :as req] (add-food date productid amount unit req db))
     (GET "/food/add/product/:productid" [productid :as req] (add-product productid req config))
-    (GET "/food/contents" [] (contents-page db))))
+    (GET "/food/contents" [] (contents-page db config))))

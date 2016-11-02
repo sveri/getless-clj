@@ -71,7 +71,7 @@
   "adds a :energy-kcal key / value to the :nutriements map"
   [product]
   (if-let [kj (-> product :nutriments :energy_100g)]
-    (assoc-in product [:nutriments :energy-kcal] (str (/ (read-string kj) 4.187)))
+    (assoc-in product [:nutriments :energy-kcal] (str (/ (if (number? kj) kj (read-string kj)) 4.187)))
     (assoc-in product [:nutriments :energy-kcal] "0")))
 
 
