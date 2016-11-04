@@ -35,8 +35,6 @@
   (layout/render "food/contents.html"
                  {:nutriments (-> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
                                   s-food/->nutriments-grouped-by-date)}))
-                 ;{:nutriments (s-food/->nutriments-grouped-by-date
-                 ;               (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password))}))
 
 (defn food-routes [config db]
   (routes

@@ -47,12 +47,10 @@
                                (nutriment_key nutriments)
                                (read-string (or (nutriment_key nutriments) "0")))
         nutriment (* cur_nutriment_number (/ amount 100))]
-
     (+ nutriment_all nutriment)))
 
-(s/def ::grouped-foods-with-products (s/coll-of (s/coll-of (merge ::db-food/foods ::s-off/product))))
-
-(s/fdef ->nutriments-grouped-by-date :args (:foods ::grouped-foods-with-products))
+(s/def ::grouped-foods-with-products (s/coll-of (s/coll-of (s/merge ::db-food/food ::s-off/product))))
+(s/fdef ->nutriments-grouped-by-date :args (s/cat :foods ::grouped-foods-with-products))
 (defn ->nutriments-grouped-by-date [foods]
   (mapv #(reduce
           (fn [{:keys [sugars_100g energy-kcal fat_100g]} {:keys [amount eaten-at product] :as food}]
