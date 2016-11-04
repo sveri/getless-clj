@@ -45,8 +45,9 @@
 (s/def ::energy_100g string?)
 (s/def ::energy_unit ::unit)
 (s/def ::energy-kcal string?)
-(s/def ::nutriments (s/coll-of (s/keys :req-un [::sugars_100g ::sugars_unit ::fat_100g ::fat_unit
-                                                ::energy_100g ::energy_unit ::salt ::salt_unit])))
+(s/def ::nutriments
+  (s/nilable (s/keys :req-un [::sugars_100g ::sugars_unit]
+                     :opt-un [::energy_100g ::energy_unit ::salt ::salt_unit ::fat_100g ::fat_unit])))
 
 (s/def ::product (s/keys :req-un [::id ::code ::lang ::image_thumb_url ::image_small_url ::rev]
                          :opt-un [::product_name ::product_name_de ::brands ::ingredients_text_de ::packaging
@@ -115,7 +116,7 @@
   (let [f #(assoc % :product (get-by-id (:product-id %) off-url off-user off-password))]
     (if (map? map-or-list)
       (f map-or-list)
-      (map f map-or-list))))
+      (mapv f map-or-list))))
 
 
 

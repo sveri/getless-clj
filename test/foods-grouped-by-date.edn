@@ -1,0 +1,1088 @@
+([{:id 16,
+   :eaten-at #inst "2016-10-22T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 4000417294005,
+   :amount 100,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/400/041/729/4005/front_fr.8.100.jpg",
+    :_keywords
+    ["lait"
+     "milchschokoladen"
+     "mousse"
+     "bunte"
+     "au"
+     "schokoladen"
+     "alpe"
+     "snack"
+     "cacao"
+     "40"
+     "ritter"
+     "vielfalt"
+     "chocolat"
+     "de"
+     "sport"
+     "fourre"
+     "une"
+     "sugary"],
+    :serving_quantity 0,
+    :packaging "Plastique,05 PP",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/400/041/729/4005/front_fr.8.200.jpg",
+    :nutriments
+    {:salt "0.27",
+     :sugars_unit "g",
+     :energy-kcal "574.1581084308574",
+     :energy_unit "kJ",
+     :energy_value "2404",
+     :fat_serving "",
+     :nutrition-score-uk "28",
+     :proteins_value "7.4",
+     :lactose "7.41",
+     :monounsaturated-fat_label "Acides gras monoinsaturés",
+     :calcium_serving "",
+     :calcium_value "224",
+     :trans-fat_serving "",
+     :trans-fat_label "Acides gras trans",
+     :lactose_100g "7.41",
+     :proteins_unit "g",
+     :carbohydrates_unit "g",
+     :sodium_value "0.1062992125984252",
+     :monounsaturated-fat_100g "12",
+     :salt_serving "",
+     :lactose_unit "g",
+     :saturated-fat_value "23",
+     :fat "39",
+     :energy "2404",
+     :salt_value "0.27",
+     :trans-fat_unit "g",
+     :calcium "0.224",
+     :proteins_serving "",
+     :saturated-fat_unit "g",
+     :fat_100g "39",
+     :lactose_value "7.41",
+     :sugars_serving "",
+     :monounsaturated-fat_value "12",
+     :saturated-fat_serving "",
+     :sugars_value "46",
+     :sodium_100g "0.106299212598425",
+     :carbohydrates_value "47",
+     :sodium_serving "",
+     :proteins_100g "7.4",
+     :fat_unit "g",
+     :lactose_label "Lactose",
+     :saturated-fat "23",
+     :calcium_label "Calcium",
+     :sugars_100g "46",
+     :monounsaturated-fat "12",
+     :sodium "0.106299212598425",
+     :trans-fat "0.3",
+     :monounsaturated-fat_unit "g",
+     :nutrition-score-fr "28",
+     :sugars "46",
+     :trans-fat_100g "0.3",
+     :carbohydrates "47",
+     :monounsaturated-fat_serving "",
+     :energy_100g "2404",
+     :energy_serving "",
+     :salt_100g "0.27",
+     :saturated-fat_100g "23",
+     :nutrition-score-uk_100g "28",
+     :sodium_unit "g",
+     :salt_unit "g",
+     :carbohydrates_serving "",
+     :trans-fat_value "0.3",
+     :lactose_serving "",
+     :carbohydrates_100g "47",
+     :proteins "7.4",
+     :fat_value "39",
+     :nutrition-score-fr_100g "28",
+     :calcium_100g "0.224",
+     :calcium_unit "mg"},
+    :ingredients_text
+    "lécithine, de _soja_, Sucre, poudre de _lait_ entier, graisse de palme, beurre de cacao, pâte de cacao, cacao maigre en poudre, _lait_ écrémé en poudre, _beurre_ concentré, pâte de _noisettes_, émulsifiant, arôme naturel.",
+    :rev 27,
+    :lang "fr",
+    :ingredients
+    [{:text "Sucre", :id "sucre", :rank 1}
+     {:text "poudre de _lait_ entier",
+      :percent "16",
+      :id "poudre-de-lait-entier",
+      :rank 2}
+     {:text "graisse de palme", :id "graisse-de-palme", :rank 3}
+     {:text "beurre de cacao", :id "beurre-de-cacao", :rank 4}
+     {:text "pâte de cacao",
+      :percent "6",
+      :id "pate-de-cacao",
+      :rank 5}
+     {:text "cacao maigre en poudre",
+      :percent "5",
+      :id "cacao-maigre-en-poudre",
+      :rank 6}
+     {:text "_lait_ écrémé en poudre",
+      :id "lait-ecreme-en-poudre",
+      :rank 7}
+     {:text "_beurre_ concentré", :id "beurre-concentre", :rank 8}
+     {:text "pâte de _noisettes_", :id "pate-de-noisettes", :rank 9}
+     {:text "émulsifiant", :id "emulsifiant", :rank 10}
+     {:text "arôme naturel.", :id "arome-naturel", :rank 11}
+     {:text "lécithine", :id "lecithine"}
+     {:text "de _soja_", :id "de-soja"}],
+    :id "4000417294005",
+    :code "4000417294005",
+    :nutrition_data_per "100g",
+    :quantity "100 g",
+    :product_name "Ritter Sport Cacao Mousse",
+    :brands "Ritter Sport,Ritter Sport Bunte Vielfalt"}}]
+ [{:id 9,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 22114166,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.100.jpg",
+    :_keywords ["steak" "prevpra" "brasilien" "rinder-steak"],
+    :serving_quantity 0,
+    :packaging "Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.200.jpg",
+    :nutriments {:energy-kcal "0"},
+    :ingredients_text "",
+    :rev 9,
+    :lang "de",
+    :ingredients [],
+    :id "22114166",
+    :code "22114166",
+    :product_name_de "Rinder-Steaks",
+    :nutrition_data_per "100g",
+    :quantity "400 g",
+    :ingredients_text_de "",
+    :product_name "Rinder-Steaks",
+    :brands "Prevpra"}}
+  {:id 11,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 22114166,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.100.jpg",
+    :_keywords ["steak" "prevpra" "brasilien" "rinder-steak"],
+    :serving_quantity 0,
+    :packaging "Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.200.jpg",
+    :nutriments {:energy-kcal "0"},
+    :ingredients_text "",
+    :rev 9,
+    :lang "de",
+    :ingredients [],
+    :id "22114166",
+    :code "22114166",
+    :product_name_de "Rinder-Steaks",
+    :nutrition_data_per "100g",
+    :quantity "400 g",
+    :ingredients_text_de "",
+    :product_name "Rinder-Steaks",
+    :brands "Prevpra"}}
+  {:id 12,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 2000000029960,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/200/000/002/9960/front_de.6.100.jpg",
+    :_keywords
+    ["huftsteak"
+     "irische"
+     "fleisch"
+     "prei"
+     "fsc"
+     "purland"
+     "beef"
+     "c041248"
+     "goldener"
+     "steak"
+     "dlg"
+     "irish"
+     "irland"
+     "2015"],
+    :serving_quantity 0,
+    :packaging "Kunststoff,Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/200/000/002/9960/front_de.6.200.jpg",
+    :nutriments
+    {:salt "0.25",
+     :sugars_unit "g",
+     :energy-kcal "115.83472653451157",
+     :energy_unit "kJ",
+     :energy_value "485",
+     :fat_serving "",
+     :nutrition-score-uk "-2",
+     :proteins_value "22.0",
+     :proteins_unit "g",
+     :carbohydrates_unit "g",
+     :sodium_value "0.09842519685039369",
+     :salt_serving "",
+     :saturated-fat_value "1.8",
+     :fat "3",
+     :fiber "0",
+     :energy "485",
+     :salt_value "0.25",
+     :fiber_unit "g",
+     :fiber_serving "",
+     :proteins_serving "",
+     :saturated-fat_unit "g",
+     :fat_100g "3",
+     :sugars_serving "",
+     :saturated-fat_serving "",
+     :sugars_value "0",
+     :sodium_100g "0.0984251968503937",
+     :carbohydrates_value "0",
+     :sodium_serving "",
+     :proteins_100g "22",
+     :fat_unit "g",
+     :saturated-fat "1.8",
+     :sugars_100g "0",
+     :fiber_value "0",
+     :sodium "0.0984251968503937",
+     :fiber_100g "0",
+     :nutrition-score-fr "-2",
+     :sugars "0",
+     :carbohydrates "0",
+     :energy_100g "485",
+     :energy_serving "",
+     :salt_100g "0.25",
+     :saturated-fat_100g "1.8",
+     :nutrition-score-uk_100g "-2",
+     :sodium_unit "g",
+     :salt_unit "g",
+     :carbohydrates_serving "",
+     :carbohydrates_100g "0",
+     :proteins "22",
+     :fat_value "3.0",
+     :nutrition-score-fr_100g "-2"},
+    :ingredients_text
+    "Rindfleisch, Pfeffer, Paprika, Koriander, Zwiebel, Gelbsenfsaat, Kräuter, Speisesalz, Würze, Honigpulver",
+    :rev 10,
+    :lang "de",
+    :ingredients
+    [{:text "Rindfleisch", :id "rindfleisch", :rank 1}
+     {:text "Pfeffer", :id "pfeffer", :rank 2}
+     {:text "Paprika", :id "paprika", :rank 3}
+     {:text "Koriander", :id "koriander", :rank 4}
+     {:text "Zwiebel", :id "zwiebel", :rank 5}
+     {:text "Gelbsenfsaat", :id "gelbsenfsaat", :rank 6}
+     {:text "Kräuter", :id "krauter", :rank 7}
+     {:text "Speisesalz", :id "speisesalz", :rank 8}
+     {:text "Würze", :id "wurze", :rank 9}
+     {:text "Honigpulver", :id "honigpulver", :rank 10}],
+    :id "2000000029960",
+    :code "2000000029960",
+    :product_name_de "Irish Beef Hüftsteak",
+    :nutrition_data_per "100g",
+    :quantity "0,181 g",
+    :ingredients_text_de
+    "Rindfleisch, Pfeffer, Paprika, Koriander, Zwiebel, Gelbsenfsaat, Kräuter, Speisesalz, Würze, Honigpulver",
+    :product_name "Irish Beef Hüftsteak",
+    :brands "Purland"}}
+  {:id 13,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 22114166,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.100.jpg",
+    :_keywords ["steak" "prevpra" "brasilien" "rinder-steak"],
+    :serving_quantity 0,
+    :packaging "Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.200.jpg",
+    :nutriments {:energy-kcal "0"},
+    :ingredients_text "",
+    :rev 9,
+    :lang "de",
+    :ingredients [],
+    :id "22114166",
+    :code "22114166",
+    :product_name_de "Rinder-Steaks",
+    :nutrition_data_per "100g",
+    :quantity "400 g",
+    :ingredients_text_de "",
+    :product_name "Rinder-Steaks",
+    :brands "Prevpra"}}
+  {:id 14,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 22114166,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.100.jpg",
+    :_keywords ["steak" "prevpra" "brasilien" "rinder-steak"],
+    :serving_quantity 0,
+    :packaging "Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.200.jpg",
+    :nutriments {:energy-kcal "0"},
+    :ingredients_text "",
+    :rev 9,
+    :lang "de",
+    :ingredients [],
+    :id "22114166",
+    :code "22114166",
+    :product_name_de "Rinder-Steaks",
+    :nutrition_data_per "100g",
+    :quantity "400 g",
+    :ingredients_text_de "",
+    :product_name "Rinder-Steaks",
+    :brands "Prevpra"}}
+  {:id 15,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 22114166,
+   :amount 3444,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.100.jpg",
+    :_keywords ["steak" "prevpra" "brasilien" "rinder-steak"],
+    :serving_quantity 0,
+    :packaging "Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.200.jpg",
+    :nutriments {:energy-kcal "0"},
+    :ingredients_text "",
+    :rev 9,
+    :lang "de",
+    :ingredients [],
+    :id "22114166",
+    :code "22114166",
+    :product_name_de "Rinder-Steaks",
+    :nutrition_data_per "100g",
+    :quantity "400 g",
+    :ingredients_text_de "",
+    :product_name "Rinder-Steaks",
+    :brands "Prevpra"}}
+  {:id 6,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 22114166,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.100.jpg",
+    :_keywords ["steak" "prevpra" "brasilien" "rinder-steak"],
+    :serving_quantity 0,
+    :packaging "Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.200.jpg",
+    :nutriments {:energy-kcal "0"},
+    :ingredients_text "",
+    :rev 9,
+    :lang "de",
+    :ingredients [],
+    :id "22114166",
+    :code "22114166",
+    :product_name_de "Rinder-Steaks",
+    :nutrition_data_per "100g",
+    :quantity "400 g",
+    :ingredients_text_de "",
+    :product_name "Rinder-Steaks",
+    :brands "Prevpra"}}
+  {:id 7,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 22114166,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.100.jpg",
+    :_keywords ["steak" "prevpra" "brasilien" "rinder-steak"],
+    :serving_quantity 0,
+    :packaging "Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/22114166/front_de.8.200.jpg",
+    :nutriments {:energy-kcal "0"},
+    :ingredients_text "",
+    :rev 9,
+    :lang "de",
+    :ingredients [],
+    :id "22114166",
+    :code "22114166",
+    :product_name_de "Rinder-Steaks",
+    :nutrition_data_per "100g",
+    :quantity "400 g",
+    :ingredients_text_de "",
+    :product_name "Rinder-Steaks",
+    :brands "Prevpra"}}
+  {:id 8,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 2000000029960,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/200/000/002/9960/front_de.6.100.jpg",
+    :_keywords
+    ["huftsteak"
+     "irische"
+     "fleisch"
+     "prei"
+     "fsc"
+     "purland"
+     "beef"
+     "c041248"
+     "goldener"
+     "steak"
+     "dlg"
+     "irish"
+     "irland"
+     "2015"],
+    :serving_quantity 0,
+    :packaging "Kunststoff,Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/200/000/002/9960/front_de.6.200.jpg",
+    :nutriments
+    {:salt "0.25",
+     :sugars_unit "g",
+     :energy-kcal "115.83472653451157",
+     :energy_unit "kJ",
+     :energy_value "485",
+     :fat_serving "",
+     :nutrition-score-uk "-2",
+     :proteins_value "22.0",
+     :proteins_unit "g",
+     :carbohydrates_unit "g",
+     :sodium_value "0.09842519685039369",
+     :salt_serving "",
+     :saturated-fat_value "1.8",
+     :fat "3",
+     :fiber "0",
+     :energy "485",
+     :salt_value "0.25",
+     :fiber_unit "g",
+     :fiber_serving "",
+     :proteins_serving "",
+     :saturated-fat_unit "g",
+     :fat_100g "3",
+     :sugars_serving "",
+     :saturated-fat_serving "",
+     :sugars_value "0",
+     :sodium_100g "0.0984251968503937",
+     :carbohydrates_value "0",
+     :sodium_serving "",
+     :proteins_100g "22",
+     :fat_unit "g",
+     :saturated-fat "1.8",
+     :sugars_100g "0",
+     :fiber_value "0",
+     :sodium "0.0984251968503937",
+     :fiber_100g "0",
+     :nutrition-score-fr "-2",
+     :sugars "0",
+     :carbohydrates "0",
+     :energy_100g "485",
+     :energy_serving "",
+     :salt_100g "0.25",
+     :saturated-fat_100g "1.8",
+     :nutrition-score-uk_100g "-2",
+     :sodium_unit "g",
+     :salt_unit "g",
+     :carbohydrates_serving "",
+     :carbohydrates_100g "0",
+     :proteins "22",
+     :fat_value "3.0",
+     :nutrition-score-fr_100g "-2"},
+    :ingredients_text
+    "Rindfleisch, Pfeffer, Paprika, Koriander, Zwiebel, Gelbsenfsaat, Kräuter, Speisesalz, Würze, Honigpulver",
+    :rev 10,
+    :lang "de",
+    :ingredients
+    [{:text "Rindfleisch", :id "rindfleisch", :rank 1}
+     {:text "Pfeffer", :id "pfeffer", :rank 2}
+     {:text "Paprika", :id "paprika", :rank 3}
+     {:text "Koriander", :id "koriander", :rank 4}
+     {:text "Zwiebel", :id "zwiebel", :rank 5}
+     {:text "Gelbsenfsaat", :id "gelbsenfsaat", :rank 6}
+     {:text "Kräuter", :id "krauter", :rank 7}
+     {:text "Speisesalz", :id "speisesalz", :rank 8}
+     {:text "Würze", :id "wurze", :rank 9}
+     {:text "Honigpulver", :id "honigpulver", :rank 10}],
+    :id "2000000029960",
+    :code "2000000029960",
+    :product_name_de "Irish Beef Hüftsteak",
+    :nutrition_data_per "100g",
+    :quantity "0,181 g",
+    :ingredients_text_de
+    "Rindfleisch, Pfeffer, Paprika, Koriander, Zwiebel, Gelbsenfsaat, Kräuter, Speisesalz, Würze, Honigpulver",
+    :product_name "Irish Beef Hüftsteak",
+    :brands "Purland"}}
+  {:id 10,
+   :eaten-at #inst "2016-10-21T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 2000000029960,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/200/000/002/9960/front_de.6.100.jpg",
+    :_keywords
+    ["huftsteak"
+     "irische"
+     "fleisch"
+     "prei"
+     "fsc"
+     "purland"
+     "beef"
+     "c041248"
+     "goldener"
+     "steak"
+     "dlg"
+     "irish"
+     "irland"
+     "2015"],
+    :serving_quantity 0,
+    :packaging "Kunststoff,Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/200/000/002/9960/front_de.6.200.jpg",
+    :nutriments
+    {:salt "0.25",
+     :sugars_unit "g",
+     :energy-kcal "115.83472653451157",
+     :energy_unit "kJ",
+     :energy_value "485",
+     :fat_serving "",
+     :nutrition-score-uk "-2",
+     :proteins_value "22.0",
+     :proteins_unit "g",
+     :carbohydrates_unit "g",
+     :sodium_value "0.09842519685039369",
+     :salt_serving "",
+     :saturated-fat_value "1.8",
+     :fat "3",
+     :fiber "0",
+     :energy "485",
+     :salt_value "0.25",
+     :fiber_unit "g",
+     :fiber_serving "",
+     :proteins_serving "",
+     :saturated-fat_unit "g",
+     :fat_100g "3",
+     :sugars_serving "",
+     :saturated-fat_serving "",
+     :sugars_value "0",
+     :sodium_100g "0.0984251968503937",
+     :carbohydrates_value "0",
+     :sodium_serving "",
+     :proteins_100g "22",
+     :fat_unit "g",
+     :saturated-fat "1.8",
+     :sugars_100g "0",
+     :fiber_value "0",
+     :sodium "0.0984251968503937",
+     :fiber_100g "0",
+     :nutrition-score-fr "-2",
+     :sugars "0",
+     :carbohydrates "0",
+     :energy_100g "485",
+     :energy_serving "",
+     :salt_100g "0.25",
+     :saturated-fat_100g "1.8",
+     :nutrition-score-uk_100g "-2",
+     :sodium_unit "g",
+     :salt_unit "g",
+     :carbohydrates_serving "",
+     :carbohydrates_100g "0",
+     :proteins "22",
+     :fat_value "3.0",
+     :nutrition-score-fr_100g "-2"},
+    :ingredients_text
+    "Rindfleisch, Pfeffer, Paprika, Koriander, Zwiebel, Gelbsenfsaat, Kräuter, Speisesalz, Würze, Honigpulver",
+    :rev 10,
+    :lang "de",
+    :ingredients
+    [{:text "Rindfleisch", :id "rindfleisch", :rank 1}
+     {:text "Pfeffer", :id "pfeffer", :rank 2}
+     {:text "Paprika", :id "paprika", :rank 3}
+     {:text "Koriander", :id "koriander", :rank 4}
+     {:text "Zwiebel", :id "zwiebel", :rank 5}
+     {:text "Gelbsenfsaat", :id "gelbsenfsaat", :rank 6}
+     {:text "Kräuter", :id "krauter", :rank 7}
+     {:text "Speisesalz", :id "speisesalz", :rank 8}
+     {:text "Würze", :id "wurze", :rank 9}
+     {:text "Honigpulver", :id "honigpulver", :rank 10}],
+    :id "2000000029960",
+    :code "2000000029960",
+    :product_name_de "Irish Beef Hüftsteak",
+    :nutrition_data_per "100g",
+    :quantity "0,181 g",
+    :ingredients_text_de
+    "Rindfleisch, Pfeffer, Paprika, Koriander, Zwiebel, Gelbsenfsaat, Kräuter, Speisesalz, Würze, Honigpulver",
+    :product_name "Irish Beef Hüftsteak",
+    :brands "Purland"}}]
+ [{:id 4,
+   :eaten-at #inst "2016-10-20T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 2000000029960,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/200/000/002/9960/front_de.6.100.jpg",
+    :_keywords
+    ["huftsteak"
+     "irische"
+     "fleisch"
+     "prei"
+     "fsc"
+     "purland"
+     "beef"
+     "c041248"
+     "goldener"
+     "steak"
+     "dlg"
+     "irish"
+     "irland"
+     "2015"],
+    :serving_quantity 0,
+    :packaging "Kunststoff,Karton",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/200/000/002/9960/front_de.6.200.jpg",
+    :nutriments
+    {:salt "0.25",
+     :sugars_unit "g",
+     :energy-kcal "115.83472653451157",
+     :energy_unit "kJ",
+     :energy_value "485",
+     :fat_serving "",
+     :nutrition-score-uk "-2",
+     :proteins_value "22.0",
+     :proteins_unit "g",
+     :carbohydrates_unit "g",
+     :sodium_value "0.09842519685039369",
+     :salt_serving "",
+     :saturated-fat_value "1.8",
+     :fat "3",
+     :fiber "0",
+     :energy "485",
+     :salt_value "0.25",
+     :fiber_unit "g",
+     :fiber_serving "",
+     :proteins_serving "",
+     :saturated-fat_unit "g",
+     :fat_100g "3",
+     :sugars_serving "",
+     :saturated-fat_serving "",
+     :sugars_value "0",
+     :sodium_100g "0.0984251968503937",
+     :carbohydrates_value "0",
+     :sodium_serving "",
+     :proteins_100g "22",
+     :fat_unit "g",
+     :saturated-fat "1.8",
+     :sugars_100g "0",
+     :fiber_value "0",
+     :sodium "0.0984251968503937",
+     :fiber_100g "0",
+     :nutrition-score-fr "-2",
+     :sugars "0",
+     :carbohydrates "0",
+     :energy_100g "485",
+     :energy_serving "",
+     :salt_100g "0.25",
+     :saturated-fat_100g "1.8",
+     :nutrition-score-uk_100g "-2",
+     :sodium_unit "g",
+     :salt_unit "g",
+     :carbohydrates_serving "",
+     :carbohydrates_100g "0",
+     :proteins "22",
+     :fat_value "3.0",
+     :nutrition-score-fr_100g "-2"},
+    :ingredients_text
+    "Rindfleisch, Pfeffer, Paprika, Koriander, Zwiebel, Gelbsenfsaat, Kräuter, Speisesalz, Würze, Honigpulver",
+    :rev 10,
+    :lang "de",
+    :ingredients
+    [{:text "Rindfleisch", :id "rindfleisch", :rank 1}
+     {:text "Pfeffer", :id "pfeffer", :rank 2}
+     {:text "Paprika", :id "paprika", :rank 3}
+     {:text "Koriander", :id "koriander", :rank 4}
+     {:text "Zwiebel", :id "zwiebel", :rank 5}
+     {:text "Gelbsenfsaat", :id "gelbsenfsaat", :rank 6}
+     {:text "Kräuter", :id "krauter", :rank 7}
+     {:text "Speisesalz", :id "speisesalz", :rank 8}
+     {:text "Würze", :id "wurze", :rank 9}
+     {:text "Honigpulver", :id "honigpulver", :rank 10}],
+    :id "2000000029960",
+    :code "2000000029960",
+    :product_name_de "Irish Beef Hüftsteak",
+    :nutrition_data_per "100g",
+    :quantity "0,181 g",
+    :ingredients_text_de
+    "Rindfleisch, Pfeffer, Paprika, Koriander, Zwiebel, Gelbsenfsaat, Kräuter, Speisesalz, Würze, Honigpulver",
+    :product_name "Irish Beef Hüftsteak",
+    :brands "Purland"}}
+  {:id 5,
+   :eaten-at #inst "2016-10-20T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 4008400354125,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/400/840/035/4125/front_de.7.100.jpg",
+    :_keywords
+    ["biscuit"
+     "kekse"
+     "haselnuss-schnitten"
+     "cake"
+     "snack"
+     "hanuta"
+     "ferrero"
+     "and"
+     "sugary"],
+    :serving_quantity 22,
+    :packaging "Kunststoff,Karton,Aluminium,Papier",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/400/840/035/4125/front_de.7.200.jpg",
+    :nutriments
+    {:salt "0.432",
+     :sugars_unit "g",
+     :energy-kcal "539.7659422020539",
+     :energy_unit "kJ",
+     :energy_value "2260",
+     :fat_serving "7.02",
+     :nutrition-score-uk 26,
+     :proteins_value "7.6",
+     :proteins_unit "g",
+     :carbohydrates_unit "g",
+     :sodium_value "0.1700787401574803",
+     :salt_serving "0.095",
+     :saturated-fat_value "18.6",
+     :fat "31.9",
+     :energy "2260",
+     :salt_value "0.432",
+     :proteins_serving "1.67",
+     :saturated-fat_unit "g",
+     :fat_100g "31.9",
+     :sugars_serving "9.37",
+     :saturated-fat_serving "4.09",
+     :sugars_value "42.6",
+     :sodium_100g "0.17007874015748",
+     :carbohydrates_value "54",
+     :sodium_serving "0.0374",
+     :proteins_100g "7.6",
+     :fat_unit "g",
+     :saturated-fat "18.6",
+     :sugars_100g "42.6",
+     :sodium "0.17007874015748",
+     :nutrition-score-fr 26,
+     :sugars "42.6",
+     :carbohydrates "54",
+     :energy_100g "2260",
+     :energy_serving "497",
+     :salt_100g "0.432",
+     :saturated-fat_100g "18.6",
+     :nutrition-score-uk_100g 26,
+     :sodium_unit "g",
+     :salt_unit "g",
+     :carbohydrates_serving "11.9",
+     :carbohydrates_100g "54",
+     :proteins "7.6",
+     :fat_value "31.9",
+     :nutrition-score-fr_100g 26},
+    :ingredients_text
+    "Palmkern, Palm, Shea, Zucker, _Vollmilchpulver_, Kakaobutter, Kakaomasse, Emulgator Lecithine, _Soja_, Zucker, Kakaomasse, Kakaobutter, Emulgator Lecithine, _Soja_, Zucker, pflanzliche Fette, _Weizenmehl_, _Haselnüsse_, _Süßmolkenpulver_, fettarmer Kakao, _Vollmilchschokolade_, Vanillin), _Magermilchpulver_, Aromen, Salz, Halbbitterschokolade, Vanillin), _Butterreinfett_, Emulgator Lecithine, _Soja_, Traubenzucker, Backtriebmittel Natriumhydrogencarbonat, Vanillin",
+    :rev 12,
+    :lang "de",
+    :ingredients
+    [{:text "Zucker", :id "zucker", :rank 1}
+     {:text "pflanzliche Fette", :id "pflanzliche-fette", :rank 2}
+     {:text "_Weizenmehl_", :id "weizenmehl", :rank 3}
+     {:text "_Haselnüsse_", :percent "13", :id "haselnusse", :rank 4}
+     {:text "_Süßmolkenpulver_", :id "sussmolkenpulver", :rank 5}
+     {:text "fettarmer Kakao", :id "fettarmer-kakao", :rank 6}
+     {:text "_Vollmilchschokolade_",
+      :id "vollmilchschokolade",
+      :rank 7}
+     {:text "Vanillin)", :id "vanillin", :rank 8}
+     {:text "_Magermilchpulver_", :id "magermilchpulver", :rank 9}
+     {:text "Aromen", :id "aromen", :rank 10}
+     {:text "Salz", :id "salz", :rank 11}
+     {:text "Halbbitterschokolade",
+      :id "halbbitterschokolade",
+      :rank 12}
+     {:text "Vanillin)", :id "vanillin", :rank 13}
+     {:text "_Butterreinfett_", :id "butterreinfett", :rank 14}
+     {:text "Emulgator Lecithine", :id "emulgator-lecithine", :rank 15}
+     {:text "_Soja_", :id "soja", :rank 16}
+     {:text "Traubenzucker", :id "traubenzucker", :rank 17}
+     {:text "Backtriebmittel Natriumhydrogencarbonat",
+      :id "backtriebmittel-natriumhydrogencarbonat",
+      :rank 18}
+     {:text "Vanillin", :id "vanillin", :rank 19}
+     {:text "Palmkern", :id "palmkern"}
+     {:text "Palm", :id "palm"}
+     {:text "Shea", :id "shea"}
+     {:text "Zucker", :id "zucker"}
+     {:text "_Vollmilchpulver_", :id "vollmilchpulver"}
+     {:text "Kakaobutter", :id "kakaobutter"}
+     {:text "Kakaomasse", :id "kakaomasse"}
+     {:text "Emulgator Lecithine", :id "emulgator-lecithine"}
+     {:text "_Soja_", :id "soja"}
+     {:text "Zucker", :id "zucker"}
+     {:text "Kakaomasse", :id "kakaomasse"}
+     {:text "Kakaobutter", :id "kakaobutter"}
+     {:text "Emulgator Lecithine", :id "emulgator-lecithine"}
+     {:text "_Soja_", :id "soja"}],
+    :id "4008400354125",
+    :code "4008400354125",
+    :product_name_de "hanuta",
+    :nutrition_data_per "100g",
+    :quantity "242 g 11 Stück",
+    :ingredients_text_de
+    "Zucker, pflanzliche Fette (Palmkern, Palm, Shea), _Weizenmehl_, _Haselnüsse_ (13%), _Süßmolkenpulver_, fettarmer Kakao, _Vollmilchschokolade_ (Zucker, _Vollmilchpulver_, Kakaobutter, Kakaomasse, Emulgator Lecithine (_Soja_), Vanillin), _Magermilchpulver_, Aromen, Salz, Halbbitterschokolade (Zucker, Kakaomasse, Kakaobutter, Emulgator Lecithine (_Soja_), Vanillin), _Butterreinfett_, Emulgator Lecithine (_Soja_), Traubenzucker, Backtriebmittel Natriumhydrogencarbonat, Vanillin",
+    :product_name "hanuta",
+    :brands "hanuta,Ferrero"}}]
+ [{:id 3,
+   :eaten-at #inst "2016-10-18T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 29015618,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/29015618/front_de.3.100.jpg",
+    :_keywords
+    ["thunfischfilet"
+     "und"
+     "fisch"
+     "meeresfruchte"
+     "saft"
+     "eigenen"
+     "im"
+     "aufgus"
+     "thunfischkonserve"
+     "thunfische"
+     "fischkonserve"
+     "food"
+     "steamer"
+     "filet"
+     "thunfisch"
+     "canned"
+     "ocean"],
+    :serving_quantity 0,
+    :packaging "Dose",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/29015618/front_de.3.200.jpg",
+    :nutriments {:energy-kcal "0"},
+    :ingredients_text "",
+    :rev 7,
+    :lang "de",
+    :ingredients [],
+    :id "29015618",
+    :code "29015618",
+    :product_name_de "Thunfisch Filets im eigenen Saft und Aufguss",
+    :nutrition_data_per "100g",
+    :quantity "150 g",
+    :ingredients_text_de "",
+    :product_name "Thunfisch Filets im eigenen Saft und Aufguss",
+    :brands "Ocean Steamer"}}]
+ [{:id 2,
+   :eaten-at #inst "2016-10-16T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 4008400401621,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/400/840/040/1621/front_de.34.100.jpg",
+    :_keywords
+    ["tartiner"
+     "nuss-nugat-creme"
+     "fruhstucke"
+     "nutella"
+     "spread"
+     "ferrero"
+     "sweet"
+     "nougatcreme"
+     "pate"],
+    :serving_quantity 15,
+    :packaging "Glas",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/400/840/040/1621/front_de.34.200.jpg",
+    :nutriments
+    {:salt "0.102",
+     :sugars_unit "g",
+     :energy-kcal "545.4979699068546",
+     :energy_unit "kJ",
+     :energy_value "2284",
+     :fat_serving "4.77",
+     :nutrition-score-uk 26,
+     :proteins_value "6.6",
+     :proteins_unit "g",
+     :carbohydrates_unit "g",
+     :sodium_value "0.04015748031496063",
+     :salt_serving "0.0153",
+     :saturated-fat_value "11.0",
+     :fat "31.8",
+     :energy "2284",
+     :salt_value "0.102",
+     :proteins_serving "0.99",
+     :saturated-fat_unit "g",
+     :fat_100g "31.8",
+     :sugars_serving "8.38",
+     :saturated-fat_serving "1.65",
+     :sugars_value "55.9",
+     :sodium_100g "0.0401574803149606",
+     :carbohydrates_value "56.9",
+     :sodium_serving "0.00602",
+     :proteins_100g "6.6",
+     :fat_unit "g",
+     :saturated-fat "11",
+     :sugars_100g "55.9",
+     :sodium "0.0401574803149606",
+     :nutrition-score-fr 26,
+     :sugars "55.9",
+     :carbohydrates "56.9",
+     :energy_100g "2284",
+     :energy_serving "343",
+     :salt_100g "0.102",
+     :saturated-fat_100g "11",
+     :nutrition-score-uk_100g 26,
+     :sodium_unit "g",
+     :salt_unit "g",
+     :carbohydrates_serving "8.54",
+     :carbohydrates_100g "56.9",
+     :proteins "6.6",
+     :fat_value "31.8",
+     :nutrition-score-fr_100g 26},
+    :ingredients_text
+    "Zucker, Palmöl, _Haselnüsse_, fettarmer Kakao, _Magermilchpulver_, 7‚, EmuIgator Lecithine, _Soja_, Vanillin",
+    :rev 37,
+    :lang "de",
+    :ingredients
+    [{:text "Zucker", :id "zucker", :rank 1}
+     {:text "Palmöl", :id "palmol", :rank 2}
+     {:text "_Haselnüsse_", :percent "13", :id "haselnusse", :rank 3}
+     {:text "fettarmer Kakao", :id "fettarmer-kakao", :rank 4}
+     {:text "_Magermilchpulver_", :id "magermilchpulver", :rank 5}
+     {:text "7‚", :percent "5", :id "7", :rank 6}
+     {:text "EmuIgator Lecithine", :id "emuigator-lecithine", :rank 7}
+     {:text "_Soja_", :id "soja", :rank 8}
+     {:text "Vanillin", :id "vanillin", :rank 9}],
+    :id "4008400401621",
+    :code "4008400401621",
+    :product_name_de "Nutella",
+    :nutrition_data_per "100g",
+    :quantity "450 g",
+    :ingredients_text_de
+    "Zucker, Palmöl, _Haselnüsse_ (13%), fettarmer Kakao, _Magermilchpulver_ (7,5%), EmuIgator Lecithine (_Soja_), Vanillin",
+    :product_name "Nutella",
+    :brands "Nutella,Ferrero"}}
+  {:id 1,
+   :eaten-at #inst "2016-10-16T00:00:00.000000000-00:00",
+   :users-id 1,
+   :product-id 4008400401621,
+   :amount 1,
+   :unit "gramm",
+   :product
+   {:image_thumb_url
+    "http://static.openfoodfacts.net/images/products/400/840/040/1621/front_de.34.100.jpg",
+    :_keywords
+    ["tartiner"
+     "nuss-nugat-creme"
+     "fruhstucke"
+     "nutella"
+     "spread"
+     "ferrero"
+     "sweet"
+     "nougatcreme"
+     "pate"],
+    :serving_quantity 15,
+    :packaging "Glas",
+    :image_small_url
+    "http://static.openfoodfacts.net/images/products/400/840/040/1621/front_de.34.200.jpg",
+    :nutriments
+    {:salt "0.102",
+     :sugars_unit "g",
+     :energy-kcal "545.4979699068546",
+     :energy_unit "kJ",
+     :energy_value "2284",
+     :fat_serving "4.77",
+     :nutrition-score-uk 26,
+     :proteins_value "6.6",
+     :proteins_unit "g",
+     :carbohydrates_unit "g",
+     :sodium_value "0.04015748031496063",
+     :salt_serving "0.0153",
+     :saturated-fat_value "11.0",
+     :fat "31.8",
+     :energy "2284",
+     :salt_value "0.102",
+     :proteins_serving "0.99",
+     :saturated-fat_unit "g",
+     :fat_100g "31.8",
+     :sugars_serving "8.38",
+     :saturated-fat_serving "1.65",
+     :sugars_value "55.9",
+     :sodium_100g "0.0401574803149606",
+     :carbohydrates_value "56.9",
+     :sodium_serving "0.00602",
+     :proteins_100g "6.6",
+     :fat_unit "g",
+     :saturated-fat "11",
+     :sugars_100g "55.9",
+     :sodium "0.0401574803149606",
+     :nutrition-score-fr 26,
+     :sugars "55.9",
+     :carbohydrates "56.9",
+     :energy_100g "2284",
+     :energy_serving "343",
+     :salt_100g "0.102",
+     :saturated-fat_100g "11",
+     :nutrition-score-uk_100g 26,
+     :sodium_unit "g",
+     :salt_unit "g",
+     :carbohydrates_serving "8.54",
+     :carbohydrates_100g "56.9",
+     :proteins "6.6",
+     :fat_value "31.8",
+     :nutrition-score-fr_100g 26},
+    :ingredients_text
+    "Zucker, Palmöl, _Haselnüsse_, fettarmer Kakao, _Magermilchpulver_, 7‚, EmuIgator Lecithine, _Soja_, Vanillin",
+    :rev 37,
+    :lang "de",
+    :ingredients
+    [{:text "Zucker", :id "zucker", :rank 1}
+     {:text "Palmöl", :id "palmol", :rank 2}
+     {:text "_Haselnüsse_", :percent "13", :id "haselnusse", :rank 3}
+     {:text "fettarmer Kakao", :id "fettarmer-kakao", :rank 4}
+     {:text "_Magermilchpulver_", :id "magermilchpulver", :rank 5}
+     {:text "7‚", :percent "5", :id "7", :rank 6}
+     {:text "EmuIgator Lecithine", :id "emuigator-lecithine", :rank 7}
+     {:text "_Soja_", :id "soja", :rank 8}
+     {:text "Vanillin", :id "vanillin", :rank 9}],
+    :id "4008400401621",
+    :code "4008400401621",
+    :product_name_de "Nutella",
+    :nutrition_data_per "100g",
+    :quantity "450 g",
+    :ingredients_text_de
+    "Zucker, Palmöl, _Haselnüsse_ (13%), fettarmer Kakao, _Magermilchpulver_ (7,5%), EmuIgator Lecithine (_Soja_), Vanillin",
+    :product_name "Nutella",
+    :brands "Nutella,Ferrero"}}])
