@@ -56,7 +56,6 @@
                                (nutriment_key nutriments)
                                (read-string (or (nutriment_key nutriments) "0")))
         nutriment (double (* cur_nutriment_number (/ amount 100)))]
-        ;_ (println cur_nutriment_number " --- "(/ amount 100) " ---" (double (* cur_nutriment_number (/ amount 100))))]
     (+ nutriment_all nutriment)))
 
 (s/def ::grouped-foods-with-products (s/coll-of (s/coll-of (s/merge ::db-food/food ::s-off/product))))

@@ -10,13 +10,15 @@
             [clojure.string :as str]
             [de.sveri.getless.service.food :as s-food]))
 
+(def default-last-x-days 2)
+
 (defn weight-page [_ db {:keys [off-url off-user off-password]}]
-  (let [weights-map (s-w/format-weighted-at (db-w/get-weights db (s-u/get-logged-in-user-id db))
+  (let [weights-map (s-w/format-weighted-at (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
                                             s-w/weight-date-format)]
     (layout/render "weight/index.html"
                    {:weights    (s-w/weight->js-string :weight weights-map)
                     :dates      (s-w/weight->js-string :weighted_at weights-map)
-                    :sugars (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
+                    :sugars (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password default-last-x-days)
                                  s-food/->nutriments-grouped-by-date)})))
                     ;:sugars     (-> (s-w/match-weights-dates-with-sugars-nutriments weights-map
                     ;                  (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
