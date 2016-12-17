@@ -3,7 +3,8 @@
             [de.sveri.getless.service.session :as sess]
             [de.sveri.getless.db.food :as db-food]
             [de.sveri.getless.service.off :as s-off]
-            [de.sveri.getless.service.user :as s-user])
+            [de.sveri.getless.service.user :as s-user]
+            [clojure.spec :as s])
   (:import (java.text SimpleDateFormat)))
 
 
@@ -16,27 +17,35 @@
 (defn add-food-to-session [session product]
   (update-in session [:getless :food :products] conj product))
 
-
-;(s/fdef foods->group-by-date :args (s/cat :foods ::db-food/foods) :ret (s/coll-of (s/coll-of ::db-food/foods)))
-(defn foods->group-by-date [foods]
-  (map (fn [[_ s]] s)
-       (seq
-         (group-by
-           (fn [{:keys [:eaten-at]}]
-             (.format (SimpleDateFormat. "yyyyMMdd") eaten-at))
-           foods))))
-
 (defn delete-food-from-session [session]
   (update-in session [:getless :food] dissoc :products))
 
 
-(s/fdef ->foods-with-product-grouped-by-date :ret (s/coll-of (s/coll-of ::db-food/foods)))
+;(s/fdef foods->group-by-date :args (s/cat :foods ::db-food/foods) :ret (s/coll-of (s/coll-of ::db-food/foods)))
+(defn foods->group-by-date [foods]
+  (mapv (fn [[_ s]] s)
+        (seq
+          (group-by
+            (fn [{:keys [:eaten-at]}]
+              (.format (SimpleDateFormat. "yyyyMMdd") eaten-at))
+            foods))))
+
+(def fetch-last-x-foods-from-user 500)
+(def default-last-x-days 100)
+
+(s/fdef ->foods-with-product-grouped-by-date :ret (s/coll-of ::db-food/foods))
 (defn ->foods-with-product-grouped-by-date
-  [db off-url off-user off-password]
-  (-> (s-user/get-logged-in-user-id db)
-      (db-food/->food-by-user-id db)
-      (s-off/add-product off-url off-user off-password)
-      foods->group-by-date))
+  [db off-url off-user off-password & [last-x-days]]
+  (let [foods-grouped-by-date (-> (s-user/get-logged-in-user-id db)
+                                  (db-food/->food-by-user-id db fetch-last-x-foods-from-user)
+                                  (s-off/add-product off-url off-user off-password)
+                                  foods->group-by-date)
+        last-x-days' (or last-x-days default-last-x-days)
+        last-x-days'' (if (< (count foods-grouped-by-date) last-x-days')
+                        (count foods-grouped-by-date)
+                        last-x-days')]
+    (subvec foods-grouped-by-date 0 last-x-days'')))
+
 
 
 (s/fdef add-nutriment :args (s/cat :nutriments ::s-off/nutriments :amount number?
@@ -46,7 +55,8 @@
         cur_nutriment_number (if (number? (nutriment_key nutriments))
                                (nutriment_key nutriments)
                                (read-string (or (nutriment_key nutriments) "0")))
-        nutriment (* cur_nutriment_number (/ amount 100))]
+        nutriment (double (* cur_nutriment_number (/ amount 100)))]
+        ;_ (println cur_nutriment_number " --- "(/ amount 100) " ---" (double (* cur_nutriment_number (/ amount 100))))]
     (+ nutriment_all nutriment)))
 
 (s/def ::grouped-foods-with-products (s/coll-of (s/coll-of (s/merge ::db-food/food ::s-off/product))))

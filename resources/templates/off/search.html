@@ -6,6 +6,7 @@
 
 {% block content %}
 
+
     <form class="form" action="/off/search" method="get">
         <input type="hidden" name="referer" class="form-control" value="{{referer}}"/>
         <input type="text" name="search" class="form-control" value="{{search}}" autofocus/>
@@ -16,7 +17,7 @@
         <tbody>
             {% for product in products %}
                 <tr>
-                    <td>{{product.product_name}}</td>
+                    <td><a href="http://world.openfoodfacts.org/product/{{product.id}}">{{product.product_name}}</a></td>
                     <td><img src="{{product.image_small_url}}" alt="{{product.product_name}}"/></td>
                     <td><a href="/{{referer}}/add/product/{{product.id}}" class="btn btn-primary">Hinzufügen </a></td>
                 </tr>

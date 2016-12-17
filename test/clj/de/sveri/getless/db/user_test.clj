@@ -15,7 +15,7 @@
 ;; Here we register another-fixture to wrap each test in the namespace
 (use-fixtures :each db-setup)
 
-(deftest get-all-users
-  (u/create-user db "email" "pw")
-  (let [users (u/get-all-users db)]
-    (is (= 1 (count users)))))
+;(deftest get-all-users
+;  (u/create-user db "email" "pw")
+;  (let [users (u/get-all-users db)]
+;    (is (= 1 (count users)))))

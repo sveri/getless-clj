@@ -7,13 +7,24 @@
             [de.sveri.getless.service.weight :as s-w]
             [clojure.instant :as inst]
             [de.sveri.getless.service.spec-validation :as validation]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [de.sveri.getless.service.food :as s-food]))
 
-(defn weight-page [_ db]
+(defn weight-page [_ db {:keys [off-url off-user off-password]}]
   (let [weights-map (s-w/format-weighted-at (db-w/get-weights db (s-u/get-logged-in-user-id db))
                                             s-w/weight-date-format)]
-    (layout/render "weight/index.html" {:weights (s-w/weight->js-string :weight weights-map)
-                                        :dates   (s-w/weight->js-string :weighted_at weights-map)})))
+    (layout/render "weight/index.html"
+                   {:weights    (s-w/weight->js-string :weight weights-map)
+                    :dates      (s-w/weight->js-string :weighted_at weights-map)
+                    :sugars (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
+                                 s-food/->nutriments-grouped-by-date)})))
+                    ;:sugars     (-> (s-w/match-weights-dates-with-sugars-nutriments weights-map
+                    ;                  (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
+                    ;                       s-food/->nutriments-grouped-by-date)))})))
+
+                                     ;(mapv :sugars_100g)
+                                     ;(mapv str)))})))
+
 
 
 (defn add [date weight db]
@@ -28,8 +39,8 @@
           (assoc (redirect "/weight") :flash validation-result)))))
 
 
-(defn weight-routes [_ db]
+(defn weight-routes [config db]
   (routes
-    (GET "/weight" req (weight-page req db))
+    (GET "/weight" req (weight-page req db config))
     (POST "/weight/add" [date weight] (add date weight db))))
 
