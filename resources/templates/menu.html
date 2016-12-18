@@ -3,14 +3,23 @@
     <ul class="nav navbar-nav" id="header-menu-wrapper">
 
         {% if identity %}
-        <li field="link-list" {% ifequal page "food/index.html" %} class="active"{%endifequal%}>
-            <a href="/food">Essen</a></li>
-        <li field="link-list" {% ifequal page "food/contents.html" %} class="active"{%endifequal%}>
-            <a href="/food/contents">Inhaltsstoffe</a></li>
-        <li field="link-list" {% ifequal page "meal/new.html" %} class="active"{%endifequal%}>
-            <a href="/meal/new">Neue Mahlzeit</a></li>
-        <li field="link-list" {% ifequal page "weight/index.html" %} class="active"{%endifequal%}>
-            <a href="/weight">Gewichtsverlauf</a></li>
+            <li field="link-list" {% ifequal page "habit/index.html" %} class="active"{%endifequal%}>
+            <a href="/habit">Gewohnheiten-Log</a></li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Ernährung
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li field="link-list" {% ifequal page "food/index.html" %} class="active"{%endifequal%}>
+                    <a href="/food">Essen</a></li>
+                    <li field="link-list" {% ifequal page "food/contents.html" %} class="active"{%endifequal%}>
+                    <a href="/food/contents">Inhaltsstoffe</a></li>
+                    <li field="link-list" {% ifequal page "weight/index.html" %} class="active"{%endifequal%}>
+                    <a href="/weight">Gewichtsverlauf</a></li>
+                </ul>
+            </li>
 
         {% endif %}
 
