@@ -41,7 +41,8 @@
   (let [merged-maps (w/merge-weights-and-nutriments weights nutriments)
         third (get merged-maps 2)]
     (is (= 92 (:weight third)))
-    (is (= 20 (:sugars_100g third)))))
+    (is (= 20 (:sugars_100g third)))
+    (is (:date third))))
 
 
 (stest/instrument)

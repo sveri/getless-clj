@@ -21,7 +21,8 @@
 
 
         weights-map (s-w/format-weighted-at (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
-                                            s-w/weight-date-format)]
+                                            s-w/weight-date-format)
+        data-map (s-w/format-weighted-at weights-and-nutriments s-w/weight-date-format)]
     (layout/render "weight/index.html"
                    {:weights    (s-w/weight->js-string :weight weights-map)
                     :dates      (s-w/weight->js-string :weighted_at weights-map)
