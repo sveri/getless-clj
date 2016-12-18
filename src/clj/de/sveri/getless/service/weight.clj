@@ -11,10 +11,10 @@
 
 (s/fdef weight->js-string :args (s/cat :k #{:date :weight :sugars_100g} :weights (s/spec ::db-w/weights))
         :ret string?)
-(defn weight->js-string [k weights]
-  (str (reduce (fn [acc weight] (str acc (when-not (= acc "[") ",")
+(defn weight->js-string [k data-maps]
+  (str (reduce (fn [acc data-map] (str acc (when-not (= acc "[") ",")
                                      "\""
-                                     (k weight) "\"")) "[" weights)
+                                     (k data-map "null") "\"")) "[" data-maps)
        "]"))
 
 
