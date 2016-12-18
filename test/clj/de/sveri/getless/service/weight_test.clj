@@ -17,12 +17,12 @@
 
 
 (deftest convert-weight-at-date-format
-  (let [weights [{:weight 10 :weighted_at (inst/read-instant-date "2016-09-03")}
-                 {:weight 20 :weighted_at (inst/read-instant-date "2016-09-04")}]]
+  (let [weights [{:weight 10 :date (inst/read-instant-date "2016-09-03")}
+                 {:weight 20 :date (inst/read-instant-date "2016-09-04")}]]
     (is (= "03.09.2016" (-> (w/format-weighted-at weights w/weight-date-format)
-                            first :weighted_at)))
+                            first :date)))
     (is (= "04.09.2016" (-> (w/format-weighted-at weights w/weight-date-format)
-                            second :weighted_at)))))
+                            second :date)))))
 
 
 

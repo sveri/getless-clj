@@ -34,7 +34,7 @@
 (s/def ::ingredients (s/* ::ingredient))
 (s/def ::ingredients_text string?)
 
-(s/def ::unit #{"g" "mg" "kJ" "kCal"})
+(s/def ::unit #{"g" "mg" "kJ" "kCal" "kcal"})
 
 (s/def ::string-or-number (s/or :number number? :string string?))
 
@@ -46,7 +46,7 @@
 (s/def ::salt_unit ::unit)
 (s/def ::energy_100g ::string-or-number)
 (s/def ::energy_unit ::unit)
-(s/def ::energy-kcal string?)
+(s/def ::energy-kcal ::string-or-number)
 (s/def ::nutriments
   (s/nilable (s/keys :opt-un [::sugars_100g ::sugars_unit ::energy_100g ::energy_unit ::salt ::salt_unit ::fat_100g ::fat_unit])))
 

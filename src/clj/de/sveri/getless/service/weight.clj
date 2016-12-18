@@ -7,9 +7,9 @@
   (:import (java.text SimpleDateFormat)))
 
 (def weight-date-format (time-f/formatter "dd.MM.yyyy"))
+(s/def ::date inst?)
 
-
-(s/fdef weight->js-string :args (s/cat :k #{:weighted_at :weight} :weights (s/spec ::db-w/weights))
+(s/fdef weight->js-string :args (s/cat :k #{:date :weight :sugars_100g} :weights (s/spec ::db-w/weights))
         :ret string?)
 (defn weight->js-string [k weights]
   (str (reduce (fn [acc weight] (str acc (when-not (= acc "[") ",")
@@ -17,8 +17,9 @@
                                      (k weight) "\"")) "[" weights)
        "]"))
 
-(s/fdef format-weighted-at :args (s/cat :weights ::db-w/weights :to-formatter any?)
-        :ret ::db-w/weights)
+
+(s/fdef format-weighted-at :args (s/cat :weights (s/coll-of (s/keys :req-un [::date])) :to-formatter any?)
+        :ret (s/coll-of (s/keys :req-un [::date])))
 (defn format-weighted-at [weights to-formatter]
   (mapv (fn [w-map]
           (assoc w-map :date
@@ -26,8 +27,6 @@
         weights))
 
 
-
-(s/def ::date inst?)
 (s/fdef merge-weights-and-nutriments :args (s/cat :weights ::db-w/weights :nutriments ::s-food/nutriments-grouped-by-date)
         :ret (s/coll-of (s/merge ::db-w/weights ::s-food/nutriments-grouped-by-date (s/keys :req-un [::date]))))
 (defn merge-weights-and-nutriments [weights nutriments]

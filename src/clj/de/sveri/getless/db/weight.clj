@@ -13,7 +13,7 @@
 ;(s/def ::weights (s/cat :weight-map (s/* ::weight-map)))
 
 
-(s/fdef get-weights :args (s/cat :db any? :users_id number?)
+(s/fdef get-weights :args (s/cat :db any? :users_id number? :limit number?)
         :ret ::weights)
 (defn get-weights [db users_id & [limit]]
   (let [query (if limit ["select * from weight where users_id = ? order by weighted_at desc limit ?" users_id limit]

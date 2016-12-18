@@ -13,14 +13,13 @@
 (s/def ::foods (s/coll-of ::food))
 (s/def ::unit #{"gramm" "liter"})
 
-(s/fdef ->food-by-user-id :args (s/cat :users-id number? :db any?)  :ret ::foods)
+(s/fdef ->food-by-user-id :args (s/cat :users-id number? :db any? :limit (s/? number?))
+        :ret ::foods)
 (defn ->food-by-user-id [users-id db & [limit]]
   (let [query (if limit ["select * from food where users_id = ? order by eaten_at desc limit ?" users-id limit]
                         ["select * from food where users_id = ? order by eaten_at desc" users-id])]
     (mapv #(assoc % :unit (-> % :unit str))
           (j/query db query {:identifiers #(.replace % \_ \-)}))))
-
-
 
 
 (defn enum->pg-enum

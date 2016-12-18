@@ -10,7 +10,7 @@
             [clojure.string :as str]
             [de.sveri.getless.service.food :as s-food]))
 
-(def default-last-x-days 2)
+(def default-last-x-days 10)
 
 (defn weight-page [_ db {:keys [off-url off-user off-password]}]
   (let [
@@ -20,20 +20,22 @@
                                       s-food/->nutriments-grouped-by-date))
 
 
-        weights-map (s-w/format-weighted-at (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
-                                            s-w/weight-date-format)
+        ;weights-map (s-w/format-weighted-at (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
+        ;                                    s-w/weight-date-format)
         data-map (s-w/format-weighted-at weights-and-nutriments s-w/weight-date-format)]
     (layout/render "weight/index.html"
-                   {:weights    (s-w/weight->js-string :weight weights-map)
-                    :dates      (s-w/weight->js-string :weighted_at weights-map)
-                    :sugars (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password default-last-x-days)
-                                 s-food/->nutriments-grouped-by-date)})))
-                    ;:sugars     (-> (s-w/match-weights-dates-with-sugars-nutriments weights-map
-                    ;                  (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
-                    ;                       s-food/->nutriments-grouped-by-date)))})))
+                   {:weights (s-w/weight->js-string :weight data-map)
+                    :dates   (s-w/weight->js-string :date data-map)
+                    :sugars  (s-w/weight->js-string :sugars_100g data-map)})))
+;{:weights    (s-w/weight->js-string :weight weights-map)
+; :dates      (s-w/weight->js-string :weighted_at weights-map)})))
+; :sugars (s-w/weight->js-string :sugars_100g data-map)})))
+;:sugars     (-> (s-w/match-weights-dates-with-sugars-nutriments weights-map
+;                  (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
+;                       s-food/->nutriments-grouped-by-date)))})))
 
-                                     ;(mapv :sugars_100g)
-                                     ;(mapv str)))})))
+;(mapv :sugars_100g)
+;(mapv str)))})))
 
 
 
