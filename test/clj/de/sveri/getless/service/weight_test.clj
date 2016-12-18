@@ -5,14 +5,14 @@
             [clojure.instant :as inst]))
 
 (deftest convert-weight_at
-  (let [weights [{:weight 10 :weighted_at (inst/read-instant-date "2016-09-03")}
-                 {:weight 20 :weighted_at (inst/read-instant-date "2017-09-03")}]]
+  (let [weights [{:weight 10 :date (inst/read-instant-date "2016-09-03")}
+                 {:weight 20 :date (inst/read-instant-date "2017-09-03")}]]
     (is (= "[\"Sat Sep 03 02:00:00 CEST 2016\",\"Sun Sep 03 02:00:00 CEST 2017\"]"
-           (w/weight->js-string :weighted_at weights)))))
+           (w/weight->js-string :date weights)))))
 
 (deftest convert-weight
-  (let [weights [{:weight 10 :weighted_at (inst/read-instant-date "2016-09-03")}
-                 {:weight 20 :weighted_at (inst/read-instant-date "2017-09-03")}]]
+  (let [weights [{:weight 10 :date (inst/read-instant-date "2016-09-03")}
+                 {:weight 20 :date (inst/read-instant-date "2017-09-03")}]]
     (is (= "[\"10\",\"20\"]" (w/weight->js-string :weight weights)))))
 
 
@@ -39,7 +39,7 @@
 
 (deftest merge-weights-and-nutriments-test
   (let [merged-maps (w/merge-weights-and-nutriments weights nutriments)
-        third (get merged-maps 2)]
+        third (get merged-maps 3)]
     (is (= 92 (:weight third)))
     (is (= 20 (:sugars_100g third)))
     (is (:date third))))

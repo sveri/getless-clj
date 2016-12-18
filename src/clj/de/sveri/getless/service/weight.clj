@@ -9,7 +9,7 @@
 (def weight-date-format (time-f/formatter "dd.MM.yyyy"))
 (s/def ::date inst?)
 
-(s/fdef weight->js-string :args (s/cat :k #{:date :weight :sugars_100g} :weights (s/spec ::db-w/weights))
+(s/fdef weight->js-string :args (s/cat :k #{:date :weight :sugars_100g} :data-maps (s/coll-of (s/keys)))
         :ret string?)
 (defn weight->js-string [k data-maps]
   (str (reduce (fn [acc data-map] (str acc (when-not (= acc "[") ",")
@@ -35,7 +35,9 @@
                          (group-by
                            (fn [m]
                              (.format (SimpleDateFormat. "yyyyMMdd") (get m :eaten-at (get m :weighted_at))))
-                           (concat weights nutriments))))]
-    (mapv (fn [gms] (let [grouped-gms (reduce merge gms)]
-                      (assoc grouped-gms :date (get grouped-gms :eaten-at (get grouped-gms :weighted_at)))))
-          grouped-maps)))
+                           (concat weights nutriments))))
+        merged-maps (mapv (fn [gms] (let [grouped-gms (reduce merge gms)]
+                                      (assoc grouped-gms :date (get grouped-gms :eaten-at (get grouped-gms :weighted_at)))))
+                          grouped-maps)]
+    (vec (sort-by #(.getTime (:date %)) merged-maps))))
+
