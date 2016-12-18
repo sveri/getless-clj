@@ -2,7 +2,9 @@
   (:require [clojure.spec :as s]
             [clj-time.coerce :as time-coerce]
             [clj-time.format :as time-f]
-            [de.sveri.getless.db.weight :as db-w]))
+            [de.sveri.getless.db.weight :as db-w]
+            [de.sveri.getless.service.food :as s-food])
+  (:import (java.text SimpleDateFormat)))
 
 (def weight-date-format (time-f/formatter "dd.MM.yyyy"))
 
@@ -15,10 +17,26 @@
                                      (k weight) "\"")) "[" weights)
        "]"))
 
-(s/fdef format-weighted-at :args (s/cat :weights (s/spec ::db-w/weights) :to-formatter any?)
+(s/fdef format-weighted-at :args (s/cat :weights ::db-w/weights :to-formatter any?)
         :ret ::db-w/weights)
 (defn format-weighted-at [weights to-formatter]
   (mapv (fn [w-map]
-          (assoc w-map :weighted_at
-                       (->> w-map :weighted_at (time-coerce/from-date) (time-f/unparse to-formatter))))
+          (assoc w-map :date
+                       (->> w-map :date (time-coerce/from-date) (time-f/unparse to-formatter))))
         weights))
+
+
+
+(s/def ::date inst?)
+(s/fdef merge-weights-and-nutriments :args (s/cat :weights ::db-w/weights :nutriments ::s-food/nutriments-grouped-by-date)
+        :ret (s/coll-of (s/merge ::db-w/weights ::s-food/nutriments-grouped-by-date (s/keys :req-un [::date]))))
+(defn merge-weights-and-nutriments [weights nutriments]
+  (let [grouped-maps (mapv (fn [[_ s]] s)
+                       (seq
+                         (group-by
+                           (fn [m]
+                             (.format (SimpleDateFormat. "yyyyMMdd") (get m :eaten-at (get m :weighted_at))))
+                           (concat weights nutriments))))]
+    (mapv (fn [gms] (let [grouped-gms (reduce merge gms)]
+                      (assoc grouped-gms :date (get grouped-gms :eaten-at (get grouped-gms :weighted_at)))))
+          grouped-maps)))

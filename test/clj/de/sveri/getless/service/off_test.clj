@@ -31,7 +31,7 @@
 
 (deftest ^:integration kj->kcal
   (let [product (off/get-by-id 3273220086056 offh/off-url  offh/off-user  offh/off-password)]
-    (is (str/starts-with? (:energy-kcal (:nutriments product)) "165."))))
+    (is (str/starts-with? (:energy-kcal (:nutriments product)) "178."))))
 
 
 (stest/instrument)

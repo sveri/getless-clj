@@ -11,7 +11,7 @@
 
 (defn index-page [db {:keys [off-url off-user off-password]}]
   (layout/render "food/index.html" {:products-list
-                                      (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)}))
+                                      (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password 10)}))
 
 (defn add-food-page [{:keys [session]}]
   (layout/render "food/add-food.html" {:products (s-food/get-food-from-session session)}))
@@ -35,8 +35,6 @@
   (layout/render "food/contents.html"
                  {:nutriments (-> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
                                   s-food/->nutriments-grouped-by-date)}))
-                 ;{:nutriments (s-food/->nutriments-grouped-by-date
-                 ;               (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password))}))
 
 (defn food-routes [config db]
   (routes

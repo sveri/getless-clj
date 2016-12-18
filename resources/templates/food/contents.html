@@ -4,27 +4,24 @@
 {% block content %}
 
 
-{{nutriments}}
 
-{% for products in products-list %}
+<table class="table">
+    <thead>
+        <tr><td></td><td>Zucker (g)</td><td>Fett (g)</td><td>Energie (kcal)</td></tr>
+    </thead>
+    <tbody>
+        {% for nutriment in nutriments %}
+            <tr>
+                <td>{{nutriment.eaten-at|date:"dd.MM.yyyy"}}</td>
+                <td>{{nutriment.sugars_100g}}</td>
+                <td>{{nutriment.fat_100g}}</td>
+                <td>{{nutriment.energy-kcal}}</td>
+            </tr>
 
-    <table class="table">
+        {% endfor %}
+    </tbody>
 
+</table>
 
-        <tbody>
-            {% for product in products %}
-                {% if forloop.first %}
-                    <tr>
-                        <td colspan="5"><h3>{{product.eaten-at|date:"dd.MM.yyyy"}}</h3></td>
-                    </tr>
-                {% endif %}
-
-                {% include "templates/food/product.html" %}
-            {% endfor %}
-        </tbody>
-
-    </table>
-
-{% endfor %}
 
 {% endblock %}

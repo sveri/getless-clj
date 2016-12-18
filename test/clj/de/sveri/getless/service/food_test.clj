@@ -32,11 +32,12 @@
            (second foods-grouped)))))
 
 (deftest group-nutriments-by-date
+  (stest/unstrument ['de.sveri.getless.service.food/->nutriments-grouped-by-date])
   (let [nutriments (food/->nutriments-grouped-by-date foods-grouped-with-nutriments)]
     (is (= 66.2 (:sugars_100g (first nutriments))))
     (is (= 280.1 (:fat_100g (second nutriments))))
     (is (= 1400.5 (:energy-kcal (second nutriments))))))
 
 
-;(stest/instrument)
+(stest/instrument)
 (stest/unstrument ['de.sveri.getless.service.food/add-nutriment])

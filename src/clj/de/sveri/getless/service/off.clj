@@ -11,7 +11,7 @@
 (s/def ::skip integer?)
 (s/def ::page integer?)
 
-(s/def ::id string?)
+(s/def ::id (s/or :number number? :string string?))
 (s/def ::code string?)
 (s/def ::image_thumb_url string?)
 (s/def ::image_small_url string?)
@@ -36,23 +36,25 @@
 
 (s/def ::unit #{"g" "mg" "kJ" "kCal"})
 
-(s/def ::sugars_100g string?)
+(s/def ::string-or-number (s/or :number number? :string string?))
+
+(s/def ::sugars_100g ::string-or-number)
 (s/def ::sugars_unit ::unit)
-(s/def ::fat_100g string?)
+(s/def ::fat_100g ::string-or-number)
 (s/def ::fat_unit ::unit)
-(s/def ::salt string?)
+(s/def ::salt ::string-or-number)
 (s/def ::salt_unit ::unit)
-(s/def ::energy_100g string?)
+(s/def ::energy_100g ::string-or-number)
 (s/def ::energy_unit ::unit)
 (s/def ::energy-kcal string?)
 (s/def ::nutriments
-  (s/nilable (s/keys :req-un [::sugars_100g ::sugars_unit]
-                     :opt-un [::energy_100g ::energy_unit ::salt ::salt_unit ::fat_100g ::fat_unit])))
+  (s/nilable (s/keys :opt-un [::sugars_100g ::sugars_unit ::energy_100g ::energy_unit ::salt ::salt_unit ::fat_100g ::fat_unit])))
 
-(s/def ::product (s/keys :req-un [::id ::code ::lang ::image_thumb_url ::image_small_url ::rev]
-                         :opt-un [::product_name ::product_name_de ::brands ::ingredients_text_de ::packaging
+(s/def ::product (s/keys :req-un [::id]
+                         :opt-un [::product_name ::code ::product_name_de ::brands ::ingredients_text_de ::packaging
                                   ::serving_quantity ::nutrition_data_per ::quantity ::ingredients ::_keywords
-                                  ::name ::ingredients_text ::nutriments]))
+                                  ::name ::rev ::image_thumb_url ::image_small_url ::lang ::ingredients_text
+                                  ::nutriments]))
 (s/def ::products (s/coll-of ::product))
 
 (s/def ::search-result (s/keys :req-un [::page-size ::count ::skip ::page ::products]))
@@ -93,7 +95,8 @@
         :ret ::search-result)
 (defn search-products [search off-url off-user off-password]
   (let [sanitized-search-term (.replace search " " "%20")
-        search-uri (str off-url "cgi/search.pl?search_terms="  sanitized-search-term "&search_simple=1&json=1&page_size=1000")
+        search-uri (str off-url "cgi/search.pl?search_terms="  sanitized-search-term
+                        "&generic_name_de=" sanitized-search-term "&search_simple=1&json=1&page_size=1000")
         json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password]}))
                                  :key-fn keyword)
         sanitized-products (sanitize-products (get json-body :products))]

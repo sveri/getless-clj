@@ -7,6 +7,7 @@
 
 (defn db-setup [f]
   (j/execute! db ["truncate table food cascade"])
+  (j/execute! db ["truncate table users cascade"])
   (f))
 
 (use-fixtures :each db-setup)
