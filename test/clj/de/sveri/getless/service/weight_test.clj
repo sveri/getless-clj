@@ -26,4 +26,22 @@
 
 
 
+(def nutriments [{:eaten-at (inst/read-instant-date "2016-09-01") :sugars_100g 10}
+                 {:eaten-at (inst/read-instant-date "2016-09-05") :sugars_100g 20}
+                 {:eaten-at (inst/read-instant-date "2016-09-08") :sugars_100g 30}])
+
+(def weights [{:weighted_at (inst/read-instant-date "2016-09-02") :weight 90}
+              {:weighted_at (inst/read-instant-date "2016-09-03") :weight 91}
+              {:weighted_at (inst/read-instant-date "2016-09-05") :weight 92}
+              {:weighted_at (inst/read-instant-date "2016-09-08") :weight 94}
+              {:weighted_at (inst/read-instant-date "2016-09-09") :weight 94}])
+
+
+(deftest merge-weights-and-nutriments-test
+  (let [merged-maps (w/merge-weights-and-nutriments weights nutriments)
+        third (get merged-maps 2)]
+    (is (= 92 (:weight third)))
+    (is (= 20 (:sugars_100g third)))))
+
+
 (stest/instrument)

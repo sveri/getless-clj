@@ -9,7 +9,8 @@
 (s/def ::weight number?)
 (s/def ::weight-map (s/keys :req-un [::weight ::weighted_at]
                             :opt-un [::id ::users_id]))
-(s/def ::weights (s/cat :weight-map (s/* ::weight-map)))
+(s/def ::weights (s/coll-of ::weight-map))
+;(s/def ::weights (s/cat :weight-map (s/* ::weight-map)))
 
 
 (s/fdef get-weights :args (s/cat :db any? :users_id number?)

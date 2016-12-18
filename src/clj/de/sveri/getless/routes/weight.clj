@@ -13,7 +13,14 @@
 (def default-last-x-days 2)
 
 (defn weight-page [_ db {:keys [off-url off-user off-password]}]
-  (let [weights-map (s-w/format-weighted-at (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
+  (let [
+        weights-and-nutriments (s-w/merge-weights-and-nutriments
+                                 (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
+                                 (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password default-last-x-days)
+                                      s-food/->nutriments-grouped-by-date))
+
+
+        weights-map (s-w/format-weighted-at (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
                                             s-w/weight-date-format)]
     (layout/render "weight/index.html"
                    {:weights    (s-w/weight->js-string :weight weights-map)

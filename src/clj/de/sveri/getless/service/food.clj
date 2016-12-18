@@ -9,6 +9,14 @@
 
 
 
+(s/def ::grouped-foods-with-products (s/coll-of (s/coll-of (s/merge ::db-food/food ::s-off/product))))
+
+(s/def ::eaten-at inst?)
+
+(s/def ::nutriments-grouped-by-date
+  (s/coll-of (s/keys :opt-un [::eaten-at ::s-off/sugars ::s-off/energy-kcal ::s-off/fat_100g])))
+
+
 (s/fdef get-food-from-session :args (s/cat :session ::sess/session-map))
 (defn get-food-from-session [session]
   (get-in session [:getless :food :products] {}))
@@ -58,8 +66,9 @@
         nutriment (double (* cur_nutriment_number (/ amount 100)))]
     (+ nutriment_all nutriment)))
 
-(s/def ::grouped-foods-with-products (s/coll-of (s/coll-of (s/merge ::db-food/food ::s-off/product))))
-(s/fdef ->nutriments-grouped-by-date :args (s/cat :foods ::grouped-foods-with-products))
+
+(s/fdef ->nutriments-grouped-by-date :args (s/cat :foods ::grouped-foods-with-products)
+        :ret ::nutriments-grouped-by-date)
 (defn ->nutriments-grouped-by-date [foods]
   (mapv #(reduce
           (fn [{:keys [sugars_100g energy-kcal fat_100g]} {:keys [amount eaten-at product] :as food}]
