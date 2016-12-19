@@ -3,6 +3,22 @@
 
 {% block content %}
 
-<h3>Aktivitäten</h3>
+
+<form action="/activity" method="POST" role="form">
+    <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+
+    <h3>Aktivitäten <input type="submit" value="Speichern" class="btn btn-primary pull-right"></h3>
+
+
+    <h4>Morgen</h4>
+    <textarea class="form-control" style="height: 100px;" name="tomorrow"></textarea>
+
+    <h4>Heute</h4>
+    <textarea class="form-control" style="height: 100px;" name="today"></textarea>
+
+    <h4>Gestern</h4>
+    <textarea class="form-control" style="height: 100px;" name="yesterday"></textarea>
+</form>
+
 
 {% endblock %}
