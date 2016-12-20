@@ -20,7 +20,16 @@
                     </tr>
                 {% endif %}
 
-                {% include "templates/food/product.html" %}
+                <tr>
+                    <td width="200px">{{product.product_name}} {{product.product.product_name}}
+                        <input type="hidden" name="productid[]" value="{{product.id}}">
+                    </td>
+                    <td width="200px"><img src="{{product.product.image_small_url}}" alt="{{product.product.product_name}}"/></td>
+                    <td>{{product.product.ingredients_text}}</td>
+                    <td><input type="number" placeholder="Menge" name="amount[]" value="{{product.amount}}"> </td>
+                    <td><select name="unit[]"><option value="gramm">Gramm</option><option value="liter">Liter</option></select></td>
+                    <td><a href="/food/delete/database/{{product.id}}" class="btn btn-danger">Löschen</a></td>
+                </tr>
             {% endfor %}
         </tbody>
 

@@ -17,7 +17,25 @@
 <form class="form" action="/food/add" method="post">
     <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
-    {% include "templates/food/products.html"  %}
+    <h4>Produkte <a href="/off/search" class="btn btn-primary pull-right">Produkt hinzufügen</a></h4>
+
+    <table class="table" style="margin-top: 30px;">
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td width="200px">{{product.product_name}}
+                    <input type="hidden" name="productid[]" value="{{product.id}}">
+                </td>
+                <td width="200px"><img src="{{product.image_small_url}}" alt="{{product.product_name}}"/></td>
+                <td>{{product.ingredients_text}}</td>
+                <td><input type="number" placeholder="Menge" name="amount[]" value="{{product.amount}}"> </td>
+                <td><select name="unit[]"><option value="gramm">Gramm</option><option value="liter">Liter</option></select></td>
+                <td><a href="/food/delete/session/{{product.id}}" class="btn btn-danger">Löschen</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 
     <label for="date" >Datum</label>
     <input class="form-control" type="date" name="date" id="date" placeholder="Datum" style="margin-bottom:10px"

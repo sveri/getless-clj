@@ -1,20 +1,19 @@
-(ns de.sveri.getless.db.weight
+(ns de.sveri.getless.db.activity
   (:require [clojure.java.jdbc :as j]
             [clojure.spec :as s])
   (:import (java.sql Timestamp)))
 
 (s/def ::id number?)
 (s/def ::users_id number?)
-(s/def ::written_at inst?)
-(s/def ::edited_at inst?)
+(s/def ::for_date inst?)
 (s/def ::content string?)
-(s/def ::activity-map (s/keys :req-un [::content ::written_at]
+(s/def ::activity-map (s/keys :req-un [::content ::for_date]
                               :opt-un [::id ::users_id]))
 (s/def ::activities (s/coll-of ::activity-map))
 
 
 (s/fdef get-activities :args (s/cat :db any? :users_id number? :limit (s/? number?))
-                        :ret ::activities)
+        :ret ::activities)
 (defn get-activities [db users_id & [limit]]
   (let [query (if limit ["select * from activity where users_id = ? order by written_at desc limit ?" users_id limit]
                         ["select * from activity where users_id = ? order by written_at desc" users_id])]

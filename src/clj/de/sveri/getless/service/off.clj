@@ -11,7 +11,7 @@
 (s/def ::skip integer?)
 (s/def ::page integer?)
 
-(s/def ::id (s/or :number number? :string string?))
+(s/def ::id string?)
 (s/def ::code string?)
 (s/def ::image_thumb_url string?)
 (s/def ::image_small_url string?)

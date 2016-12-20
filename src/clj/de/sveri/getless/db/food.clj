@@ -43,3 +43,9 @@
                      :unit (-> (get units i) ->unit)}))]
     (j/insert-multi! db :food rows)))
 
+
+(s/fdef delete-food :args (s/cat :db any? :productid number? :userid number?))
+(defn delete-food [db productid userid]
+  (j/delete! db :food ["id = ? and users_id = ?" productid userid]))
+
+

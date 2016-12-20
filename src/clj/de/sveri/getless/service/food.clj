@@ -25,7 +25,15 @@
 (defn add-food-to-session [session product]
   (update-in session [:getless :food :products] conj product))
 
-(defn delete-food-from-session [session]
+
+(s/fdef remove-product-from-session :args (s/cat :session ::sess/session-map :product-id ::s-off/id)
+        :ret ::sess/session-map)
+(defn remove-product-from-session [session product-id]
+  (let [cleaned-products (vec (remove #(= (:id %) product-id) (get-in session [:getless :food :products])))]
+    (assoc-in session [:getless :food :products] cleaned-products)))
+
+
+(defn remove-products-from-session [session]
   (update-in session [:getless :food] dissoc :products))
 
 
