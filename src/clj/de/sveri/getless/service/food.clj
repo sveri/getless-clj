@@ -9,7 +9,7 @@
 
 
 
-(s/def ::grouped-foods-with-products (s/coll-of (s/coll-of (s/merge ::db-food/food ::s-off/product))))
+(s/def ::grouped-foods-with-products (s/coll-of (s/coll-of (s/merge ::db-food/food (s/keys :req-un [::s-off/product])))))
 
 (s/def ::eaten-at inst?)
 

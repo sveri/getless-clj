@@ -67,6 +67,8 @@
 
   :min-lein-version "2.5.0"
 
+  :jvm-opts ["-Duser.timezone=UTC"]
+
   ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
   ;:hooks [leiningen.cljsbuild]
 
