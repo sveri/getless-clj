@@ -11,13 +11,18 @@
 
 
     <h4>Morgen</h4>
-    <textarea class="form-control" style="height: 100px;" name="tomorrow"></textarea>
+    <textarea class="form-control" style="height: 100px;" name="tomorrow">{{activities.0.content}}</textarea>
 
     <h4>Heute</h4>
-    <textarea class="form-control" style="height: 100px;" name="today"></textarea>
+    <textarea class="form-control" style="height: 100px;" name="today">{{activities.1.content}}</textarea>
 
     <h4>Gestern</h4>
-    <textarea class="form-control" style="height: 100px;" name="yesterday"></textarea>
+    <textarea class="form-control" style="height: 100px;" name="yesterday">{{activities.2.content}}</textarea>
+
+    {% for activity in rest-activities %}
+        <h4>{{activity.for-date}}</h4>
+        <textarea class="form-control" style="height: 100px;" readonly="readonly">{{activity.content}}</textarea>
+    {% endfor %}
 </form>
 
 

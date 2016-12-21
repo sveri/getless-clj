@@ -4,7 +4,7 @@
             [ring.util.response :refer [response redirect]]))
 
 (defn home-page []
-  (redirect "/weight"))
+  (layout/render "home/index.html"))
 
 (defn contact-page []
   (layout/render "home/contact.html"))

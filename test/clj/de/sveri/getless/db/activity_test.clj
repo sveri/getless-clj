@@ -1,8 +1,10 @@
 (ns de.sveri.getless.db.activity-test
   (:require [clojure.test :refer :all]
             [clojure.java.jdbc :as j]
-            [de.sveri.getless.db.activity :as db]
-            [de.sveri.getless.db.food :as db-food]))
+            [de.sveri.getless.db.activity :as db-act]
+            [clj-time.core :as t-core]
+            [clj-time.coerce :as t-coerce]
+            [clojure.instant :as inst]))
 
 (def db {:connection-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless"})
 
@@ -20,9 +22,22 @@
 
 
 
-;(deftest insert-food
-;  (let [admin-user (first (insert-admin-user db))
-;        _ (db-food/insert-food db 1476576000000 (:id admin-user) [1] [100] ["gramm"])
-;        foods (db-food/->food-by-user-id (:id admin-user) db)]
-;    (is (= "gramm"(-> foods first :unit)))
-;    (is (= 1 (-> foods first :product-id)))))
+(deftest insert-activity
+  (let [admin-user (first (insert-admin-user db))
+        today (t-coerce/to-date (t-core/today))
+        _ (db-act/insert-activity db "some text" today (:id admin-user))
+        activities (db-act/get-activities db (:id admin-user))]
+    (is (= (.getTime today) (.getTime (:for-date (first activities)))))))
+
+(deftest insert-or-update-activity
+  (let [admin-user (first (insert-admin-user db))
+        today (t-coerce/to-date (t-core/today))
+        first_content "some text"
+        second_content "some text 2"
+        _ (db-act/insert-or-update-activity db first_content today (:id admin-user))
+        activities (db-act/get-activities db (:id admin-user))
+        _ (db-act/insert-or-update-activity db second_content today (:id admin-user))
+        second_activities (db-act/get-activities db (:id admin-user))]
+    (is (= (.getTime today) (.getTime (:for-date (first activities)))))
+    (is (= first_content (:content (first activities))))
+    (is (= second_content (:content (first second_activities))))))

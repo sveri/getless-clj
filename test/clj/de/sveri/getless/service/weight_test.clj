@@ -7,7 +7,7 @@
 (deftest convert-weight_at
   (let [weights [{:weight 10 :date (inst/read-instant-date "2016-09-03")}
                  {:weight 20 :date (inst/read-instant-date "2017-09-03")}]]
-    (is (= "[\"Sat Sep 03 02:00:00 CEST 2016\",\"Sun Sep 03 02:00:00 CEST 2017\"]"
+    (is (= "[\"Sat Sep 03 00:00:00 UTC 2016\",\"Sun Sep 03 00:00:00 UTC 2017\"]"
            (w/weight->js-string :date weights)))))
 
 (deftest convert-weight

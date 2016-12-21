@@ -1,7 +1,8 @@
 (ns de.sveri.getless.db.activity
   (:require [clojure.java.jdbc :as j]
             [clojure.spec :as s])
-  (:import (java.sql Timestamp)))
+  (:import (java.sql Timestamp)
+           (java.util Date)))
 
 (s/def ::id number?)
 (s/def ::users_id number?)
@@ -15,13 +16,22 @@
 (s/fdef get-activities :args (s/cat :db any? :users_id number? :limit (s/? number?))
         :ret ::activities)
 (defn get-activities [db users_id & [limit]]
-  (let [query (if limit ["select * from activity where users_id = ? order by written_at desc limit ?" users_id limit]
-                        ["select * from activity where users_id = ? order by written_at desc" users_id])]
-    (j/query db query)))
+  (let [query (if limit ["select * from activity where users_id = ? order by for_date desc limit ?" users_id limit]
+                        ["select * from activity where users_id = ? order by for_date desc" users_id])]
+    (j/query db query {:identifiers #(.replace % \_ \-)})))
 
 
-(s/fdef save-activity :args (s/cat :db any? :content ::content :date number? :users_id number?))
-(defn save-activity [db content date users_id]
-  (j/insert! db :activity {:content content
-                           :written_at (new Timestamp date)
+(s/fdef insert-activity :args (s/cat :db any? :content ::content :date inst? :users_id number?))
+(defn insert-activity [db content date users_id]
+  (j/insert! db :activity {:content  content
+                           :for_date (new java.sql.Date (.getTime date))
                            :users_id users_id}))
+
+(s/fdef insert-or-update-activity :args (s/cat :db any? :content ::content :date inst? :users_id number?))
+(defn insert-or-update-activity [db content date users_id]
+  (let [for-date (new java.sql.Date (.getTime date))
+        get-query ["select * from activity where users_id = ? and for_date = ?" users_id for-date]
+        get-result (j/query db get-query {:identifiers #(.replace % \_ \-)})]
+    (if (< 0 (count get-result))
+      (j/update! db :activity {:content content} ["users_id = ? and for_date = ?" users_id for-date])
+      (insert-activity db content date users_id))))
