@@ -1,0 +1,7 @@
+textarea.form-control.large {
+    height: 200px;
+}
+
+textarea.form-control.small {
+    height: 100px;
+}
