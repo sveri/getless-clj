@@ -9,7 +9,7 @@
   :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
                  [org.clojure/clojurescript "1.7.170"]
 
-                 [org.clojure/core.cache "0.6.4"]
+                 [org.clojure/core.cache "0.6.5"]
                  [org.clojure/core.async "0.2.391"]
 
                  [ring "1.4.0"]

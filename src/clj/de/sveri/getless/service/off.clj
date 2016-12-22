@@ -1,8 +1,13 @@
 (ns de.sveri.getless.service.off
   (:require [org.httpkit.client :as client]
+            [de.sveri.getless.db.food :as db-food]
             [clojure.spec :as s]
             [clojure.string :as str]
-            [clojure.data.json :as json]))
+            [clojure.data.json :as json]
+            [clojure.core.cache :as cache]))
+
+(def product-cache (atom (cache/ttl-cache-factory {} :ttl 172800000)))
+
 
 
 (s/def ::name (s/and string? #(not= "" %)))
@@ -95,7 +100,7 @@
         :ret ::search-result)
 (defn search-products [search off-url off-user off-password]
   (let [sanitized-search-term (.replace search " " "%20")
-        search-uri (str off-url "cgi/search.pl?search_terms="  sanitized-search-term
+        search-uri (str off-url "cgi/search.pl?search_terms=" sanitized-search-term
                         "&generic_name_de=" sanitized-search-term "&search_simple=1&json=1&page_size=1000")
         json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password]}))
                                  :key-fn keyword)
@@ -103,17 +108,26 @@
     (assoc json-body :products sanitized-products)))
 
 
+(defn get-from-cache-or-api [id off-url off-user off-password]
+  (let [uri (str off-url "api/v0/product/" id ".json")]
+    (if (cache/has? @product-cache id)
+      (cache/lookup @product-cache id)
+      (let [product (json/read-str (:body @(client/request {:url uri :basic-auth [off-user off-password]}))
+                                   :key-fn keyword)]
+        (swap! product-cache #(cache/miss % id product))
+        product))))
+
+
 (s/fdef get-by-id :args (s/cat :id (s/or :int integer? :str string?) :off-ur string? :off-user string? :off-password string?)
         :ret ::product)
 (defn get-by-id [id off-url off-user off-password]
-  (let [uri (str off-url "api/v0/product/" id ".json")
-        product (json/read-str (:body @(client/request {:url uri :basic-auth [off-user off-password]}))
-                               :key-fn keyword)]
+  (let [product (get-from-cache-or-api id off-url off-user off-password)]
     (sanitize-product (get product :product {}))))
 
 
-
-(defn add-product 
+(s/fdef add-product :args (s/cat :map-or-list (s/or :map (s/keys :req-un [::db-food/product-id]) :list (s/coll-of (s/keys :req-un [::db-food/product-id])))
+                                 :off-url string? :off-user string? :off-password string?))
+(defn add-product
   "adds the off product to the given map or maps. The map must contain the key :product-id"
   [map-or-list off-url off-user off-password]
   (let [f #(assoc % :product (get-by-id (:product-id %) off-url off-user off-password))]

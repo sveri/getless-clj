@@ -1,7 +1,6 @@
 (ns de.sveri.getless.db.food
   (:require [clojure.java.jdbc :as j]
-            [clojure.spec :as s]
-            [de.sveri.getless.service.off :as s-off])
+            [clojure.spec :as s])
   (:import (java.sql Timestamp)))
 
 (s/def ::id number?)
