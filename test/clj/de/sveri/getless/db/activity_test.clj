@@ -25,19 +25,19 @@
 (deftest insert-activity
   (let [admin-user (first (insert-admin-user db))
         today (t-coerce/to-date (t-core/today))
-        _ (db-act/insert-activity db "some text" today (:id admin-user))
+        _ (db-act/insert-activity db "some text planned" "some text done" today (:id admin-user))
         activities (db-act/get-activities db (:id admin-user))]
     (is (= (.getTime today) (.getTime (:for-date (first activities)))))))
 
 (deftest insert-or-update-activity
   (let [admin-user (first (insert-admin-user db))
         today (t-coerce/to-date (t-core/today))
-        first_content "some text"
-        second_content "some text 2"
-        _ (db-act/insert-or-update-activity db first_content today (:id admin-user))
+        first_planned "some text"
+        second_planned "some text 2"
+        _ (db-act/insert-or-update-activity db first_planned first_planned today (:id admin-user))
         activities (db-act/get-activities db (:id admin-user))
-        _ (db-act/insert-or-update-activity db second_content today (:id admin-user))
+        _ (db-act/insert-or-update-activity db second_planned second_planned today (:id admin-user))
         second_activities (db-act/get-activities db (:id admin-user))]
     (is (= (.getTime today) (.getTime (:for-date (first activities)))))
-    (is (= first_content (:content (first activities))))
-    (is (= second_content (:content (first second_activities))))))
+    (is (= first_planned (:planned (first activities))))
+    (is (= second_planned (:planned (first second_activities))))))

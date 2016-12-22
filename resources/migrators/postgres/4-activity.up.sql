@@ -12,3 +12,9 @@ CREATE INDEX activity_users_index ON weight USING btree (users_id);
 
 ALTER TABLE ONLY activity
     ADD CONSTRAINT fk_users_id FOREIGN KEY (users_id) REFERENCES users(id);
+
+-- 22.12.2016
+
+ALTER TABLE activity RENAME COLUMN content to planned;
+
+ALTER TABLE activity ADD COLUMN done TEXT;

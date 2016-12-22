@@ -10,19 +10,44 @@
     <h3>Aktivitäten <input type="submit" value="Speichern" class="btn btn-primary pull-right"></h3>
 
 
-    <h4>Morgen</h4>
-    <textarea class="form-control" style="height: 100px;" name="tomorrow">{{activities.0.content}}</textarea>
+    <div class="row">
+        <div class="col-md-6">
 
-    <h4>Heute</h4>
-    <textarea class="form-control" style="height: 100px;" name="today">{{activities.1.content}}</textarea>
+            <h3>Geplant</h3>
 
-    <h4>Gestern</h4>
-    <textarea class="form-control" style="height: 100px;" name="yesterday">{{activities.2.content}}</textarea>
+            <h4>Morgen</h4>
+            <textarea class="form-control" style="height: 100px;" name="tomorrow">{{activities.0.planned}}</textarea>
 
-    {% for activity in rest-activities %}
-        <h4>{{activity.for-date|date:"dd.MM.yyyy"}}</h4>
-        <textarea class="form-control" style="height: 100px;" readonly="readonly">{{activity.content}}</textarea>
-    {% endfor %}
+            <h4>Heute</h4>
+            <textarea class="form-control" style="height: 100px;" name="today">{{activities.1.planned}}</textarea>
+
+            <h4>Gestern</h4>
+            <textarea class="form-control" style="height: 100px;" name="yesterday">{{activities.2.planned}}</textarea>
+
+            {% for activity in rest-activities %}
+            <h4>{{activity.for-date|date:"dd.MM.yyyy"}}</h4>
+            <textarea class="form-control" style="height: 100px;" readonly="readonly">{{activity.planned}}</textarea>
+            {% endfor %}
+        </div>
+        <div class="col-md-6">
+
+            <h3>Erledigt</h3>
+
+            <h4>Morgen</h4>
+            <textarea class="form-control" style="height: 100px;" name="tomorrow-done">{{activities.0.done}}</textarea>
+
+            <h4>Heute</h4>
+            <textarea class="form-control" style="height: 100px;" name="today-done">{{activities.1.done}}</textarea>
+
+            <h4>Gestern</h4>
+            <textarea class="form-control" style="height: 100px;" name="yesterday-done">{{activities.2.done}}</textarea>
+
+            {% for activity in rest-activities %}
+            <h4>{{activity.for-date|date:"dd.MM.yyyy"}}</h4>
+            <textarea class="form-control" style="height: 100px;" readonly="readonly">{{activity.done}}</textarea>
+            {% endfor %}
+        </div>
+    </div>
 </form>
 
 

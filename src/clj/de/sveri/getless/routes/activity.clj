@@ -14,13 +14,13 @@
     (layout/render "activity/index.html" {:rest-activities (if (< 3 (count activities)) (subvec activities 3) [])
                                           :activities activities})))
 
-(defn save [db tomorrow-text today-text yesterday-text]
+(defn save [db tomorrow-text today-text yesterday-text tomorrow-done today-done yesterday-done]
   (let [user-id (s-user/get-logged-in-user-id db)
         three-dates (s-act/get-three-dates)]
     (try
-      (db-act/insert-or-update-activity db tomorrow-text (:tomorrow three-dates) user-id)
-      (db-act/insert-or-update-activity db today-text (:today three-dates) user-id)
-      (db-act/insert-or-update-activity db yesterday-text (:yesterday three-dates) user-id)
+      (db-act/insert-or-update-activity db tomorrow-text tomorrow-done (:tomorrow three-dates) user-id)
+      (db-act/insert-or-update-activity db today-text today-done (:today three-dates) user-id)
+      (db-act/insert-or-update-activity db yesterday-text yesterday-done (:yesterday three-dates) user-id)
       (catch Exception e
         (layout/flash-result "Etwas schlug beim speichern fehl." "alert-danger")
         (log/error "Error adding activity")
@@ -32,4 +32,5 @@
 (defn activity-routes [_ db]
   (routes
     (GET "/activity" [] (index-page db))
-    (POST "/activity" [tomorrow today yesterday] (save db tomorrow today yesterday))))
+    (POST "/activity" [tomorrow today yesterday tomorrow-done today-done yesterday-done]
+      (save db tomorrow today yesterday tomorrow-done today-done yesterday-done))))

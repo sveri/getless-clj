@@ -54,7 +54,7 @@
                  [prismatic/plumbing "0.5.0"]
                  [prismatic/schema "1.0.5"]
 
-                 [com.rpl/specter "0.8.0"]
+                 [com.rpl/specter "0.13.2"]
 
                  [de.sveri/closp-crud "0.3.0"]
                  [clj-time "0.12.0"]
