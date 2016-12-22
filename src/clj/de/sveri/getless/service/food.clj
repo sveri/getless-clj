@@ -49,13 +49,24 @@
 (def fetch-last-x-foods-from-user 500)
 (def default-last-x-days 100)
 
+
+(s/fdef sort-grouped-products-by-date :args (s/cat :products (s/coll-of (s/coll-of (s/keys :req-un [::db-food/eaten-at])))
+                                                   :date-key keyword?)
+        :ret (s/coll-of (s/coll-of (s/keys :req-un [::db-food/eaten-at]))))
+(defn sort-grouped-products-by-date [products date-key]
+  (let [inner-sorted-products (mapv (fn [productlist] (reverse (sort-by #(.getTime (date-key %)) productlist)))
+                                    products)]
+    (vec (reverse (sort-by #(.getTime (date-key (first %))) inner-sorted-products)))))
+
+
 (s/fdef ->foods-with-product-grouped-by-date :ret (s/coll-of ::db-food/foods))
 (defn ->foods-with-product-grouped-by-date
   [db off-url off-user off-password & [last-x-days]]
   (let [foods-grouped-by-date (-> (s-user/get-logged-in-user-id db)
                                   (db-food/->food-by-user-id db fetch-last-x-foods-from-user)
                                   (s-off/add-product off-url off-user off-password)
-                                  foods->group-by-date)
+                                  foods->group-by-date
+                                  (sort-grouped-products-by-date :eaten-at))
         last-x-days' (or last-x-days default-last-x-days)
         last-x-days'' (if (< (count foods-grouped-by-date) last-x-days')
                         (count foods-grouped-by-date)

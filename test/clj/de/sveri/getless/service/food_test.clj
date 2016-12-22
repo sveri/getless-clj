@@ -39,5 +39,38 @@
     (is (= 1400.5 (:energy-kcal (second nutriments))))))
 
 
+(def grouped-products-to-sort [[{:id 1,
+                                 :eaten-at #inst "2016-10-16T10:00:00.000-00:00",
+                                 :users-id 1,
+                                 :product-id 4008400401621}
+                                {:id 5,
+                                 :eaten-at #inst "2016-10-16T14:00:00.000-00:00",
+                                 :users-id 1,
+                                 :product-id 4008400401621}
+                                {:id 2,
+                                 :eaten-at #inst "2016-10-16T12:00:00.000-00:00",
+                                 :users-id 1,
+                                 :product-id 4008400401621}]
+                               [{:id 3,
+                                 :eaten-at #inst "2016-10-18T14:30:00.000-00:00",
+                                 :users-id 1,
+                                 :product-id 29015618}
+                                {:id 4,
+                                 :eaten-at #inst "2016-10-18T20:50:20.000-00:00",
+                                 :users-id 1,
+                                 :product-id 29015618}]])
+
+(deftest sort-grouped-products-by-date-test
+  (let [sorted-products (food/sort-grouped-products-by-date grouped-products-to-sort :eaten-at)]
+    (clojure.pprint/pprint sorted-products)
+    (is (= [{:id 4, :eaten-at #inst "2016-10-18T20:50:20.000000000-00:00", :users-id 1, :product-id 29015618}
+            {:id 3, :eaten-at #inst "2016-10-18T14:30:00.000000000-00:00", :users-id 1, :product-id 29015618}]
+           (first sorted-products)))
+    (is (= [{:id 5, :eaten-at #inst "2016-10-16T14:00:00.000000000-00:00", :users-id 1, :product-id 4008400401621}
+            {:id 2, :eaten-at #inst "2016-10-16T12:00:00.000000000-00:00", :users-id 1, :product-id 4008400401621}
+            {:id 1, :eaten-at #inst "2016-10-16T10:00:00.000000000-00:00", :users-id 1, :product-id 4008400401621}]
+           (second sorted-products)))))
+
+
 (stest/instrument)
 (stest/unstrument ['de.sveri.getless.service.food/add-nutriment])

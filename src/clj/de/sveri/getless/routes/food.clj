@@ -27,10 +27,11 @@
     (try
       (db-food/insert-food db (.getTime (inst/read-instant-date date)) user-id (mapv read-string productids)
                               (mapv read-string amounts) units)
-      (assoc (redirect "/food") :session (s-food/remove-products-from-session session))
       (catch Exception e
+        (layout/flash-result "Etwas schlug beim Speichern fehl." "alert-danger")
         (log/error "Error adding food")
-        (.printStackTrace e)))))
+        (.printStackTrace e)))
+    (assoc (redirect "/food") :session (s-food/remove-products-from-session session))))
 
 (defn delete-product-from-session [productid {:keys [session]}]
   (assoc (redirect "/food/add") :session (s-food/remove-product-from-session session productid)))
@@ -56,5 +57,5 @@
     (POST "/food/add" [date productid amount unit :as req] (add-food date productid amount unit req db))
     (GET "/food/add/product/:productid" [productid :as req] (add-product productid req config))
     (GET "/food/delete/session/:productid" [productid :as req] (delete-product-from-session productid req))
-    (GET "/food/delete/database/:productid" [productid :as req] (delete-product-from-database productid db))
+    (GET "/food/delete/database/:productid" [productid] (delete-product-from-database productid db))
     (GET "/food/contents" [] (contents-page db config))))
