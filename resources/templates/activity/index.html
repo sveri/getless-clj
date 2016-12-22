@@ -20,7 +20,7 @@
     <textarea class="form-control" style="height: 100px;" name="yesterday">{{activities.2.content}}</textarea>
 
     {% for activity in rest-activities %}
-        <h4>{{activity.for-date}}</h4>
+        <h4>{{activity.for-date|date:"dd.MM.yyyy"}}</h4>
         <textarea class="form-control" style="height: 100px;" readonly="readonly">{{activity.content}}</textarea>
     {% endfor %}
 </form>

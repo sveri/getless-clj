@@ -6,9 +6,9 @@
 
 (s/def ::id number?)
 (s/def ::users_id number?)
-(s/def ::for_date inst?)
+(s/def ::for-date inst?)
 (s/def ::content string?)
-(s/def ::activity-map (s/keys :req-un [::content ::for_date]
+(s/def ::activity-map (s/keys :req-un [::content ::for-date]
                               :opt-un [::id ::users_id]))
 (s/def ::activities (s/coll-of ::activity-map))
 

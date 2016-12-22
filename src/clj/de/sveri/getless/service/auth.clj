@@ -16,6 +16,8 @@
              :handler loggedin-access}
             {:pattern #"^/weight.*"
              :handler loggedin-access}
+            {:pattern #"^/activity.*"
+             :handler loggedin-access}
             {:pattern #"^/off.*"
              :handler loggedin-access}
             {:pattern #"^/meal.*"
