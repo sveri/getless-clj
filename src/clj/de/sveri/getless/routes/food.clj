@@ -14,27 +14,35 @@
                  {:products-list (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password 10)
                   :delete-uri "/food/delete/database/"}))
 
+
 (defn add-food-page [{:keys [session]}]
   (layout/render "food/add-food.html" {:products (s-food/get-food-from-session session)
                                        :delete-uri "/food/delete/session/"}))
 
-(defn add-product [productid {:keys [session]} {:keys [off-url off-user off-password]}]
+
+(defn add-product-to-session [productid {:keys [session]} {:keys [off-url off-user off-password]}]
   (let [session (s-food/add-food-to-session session (s-off/get-by-id productid off-url off-user off-password))]
     (assoc (redirect "/food/add") :session session)))
 
-(defn add-food [date productids amounts units {:keys [session]} db]
-  (let [user-id (s-user/get-logged-in-user-id db)]
+
+(defn save-food-to-db-or-as-template [save_or_template date productids amounts units {:keys [session]} db]
+  (let [user-id (s-user/get-logged-in-user-id db)
+        amount-numbers (mapv read-string amounts)]
     (try
-      (db-food/insert-food db (.getTime (inst/read-instant-date date)) user-id (mapv read-string productids)
-                              (mapv read-string amounts) units)
+      (if (= "Speichern" save_or_template)
+        (db-food/insert-food db (.getTime (inst/read-instant-date date)) user-id (mapv read-string productids)
+                                amount-numbers units))
+
       (catch Exception e
         (layout/flash-result "Etwas schlug beim Speichern fehl." "alert-danger")
         (log/error "Error adding food")
         (.printStackTrace e)))
     (assoc (redirect "/food") :session (s-food/remove-products-from-session session))))
 
+
 (defn delete-product-from-session [productid {:keys [session]}]
   (assoc (redirect "/food/add") :session (s-food/remove-product-from-session session productid)))
+
 
 (defn delete-product-from-database [productid db]
   (try
@@ -50,12 +58,14 @@
                  {:nutriments (-> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
                                   s-food/->nutriments-grouped-by-date)}))
 
+
 (defn food-routes [config db]
   (routes
     (GET "/food" [] (index-page db config))
     (GET "/food/add" req (add-food-page req))
-    (POST "/food/add" [date productid amount unit :as req] (add-food date productid amount unit req db))
-    (GET "/food/add/product/:productid" [productid :as req] (add-product productid req config))
+    (POST "/food/add" [save_or_template date productid amount unit :as req]
+      (save-food-to-db-or-as-template save_or_template date productid amount unit req db))
+    (GET "/food/add/product/:productid" [productid :as req] (add-product-to-session productid req config))
     (GET "/food/delete/session/:productid" [productid :as req] (delete-product-from-session productid req))
     (GET "/food/delete/database/:productid" [productid] (delete-product-from-database productid db))
     (GET "/food/contents" [] (contents-page db config))))

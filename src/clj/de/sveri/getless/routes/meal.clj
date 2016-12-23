@@ -9,24 +9,24 @@
             [ring.util.response :refer [response redirect]]
             [clojure.spec :as s]))
 
-(defn new-page [{:keys [session]}]
-  (let [meal (s-meal/get-meal session)]
-    (layout/render "meal/new.html" {:meal meal :products (:products meal)})))
+;(defn new-page [{:keys [session]}]
+;  (let [meal (s-meal/get-meal session)]
+;    (layout/render "meal/new.html" {:meal meal :products (:products meal)})))
 
-(defn add-product [productid {:keys [session]} {:keys [off-url off-user off-password]}]
-  (let [session (s-meal/add-product-to-meal session (s-off/get-by-id productid off-url off-user off-password))]
-    (assoc (redirect "/meal/new") :session session)))
+;(defn add-product [productid {:keys [session]} {:keys [off-url off-user off-password]}]
+;  (let [session (s-meal/add-product-to-meal session (s-off/get-by-id productid off-url off-user off-password))]
+;    (assoc (redirect "/meal/new") :session session)))
 
 
-(s/fdef save-meal :args (s/cat :name string? :type ::s-meal/meal-type))
-(defn save-meal [name type {:keys [session]}]
-  (if (validation/validate-specs name ::spec-comm/required-name type ::s-meal/meal-type)
+;(s/fdef save-meal :args (s/cat :name string? :type ::s-meal/meal-type))
+(defn save-meal [name {:keys [session]}]
+  (if (validation/validate-specs name ::spec-comm/required-name)
     (do
       (redirect "/meal/new"))))
 
 
 (defn meal-routes [config]
-  (routes
-    (GET "/meal/new" req (new-page req))
-    (POST "/meal/new" [name type :as req] (save-meal name type req))
-    (GET "/meal/add/product/:productid" [productid :as req] (add-product productid req config))))
+  (routes))
+    ;(GET "/meal/new" req (new-page req))
+    ;(POST "/meal/session" [name :as req] (save-meal name req))))
+    ;(GET "/meal/add/product/:productid" [productid :as req] (add-product productid req config))))

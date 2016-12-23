@@ -7,6 +7,8 @@
 (s/def ::users-id number?)
 (s/def ::product-id number?)
 (s/def ::eaten-at inst?)
+(s/def ::amount number?)
+(s/def ::amounts (s/coll-of ::amount))
 (s/def ::food (s/keys :req-un [::eaten-at ::product-id ::users-id]
                       :opt-un [::id]))
 (s/def ::foods (s/coll-of ::food))
@@ -34,7 +36,7 @@
 
 
 (s/fdef insert-food :args (s/cat :db any? :date number? :users-id number? :products (s/coll-of number?)
-                                 :amounts (s/coll-of number?) :units (s/coll-of ::unit)))
+                                 :amounts ::amounts :units (s/coll-of ::unit)))
 (defn insert-food [db date users-id products amounts units]
   (let [sql-timestamp (new Timestamp date)
         rows (vec (for [i (range 0 (count products))]
