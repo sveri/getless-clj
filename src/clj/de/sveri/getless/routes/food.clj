@@ -3,9 +3,11 @@
             [ring.util.response :refer [response redirect]]
             [de.sveri.getless.layout :as layout]
             [de.sveri.getless.db.food :as db-food]
+            [de.sveri.getless.db.meal :as db-meal]
             [de.sveri.getless.service.user :as s-user]
             [de.sveri.getless.service.food :as s-food]
             [de.sveri.getless.service.off :as s-off]
+            [de.sveri.getless.service.meal :as s-meal]
             [clojure.instant :as inst]
             [clojure.tools.logging :as log]))
 
@@ -25,14 +27,15 @@
     (assoc (redirect "/food/add") :session session)))
 
 
-(defn save-food-to-db-or-as-template [save_or_template date productids amounts units {:keys [session]} db]
+(defn save-food-to-db-or-as-template [save_or_template meal-name date productids amounts units {:keys [session]} db]
   (let [user-id (s-user/get-logged-in-user-id db)
-        amount-numbers (mapv read-string amounts)]
+        amount-numbers (mapv read-string amounts)
+        productid-numbers (mapv read-string productids)]
     (try
       (if (= "Speichern" save_or_template)
-        (db-food/insert-food db (.getTime (inst/read-instant-date date)) user-id (mapv read-string productids)
-                                amount-numbers units))
-
+        (db-food/insert-food db (.getTime (inst/read-instant-date date)) user-id productid-numbers
+                                amount-numbers units)
+        (db-meal/insert-meal db user-id meal-name (s-meal/foods-to-meal productid-numbers amount-numbers units)))
       (catch Exception e
         (layout/flash-result "Etwas schlug beim Speichern fehl." "alert-danger")
         (log/error "Error adding food")
@@ -63,8 +66,8 @@
   (routes
     (GET "/food" [] (index-page db config))
     (GET "/food/add" req (add-food-page req))
-    (POST "/food/add" [save_or_template date productid amount unit :as req]
-      (save-food-to-db-or-as-template save_or_template date productid amount unit req db))
+    (POST "/food/add" [save_or_template meal-name date productid amount unit :as req]
+      (save-food-to-db-or-as-template save_or_template meal-name date productid amount unit req db))
     (GET "/food/add/product/:productid" [productid :as req] (add-product-to-session productid req config))
     (GET "/food/delete/session/:productid" [productid :as req] (delete-product-from-session productid req))
     (GET "/food/delete/database/:productid" [productid] (delete-product-from-database productid db))
