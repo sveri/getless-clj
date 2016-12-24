@@ -7,6 +7,13 @@
             [de.sveri.getless.service.off-helper :as offh]))
 
 
+(deftest foods-to-products-test
+  (let [products (meal/foods-to-products [1 2 3] [100 200 300 ] ["gramm" "gramm" "gramm"])]
+    (is (= {:product-id 1, :amount 100, :unit "gramm"} (first products)))
+    (is (= {:product-id 2, :amount 200, :unit "gramm"} (second products)))
+    (is (= {:product-id 3, :amount 300, :unit "gramm"} (nth products 2)))))
+
+
 ;(deftest save-meal-in-session
 ;  (let [session (meal/save-new-meal {})
 ;        meal (meal/get-meal session)]

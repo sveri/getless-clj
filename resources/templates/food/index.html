@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<a href="/food/add" class="btn btn-primary">Neues Essen</a>
+<a href="/food/add" class="btn btn-primary">Neues Essen</a> <a href="/food/add-from-template" class="btn btn-primary pull-right">Von Vorlage</a>
 
 <br /><br />
 
@@ -16,7 +16,7 @@
             {% for product in products %}
                 {% if forloop.first %}
                     <tr>
-                        <td colspan="5"><h3>{{product.eaten-at|date:"dd.MM.yyyy"}}</h3></td>
+                        <td colspan="6"><h3>{{product.eaten-at|date:"dd.MM.yyyy"}}</h3></td>
                     </tr>
                 {% endif %}
 

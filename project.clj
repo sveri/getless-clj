@@ -57,6 +57,7 @@
                  [com.rpl/specter "0.13.2"]
 
                  [de.sveri/closp-crud "0.3.0"]
+                 [org.clojure/test.check "0.9.0"]
                  [clj-time "0.12.0"]
                  [org.clojure/tools.logging "0.3.1"]
                  [org.postgresql/postgresql "9.4-1205-jdbc42"]

@@ -62,7 +62,6 @@
 
 (deftest sort-grouped-products-by-date-test
   (let [sorted-products (food/sort-grouped-products-by-date grouped-products-to-sort :eaten-at)]
-    (clojure.pprint/pprint sorted-products)
     (is (= [{:id 4, :eaten-at #inst "2016-10-18T20:50:20.000000000-00:00", :users-id 1, :product-id 29015618}
             {:id 3, :eaten-at #inst "2016-10-18T14:30:00.000000000-00:00", :users-id 1, :product-id 29015618}]
            (first sorted-products)))

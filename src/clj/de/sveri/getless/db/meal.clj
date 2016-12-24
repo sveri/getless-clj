@@ -18,32 +18,45 @@
 
 
 
-;(s/fdef -by-user-id :args (s/cat :users-id number? :db any? :limit (s/? number?))
-;        :ret ::foods)
-;(defn meal-by-user-id [users-id db & [limit]]
-;  (let [query (if limit ["select * from food where users_id = ? order by eaten_at desc limit ?" users-id limit]
-;                        ["select * from food where users_id = ? order by eaten_at desc" users-id])]
-;    (mapv #(assoc % :unit (-> % :unit str))
-;          (j/query db query {:identifiers #(.replace % \_ \-)}))))
+(defn add-products-edn-to-meal [meal]
+  (assoc meal :products-edn (read-string (:products meal))))
+
+
+(s/fdef meals-by-user-id :args (s/cat :users-id number? :db any? :limit (s/? number?))
+        :ret ::meals)
+(defn meals-by-user-id [users-id db & [limit]]
+  (let [query (if limit ["select * from meal where users_id = ? order by name desc limit ?" users-id limit]
+                        ["select * from meal where users_id = ? order by name desc" users-id])]
+    (mapv (fn [meal] (add-products-edn-to-meal meal))
+          (j/query db query {:identifiers #(.replace % \_ \-)}))))
+
+
+
+(defn meal-by-id [db meal-id]
+  (let [meal (j/query db ["select * from meal where id = ? " meal-id] {:identifiers #(.replace % \_ \-)})]
+    (add-products-edn-to-meal (first meal))))
+
 
 
 (s/fdef insert-meal :args (s/cat :db any? :users-id number? :name string? :products ::products-edn))
 
 (defn insert-meal [db users-id name products]
-  (j/insert! db :meal {:users_id users-id :name name :products (.toString products)}))
+  (j/insert! db :meal {:users_id users-id :name name :products (.toString (vec products))}))
 
 
 
-;(def breakfast "BREAKFAST")
-;(def launch "LAUNCH")
-;(def supper "SUPPER")
-;(def snack "SNACK")
-;
-;(s/def ::breakfast #(= % breakfast))
-;(s/def ::launch #(= % launch))
-;(s/def ::supper #(= % supper))
-;(s/def ::snack #(= % snack))
-;(s/def ::meal-type (s/or :snack ::snack :supper ::supper :launch ::launch :breakfast ::breakfast))
-;
-;
-;(s/def ::meal (s/keys :req [::meal-type]))
+(def breakfast "BREAKFAST")
+(def launch "LAUNCH")
+(def supper "SUPPER")
+(def snack "SNACK")
+
+(s/def ::breakfast #(= % breakfast))
+(s/def ::launch #(= % launch))
+(s/def ::supper #(= % supper))
+(s/def ::snack #(= % snack))
+(s/def ::meal-type (s/or :snack ::snack :supper ::supper :launch ::launch :breakfast ::breakfast))
+
+
+(s/def ::meal (s/keys :req [::meal-type]))
+
+
