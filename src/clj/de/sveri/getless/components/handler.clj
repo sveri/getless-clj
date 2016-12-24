@@ -46,7 +46,7 @@
 (def secret (:jwt-secret (s-c/read-config-from-nomad)))
 (def jws-backend (backends/jws {:secret secret}))
 
-(defn get-handler [config locale {:keys [db]}]
+(defn get-handler [config {:keys [db]}]
   (routes
     (-> (auth-routes config db)
         (wrap-routes wrap-restful-format :formats [:json-kw]))
@@ -62,7 +62,7 @@
                           (user-routes config db) (food-routes config db) (meal-routes config) (habit-routes config db)
                           (activity-routes config db) base-routes]))
           ;; add custom middleware here
-          :middleware (load-middleware config (:tconfig locale))
+          :middleware (load-middleware config)
           :ring-defaults (mk-defaults false)
           ;; add access rules here
           :access-rules []
@@ -75,10 +75,10 @@
         ; Content-Type, Content-Length, and Last Modified headers for files in body
         (wrap-file-info))))
 
-(defrecord Handler [config locale db]
+(defrecord Handler [config db]
   comp/Lifecycle
   (start [comp]
-    (assoc comp :handler (get-handler (:config config) locale db)))
+    (assoc comp :handler (get-handler (:config config) db)))
   (stop [comp]
     (assoc comp :handler nil)))
 

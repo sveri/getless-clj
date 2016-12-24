@@ -1,6 +1,38 @@
 (ns de.sveri.getless.components.locale
   (:require [com.stuartsierra.component :as component]))
 
+
+(def my-tempura-dictionary
+  {:de {:missing ":de missing text"
+        :__load-resource "resources/i18/de.clj"}
+   :en {:missing ":en missing text"
+        :__load-resource "resources/i18/en.clj"}})
+
+  ;{:en-GB ; Locale
+  ; {:missing ":en-GB missing text" ; Fallback for missing resources
+  ;  :example ; You can nest ids if you like
+  ;           {:greet "Good day %1!"}} ; Note Clojure fn-style %1 args
+  ;
+  ;
+  ; :en ; A second locale
+  ; {:missing ":en missing text"
+  ;  :example
+  ;           {:greet "Hello %1"
+  ;            :farewell "Goodbye %1"
+  ;            :foo "foo"
+  ;            :bar "bar"
+  ;            :bar-copy :en.example/bar ; Can alias entries
+  ;            :baz [:div "This is a **Hiccup** form"]
+  ;
+  ;            ;; Can use arbitrary fns as resources
+  ;            :qux (fn [[arg1 arg2]] (str arg1 " and " arg2))}
+  ;
+  ;  :example-copy :en/example ; Can alias entire subtrees
+  ;
+  ;  :import-example
+  ;  {:__load-resource ; Inline edn content loaded from disk/resource
+  ;   "resources/i18n.clj"}}})
+
 (def tconfig
   {:fallback-locale :en
    :dictionary      {:en

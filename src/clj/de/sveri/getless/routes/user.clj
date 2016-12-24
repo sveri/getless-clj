@@ -9,7 +9,8 @@
             [de.sveri.getless.db.user :as db]
             [de.sveri.getless.service.user :as uservice]
             [de.sveri.getless.service.auth :as auth]
-            [taoensso.tower :refer [t]]
+            ;[taoensso.tower :refer [t]]
+            [taoensso.tempura :as tempura :refer [tr]]
             [clojure.tools.logging :as log])
   (:import (net.tanesha.recaptcha ReCaptchaImpl)))
 

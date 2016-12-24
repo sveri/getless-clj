@@ -6,7 +6,6 @@
             [buddy.auth.accessrules :refer [wrap-access-rules]]
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
             [noir.session :as sess]
-            [taoensso.tower.ring :refer [wrap-tower]]
             [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
             [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
             [ring.middleware.transit :refer [wrap-transit-response]]
@@ -28,16 +27,15 @@
    #(prone/wrap-exceptions % {:app-namespaces ['de.sveri]})
    wrap-reload])
 
-(defn production-middleware [config tconfig]
+(defn production-middleware [config]
   [#(add-req-properties % config)
    #(wrap-access-rules % {:rules auth/rules})
    #(wrap-authorization % auth/auth-session-backend)
-   #(wrap-tower % tconfig)
    #(wrap-transit-response % {:encoding :json :opts {}})
    wrap-anti-forgery
    wrap-trimmings])
 
-(defn load-middleware [config tconfig]
+(defn load-middleware [config]
   (when (= (:env config) :dev) (stest/instrument))
-  (concat (production-middleware config tconfig)
+  (concat (production-middleware config)
           (when (= (:env config) :dev) development-middleware)))
