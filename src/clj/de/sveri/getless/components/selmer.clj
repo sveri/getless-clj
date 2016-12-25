@@ -6,9 +6,7 @@
   (sp/add-tag!
    :localize
    (fn [args context-map]
-     (clojure.pprint/pprint (:localize-fn context-map))
-     (clojure.pprint/pprint (mapv keyword args))
-     (str "foo " (first args)))))
+     ((:localize-fn context-map) [(keyword (first args))] (vec (rest args))))))
 
 (defrecord Selmer [template-caching?]
   component/Lifecycle
