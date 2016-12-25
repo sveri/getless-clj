@@ -7,23 +7,19 @@
 {% block content %}
 
 
+
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <div class="list-group">
-            <div class="list-group-item">
-                <h4 class="list-group-item-heading">Wir urteilen nicht.</h4>
-                <!--<p class="list-group-item-text">...</p>-->
-            </div>
-            <div class="list-group-item">
-                <h4 class="list-group-item-heading">Wir unterstützen uns.</h4>
-            </div>
-            <div class="list-group-item">
-                <h4 class="list-group-item-heading">Wir nutzen Mittel die niemandem schaden.</h4>
-            </div>
-            <!--<div class="list-group-item">-->
-                <!--<h4 class="list-group-item-heading"></h4>-->
-            <!--</div>-->
+
+            {% for rule in rules %}
+                <div class="list-group-item">
+                    <h4 class="list-group-item-heading">{{rule}}</h4>
+                    <!--<p class="list-group-item-text">...</p>-->
+                </div>
+            {% endfor %}
+
         </div>
     </div>
     <div class="col-md-3"></div>

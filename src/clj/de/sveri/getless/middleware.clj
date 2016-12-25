@@ -1,10 +1,9 @@
 (ns de.sveri.getless.middleware
   (:require [prone.middleware :as prone]
-            ;[selmer.middleware :refer [wrap-error-page]]
-            ;[prone.middleware :refer [wrap-exceptions]]
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [buddy.auth.accessrules :refer [wrap-access-rules]]
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
+            [taoensso.tempura :refer [tr]]
             [noir.session :as sess]
             [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
             [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
@@ -12,6 +11,7 @@
             [ring.middleware.reload :refer [wrap-reload]]
             [de.sveri.getless.service.auth :refer [auth-session-backend]]
             [de.sveri.getless.service.auth :as auth]
+            [de.sveri.getless.locale :as loc]
             [clojure.spec.test :as stest]))
 
 (defonce in-memory-store-instance (in-memory-store))
@@ -22,6 +22,18 @@
     (sess/put! :captcha-enabled? (:captcha-enabled? config))
     (handler req)))
 
+(defn add-locale [handler]
+  (fn [req]
+    (let [accept-language (get-in req [:headers "accept-language"])
+          short-lang (cond
+                       (.contains accept-language "de") "de"
+                       :else "en")]
+      (sess/put! :locale short-lang)
+      (handler (assoc req :localize (partial tr
+                                             {:default-locale :en
+                                              :dict           loc/local-dict}
+                                             [(keyword short-lang)]))))))
+
 (def development-middleware
   [#(wrap-miniprofiler % {:store in-memory-store-instance})
    #(prone/wrap-exceptions % {:app-namespaces ['de.sveri]})
@@ -29,6 +41,7 @@
 
 (defn production-middleware [config]
   [#(add-req-properties % config)
+   add-locale
    #(wrap-access-rules % {:rules auth/rules})
    #(wrap-authorization % auth/auth-session-backend)
    #(wrap-transit-response % {:encoding :json :opts {}})

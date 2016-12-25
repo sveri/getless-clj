@@ -48,7 +48,6 @@
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
-                 ;[com.taoensso/tower "3.1.0-beta4"]
                  [com.taoensso/tempura "1.0.0"]
 
                  [org.clojure/core.typed "0.3.11"]

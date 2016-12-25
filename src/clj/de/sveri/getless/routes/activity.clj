@@ -9,10 +9,12 @@
             [de.sveri.getless.service.activity :as s-act]
             [clojure.tools.logging :as log]))
 
+
 (defn index-page [db]
   (let [activities (vec (s-act/pad-with-tomorrow-today-yesterday-if-needed (db-act/get-activities db (s-user/get-logged-in-user-id db) 10)))]
     (layout/render "activity/index.html" {:rest-activities (if (< 3 (count activities)) (subvec activities 3) [])
                                           :activities activities})))
+
 
 (defn save [db tomorrow-text today-text yesterday-text tomorrow-done today-done yesterday-done]
   (let [user-id (s-user/get-logged-in-user-id db)
