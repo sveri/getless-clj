@@ -6,20 +6,20 @@
         <!--<li field="link-list" {% ifequal page "habit/index.html" %} class="active"{%endifequal%}>-->
         <!--<a href="/habit">Gewohnheiten-Log</a></li>-->
         <li field="link-list" {% ifequal page "activity/index.html" %} class="active"{%endifequal%}>
-        <a href="/activity">Aktivitäten</a></li>
+        <a href="/activity">{{activities_message}}</a></li>
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Ernährung
+                    {{diet_message}}
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li field="link-list" {% ifequal page "food/index.html" %} class="active"{%endifequal%}>
-                    <a href="/food">Essen</a></li>
+                    <a href="/food">{{food_message}}</a></li>
                     <li field="link-list" {% ifequal page "food/contents.html" %} class="active"{%endifequal%}>
-                    <a href="/food/contents">Inhaltsstoffe</a></li>
+                    <a href="/food/contents">{{ingredients_message}}</a></li>
                     <li field="link-list" {% ifequal page "weight/index.html" %} class="active"{%endifequal%}>
-                    <a href="/weight">Gewichtsverlauf</a></li>
+                    <a href="/weight">{{weight_progress_message}}</a></li>
                 </ul>
             </li>
 
@@ -52,8 +52,8 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/user/changepassword">Change Password</a></li>
-                    <li><a href="/user/logout">Logout</a></li>
+                    <li><a href="/user/changepassword">{{change_password_message}}</a></li>
+                    <li><a href="/user/logout">{{logout_message}}</a></li>
                 </ul>
             </li>
         </ul>
@@ -67,19 +67,19 @@
             <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
             {% if nexturl %}
-            <input name="nexturl" type="hidden" value="{{nexturl}}"/>
+                <input name="nexturl" type="hidden" value="{{nexturl}}"/>
             {% endif %}
 
             <div class="form-group">
-                <input id="upper_email" type="text" placeholder="Email" name="username" class="form-control">
+                <input id="upper_email" type="text" placeholder="{{email_placeholder}}" name="username" class="form-control">
             </div>
             <div class="form-group">
-                <input id="upper_password" type="password" placeholder="Password" name="password" class="form-control">
+                <input id="upper_password" type="password" placeholder="{{password_placeholder}}" name="password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-primary">{{signin_message}}</button>
 
             {% if registration-allowed? %}
-                <a href="/user/signup" class="btn btn-success">Sign Up</a>
+                <a href="/user/signup" class="btn btn-success">{{signup_message}}</a>
             {% endif %}
         </form>
     </div>
