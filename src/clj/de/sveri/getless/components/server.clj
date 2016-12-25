@@ -22,7 +22,6 @@
    an app server such as Tomcat
    put any initialization code here"
   [config]
-  (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
   (sched/start! session/cleanup-job)
   ;(cronj/start! session/cleanup-job)
