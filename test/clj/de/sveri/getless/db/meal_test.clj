@@ -25,4 +25,7 @@
 (deftest insert-into-meal
   (let [_ (db-meal/insert-meal db 1 "foo" test-products)
         meal-from-db (db-meal/meals-by-user-id 1 db)]
-    (println meal-from-db)))
+    (is (= [{:product-id 1, :amount 100, :unit "gramm"}
+            {:product-id 2, :amount 200, :unit "gramm"}]
+           (:products-edn (first meal-from-db))))))
+
