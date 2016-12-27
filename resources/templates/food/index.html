@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<a href="/food/add" class="btn btn-primary">Neues Essen</a> <a href="/food/add-from-template" class="btn btn-primary pull-right">Von Vorlage</a>
+<a href="/food/add" class="btn btn-primary">{% localize food/new %}</a> <a href="/food/add-from-template" class="btn btn-primary pull-right">{% localize food/from_template %}</a>
 
 <br /><br />
 
@@ -26,9 +26,10 @@
                     </td>
                     <td width="200px"><img src="{{product.product.image_small_url}}" alt="{{product.product.product_name}}"/></td>
                     <td>{{product.product.ingredients_text}}</td>
-                    <td><input type="number" placeholder="Menge" name="amount[]" value="{{product.amount}}"> </td>
-                    <td><select name="unit[]"><option value="gramm">Gramm</option><option value="liter">Liter</option></select></td>
-                    <td><a href="/food/delete/database/{{product.id}}" class="btn btn-danger">Löschen</a></td>
+                    <td><input type="number" placeholder="{% localize generic/amount %}" name="amount[]" value="{{product.amount}}"> </td>
+                    <td><select name="unit[]"><option value="gramm">{% localize generic/gram %}</option>
+                        <option value="liter">{% localize generice/litre %}</option></select></td>
+                    <td><a href="/food/delete/database/{{product.id}}" class="btn btn-danger">{% localize generic/delete %}</a></td>
                 </tr>
             {% endfor %}
         </tbody>

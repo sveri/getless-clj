@@ -8,7 +8,7 @@
 
 {% for meal in meals %}
 
-    <h3>{{meal.name}}<a href="/food/add/{{meal.id}}" class="btn btn-primary pull-right">Übernehmen</a></h3>
+    <h3>{{meal.name}}<a href="/food/add/{{meal.id}}" class="btn btn-primary pull-right">{% localize food/select %}</a></h3>
 
     <table class="table" style="margin-top: 30px;">
         <tbody>
@@ -19,7 +19,7 @@
                 </td>
                 <td width="200px"><img src="{{product.product.image_small_url}}" alt="{{product.product_name}}" height="50px"/></td>
                 <td width="200px">{{product.ingredients_text}}</td>
-                <td width="200px"><input type="number" placeholder="Menge" name="amount[]" value="{{product.amount}}" required="required" class="form-control"></td>
+                <td width="200px"><input type="number" placeholder="{% localize generic/amount %}" name="amount[]" value="{{product.amount}}" required="required" class="form-control"></td>
                 <td>{{product.unit|capitalize}}</td>
             </tr>
         {% endfor %}
