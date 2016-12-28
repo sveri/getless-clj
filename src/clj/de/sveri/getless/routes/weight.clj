@@ -12,7 +12,7 @@
 
 (def default-last-x-days 10)
 
-(defn weight-page [_ db {:keys [off-url off-user off-password]}]
+(defn weight-page [{:keys [localize]} db {:keys [off-url off-user off-password]}]
   (let [weights-and-nutriments (s-w/merge-weights-and-nutriments
                                  (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
                                  (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password default-last-x-days)
@@ -21,7 +21,13 @@
     (layout/render "weight/index.html"
                    {:weights (s-w/weight->js-string :weight data-map)
                     :dates   (s-w/weight->js-string :date data-map)
-                    :sugars  (s-w/weight->js-string :sugars_100g data-map)})))
+                    :sugars  (s-w/weight->js-string :sugars_100g data-map)
+                    :fats  (s-w/weight->js-string :fat_100g data-map)
+                    :energy  (s-w/weight->js-string :energy_100g data-map)
+                    :weight_string (localize [:generic/weight-progress])
+                    :sugar_string (localize [:food/sugar])
+                    :fat_string (localize [:food/fat])
+                    :energy_string (localize [:food/energy])})))
 
 
 (defn add [date weight db]

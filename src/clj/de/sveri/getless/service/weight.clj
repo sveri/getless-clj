@@ -9,7 +9,7 @@
 (def weight-date-format (time-f/formatter "dd.MM.yyyy"))
 (s/def ::date inst?)
 
-(s/fdef weight->js-string :args (s/cat :k #{:date :weight :sugars_100g} :data-maps (s/coll-of (s/keys)))
+(s/fdef weight->js-string :args (s/cat :k #{:date :weight :sugars_100g :fat_100g :energy_100g} :data-maps (s/coll-of (s/keys)))
         :ret string?)
 (defn weight->js-string [k data-maps]
   (str (reduce (fn [acc data-map] (str acc (when-not (= acc "[") ",")

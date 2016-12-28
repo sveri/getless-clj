@@ -4,7 +4,8 @@
             [clojure.spec :as s]
             [clojure.string :as str]
             [clojure.data.json :as json]
-            [clojure.core.cache :as cache]))
+            [clojure.core.cache :as cache]
+            [clojure.tools.logging :as log]))
 
 (def product-cache (atom (cache/ttl-cache-factory {} :ttl 172800000)))
 
@@ -112,10 +113,14 @@
   (let [uri (str off-url "api/v0/product/" id ".json")]
     (if (cache/has? @product-cache id)
       (cache/lookup @product-cache id)
-      (let [product (json/read-str (:body @(client/request {:url uri :basic-auth [off-user off-password]}))
-                                   :key-fn keyword)]
-        (swap! product-cache #(cache/miss % id product))
-        product))))
+      (try
+        (let [product (json/read-str (:body @(client/request {:url uri :basic-auth [off-user off-password]}))
+                                     :key-fn keyword)]
+         (swap! product-cache #(cache/miss % id product))
+         product)
+        (catch Exception e
+          (log/error "Cannot retrieve off products.")
+          (.printStackTrace e))))))
 
 
 (s/fdef get-by-id :args (s/cat :id (s/or :int integer? :str string?) :off-ur string? :off-user string? :off-password string?)

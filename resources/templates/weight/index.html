@@ -7,8 +7,16 @@
 {% block content %}
 
 <input type="hidden" id="weighted_at" value="{{dates}}"/>
+
 <input type="hidden" id="weights" value="{{weights}}"/>
 <input type="hidden" id="sugars" value="{{sugars}}"/>
+<input type="hidden" id="fats" value="{{fats}}"/>
+<input type="hidden" id="energy" value="{{energy}}"/>
+
+<input type="hidden" id="weight_string" value="{{weight_string}}"/>
+<input type="hidden" id="sugar_string" value="{{sugar_string}}"/>
+<input type="hidden" id="fat_string" value="{{fat_string}}"/>
+<input type="hidden" id="energy_string" value="{{energy_string}}"/>
 
     <h3>{% localize generic/weight-progress %}</h3>
 
