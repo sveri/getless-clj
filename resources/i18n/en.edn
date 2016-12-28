@@ -14,6 +14,7 @@
             :today             "Today"
             :yesterday         "Yesterday"
             :done              "Done"
+            :delete            "Delete"
             :save              "Save"
             :gram              "gram"
             :litre             "litre"
@@ -68,5 +69,7 @@
             :fat           "Fat"
             :energy        "Energy"}
  :contact  {:contact            "Contact"
-            :content_belongs_to "Content belongs to"}}
+            :content_belongs_to "Content belongs to"}
+ :weight {:add "Add Record"
+          :kg "kg"}}
 
