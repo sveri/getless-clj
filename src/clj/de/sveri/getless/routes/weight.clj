@@ -23,7 +23,7 @@
                     :dates   (s-w/weight->js-string :date data-map)
                     :sugars  (s-w/weight->js-string :sugars_100g data-map)
                     :fats  (s-w/weight->js-string :fat_100g data-map)
-                    :energy  (s-w/weight->js-string :energy_100g data-map)
+                    :energy  (s-w/weight->js-string :energy-kcal data-map)
                     :weight_string (localize [:generic/weight-progress])
                     :sugar_string (localize [:food/sugar])
                     :fat_string (localize [:food/fat])
