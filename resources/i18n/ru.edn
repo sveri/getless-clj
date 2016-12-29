@@ -1,0 +1,75 @@
+{:generic
+           {:some_error        "Произошла ошибка."
+            :deletion_canceled "Удаление прервано."
+            :email             "E-Mail"
+            :password          "Пароль"
+            :password_confirm  "Подтверждение пароля"
+            :logout            "Выход"
+            :diet              "Диета"
+            :activities        "Виды активности"
+            :food              "Питание"
+            :ingredients       "Ингредиенты"
+            :weight-progress   "Отслеживание веса"
+            :tomorrow          "Завтра"
+            :today             "Сегодня"
+            :yesterday         "Вчера"
+            :done              "Выполнено"
+            :delete            "Удалить"
+            :save              "Сохранить"
+            :gram              "Грамм"
+            :litre             "Литр"
+            :date              "Дата"
+            :amount            "Сумма"
+            :search            "Поиск"
+            :add               "Добавить"
+            :cancel            "Отменить"}
+ :user
+           {:email_invalid        "Адрес недействителен."
+            :pass_min_length      "Пароль должен содержать не менее 5 символов."
+            :pass_match           "Пароли не совпадают."
+            :pass_correct         "Пароль неверный."
+            :pass_changed         "Пароль изменен"
+            :change_password      "Сменить пароль"
+            :wrong_cur_pass       "Текущий пароль неверен"
+            :username_exists      "Данное имя уже занято. Пожалуйста, введите другое."
+            :username_wrong       "Введите имя пользователя."
+            :deleted              "Пользователь успешно удален."
+            :updated              "Данные пользователи успешно изменены."
+            :user_added           "Пользователь добавлен."
+            :captcha_wrong        "Неверно введена Captcha."
+            :email_failed         "Произошла ошибка при отправке письма. Пожалуйста, обратитесь в техподдержку"
+            :signup               "Зарегистрироваться"
+            :signin               "Войти"
+            :username             "Имя пользователя"
+            :role                 "Роль"
+            :current_password     "Текущий пароль"
+            :new_password         "Новый пароль"
+            :new_password_confirm "Подтверждение нового пароля"
+            :really_delete        "Вы точно хотите удалить пользователя"
+            :register             "Регистрация"}
+
+ :admin
+           {:title    "Информация о пользователе"
+            :add_user "Добавить пользователя"
+            :new_user "Новый пользователь"
+            :filter   "Фильтр"
+            :active   "Активный"
+            :update   "Сохранить изменения"}
+ :home     {:we-dont-judge         "Мы не оцениваем."
+            :we-support-each-other "Мы поддерживаем."
+            :we-use-means          "Мы используем средства без ущерба для других."}
+ :activity {:planned "Запланировать"}
+ :product  {:add           "Добавить продукт"
+            :save_template "Сохранить шаблон"
+            :template_name "Имя шаблона"}
+ :food     {:new           "Новый продукт"
+            :from_template "Из шаблона"
+            :select        "Выбрать"
+            :sugar         "Сахар"
+            :fat           "Жиры"
+            :energy        "Калорийность"}
+ :contact  {:contact            "Контакты"
+            :content_belongs_to "Права принадлежат"}
+ :weight   {:add "Добавить запись"
+            :kg  "кг"}
+ :off      {:search-only-one-locale "Искать продукты только на одном языке"}}
