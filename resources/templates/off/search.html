@@ -7,9 +7,10 @@
 {% block content %}
 
 
-    <form class="form" action="/off/search" method="get">
-        <input type="text" name="search" class="form-control" value="{{search}}" autofocus/>
-        <input type="submit" value="{% localize generic/search %}" class="btn btn-default" />
+    <form class="form-inline" action="/off/search" method="get">
+        <input type="text" name="search" class="form-control" value="{{search}}" autofocus style="width:300px;"/>
+        <input type="checkbox" name="only-one-locale" class="form-control" style="margin-left: 30px;" checked="checked"/> {% localize off/search-only-one-locale %}
+        <input type="submit" value="{% localize generic/search %}" class="btn btn-primary" style="margin-left: 30px;"/>
     </form>
 
     <table class="table" style="margin-top: 30px;">

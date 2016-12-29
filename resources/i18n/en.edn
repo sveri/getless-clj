@@ -71,5 +71,6 @@
  :contact  {:contact            "Contact"
             :content_belongs_to "Content belongs to"}
  :weight {:add "Add Record"
-          :kg "kg"}}
+          :kg "kg"}
+ :off      {:search-only-one-locale "Only English Products"}}
 

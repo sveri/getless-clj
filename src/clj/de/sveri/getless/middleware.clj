@@ -25,13 +25,13 @@
 (defn add-locale [handler]
   (fn [req]
     (let [accept-language (get-in req [:headers "accept-language"])
-          short-languages (tempura/parse-http-accept-header accept-language)]
-      (sess/put! :exact-locale (first short-languages))
-      (sess/put! :short-locale (subs (first short-languages) 0 2))
+          parsed-languages (tempura/parse-http-accept-header accept-language)]
+      (sess/put! :exact-locale (first parsed-languages))
+      (sess/put! :short-locale (subs (first parsed-languages) 0 2))
       (handler (assoc req :localize (partial tr
                                              {:default-locale :en
                                               :dict           loc/local-dict}
-                                             short-languages))))))
+                                             parsed-languages))))))
 
 (def development-middleware
   [#(wrap-miniprofiler % {:store in-memory-store-instance})

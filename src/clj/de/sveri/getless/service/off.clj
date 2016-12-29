@@ -99,12 +99,12 @@
 (defn sanitize-products [products]
   (map sanitize-product products))
 
-(s/fdef search-products :args (s/cat :search string? :off-ur string? :off-user string? :off-password string?)
+(s/fdef search-products :args (s/cat :search string? :only-one-locale boolean? :off-ur string? :off-user string? :off-password string?)
         :ret ::search-result)
-(defn search-products [search off-url off-user off-password]
+(defn search-products [search only-one-locale off-url off-user off-password]
   (let [sanitized-search-term (.replace search " " "%20")
         search-uri (str off-url "cgi/search.pl?search_terms=" sanitized-search-term
-                        "&tagtype_0=countries&tag_contains_0=contains&tag_0=" (sess/get :short-locale)
+                        (if only-one-locale (str "&tagtype_0=countries&tag_contains_0=contains&tag_0=" (sess/get :short-locale)) "")
                         "&search_simple=1&json=1&page_size=1000")
         json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password] :insecure? true}))
                                  :key-fn keyword)

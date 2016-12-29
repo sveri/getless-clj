@@ -70,5 +70,6 @@
             :energy        "Energie"}
  :contact  {:contact            "Kontakt"
             :content_belongs_to "Der Inhalt gehört zu"}
- :weight {:add "Eintrag hinzufügen"
-          :kg "kg"}}
+ :weight   {:add "Eintrag hinzufügen"
+            :kg  "kg"}
+ :off      {:search-only-one-locale "Nur Deutsche Produkte"}}
