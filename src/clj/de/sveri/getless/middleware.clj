@@ -26,7 +26,8 @@
   (fn [req]
     (let [accept-language (get-in req [:headers "accept-language"])
           short-languages (tempura/parse-http-accept-header accept-language)]
-      (sess/put! :locale (first short-languages))
+      (sess/put! :exact-locale (first short-languages))
+      (sess/put! :short-locale (subs (first short-languages) 0 2))
       (handler (assoc req :localize (partial tr
                                              {:default-locale :en
                                               :dict           loc/local-dict}

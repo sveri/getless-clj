@@ -3,7 +3,7 @@
             [de.sveri.getless.service.config :as s-c]))
 
 (defn prod-conf-or-dev []
-  (s-c/read-config-from-nomad))
+  (s-c/prod-conf-or-dev))
 
 
 (defrecord Config [config]

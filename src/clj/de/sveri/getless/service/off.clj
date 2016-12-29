@@ -5,7 +5,8 @@
             [clojure.string :as str]
             [clojure.data.json :as json]
             [clojure.core.cache :as cache]
-            [clojure.tools.logging :as log]))
+            [clojure.tools.logging :as log]
+            [noir.session :as sess]))
 
 (def product-cache (atom (cache/ttl-cache-factory {} :ttl 172800000)))
 
@@ -93,6 +94,7 @@
       kJ->kCal))
 
 
+
 (s/fdef sanitize-products :args (s/cat :products any?) :ret ::products)
 (defn sanitize-products [products]
   (map sanitize-product products))
@@ -102,11 +104,13 @@
 (defn search-products [search off-url off-user off-password]
   (let [sanitized-search-term (.replace search " " "%20")
         search-uri (str off-url "cgi/search.pl?search_terms=" sanitized-search-term
-                        "&generic_name_de=" sanitized-search-term "&search_simple=1&json=1&page_size=1000")
-        json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password]}))
+                        "&tagtype_0=countries&tag_contains_0=contains&tag_0=" (sess/get :short-locale)
+                        "&search_simple=1&json=1&page_size=1000")
+        json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password] :insecure? true}))
                                  :key-fn keyword)
         sanitized-products (sanitize-products (get json-body :products))]
     (assoc json-body :products sanitized-products)))
+
 
 
 (defn get-from-cache-or-api [id off-url off-user off-password]
@@ -114,7 +118,7 @@
     (if (cache/has? @product-cache id)
       (cache/lookup @product-cache id)
       (try
-        (let [product (json/read-str (:body @(client/request {:url uri :basic-auth [off-user off-password]}))
+        (let [product (json/read-str (:body @(client/request {:url uri :basic-auth [off-user off-password] :insecure? true}))
                                      :key-fn keyword)]
          (swap! product-cache #(cache/miss % id product))
          product)
@@ -123,7 +127,7 @@
           (.printStackTrace e))))))
 
 
-(s/fdef get-by-id :args (s/cat :id (s/or :int integer? :str string?) :off-ur string? :off-user string? :off-password string?)
+(s/fdef get-by-id :args (s/cat :id (s/or :int integer? :str string?) :off-url string? :off-user string? :off-password string?)
         :ret ::product)
 (defn get-by-id [id off-url off-user off-password]
   (let [product (get-from-cache-or-api id off-url off-user off-password)]

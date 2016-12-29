@@ -42,7 +42,7 @@
            (assoc-in [:security :anti-forgery] xss-protection?)))
 
 
-(def secret (:jwt-secret (s-c/read-config-from-nomad)))
+(def secret (:jwt-secret (s-c/prod-conf-or-dev)))
 (def jws-backend (backends/jws {:secret secret}))
 
 (defn get-handler [config {:keys [db]}]
