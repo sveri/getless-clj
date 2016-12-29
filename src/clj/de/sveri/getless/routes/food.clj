@@ -11,34 +11,34 @@
             [clojure.instant :as inst]
             [clojure.tools.logging :as log]))
 
-(defn index-page [db {:keys [off-url off-user off-password]}]
+(defn index-page [db {:keys [off-url off-user off-password]} {:keys [localize]}]
   (layout/render "food/index.html"
-                 {:products-list (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password 10)
+                 {:products-list (s-food/->foods-with-product-grouped-by-date db localize off-url off-user off-password 10)
                   :delete-uri "/food/delete/database/"}))
 
 
-(defn add-food-page [db {:keys [session]} mealid {:keys [off-url off-user off-password]}]
-  (let [products (if mealid (s-meal/get-products-from-meal db (read-string mealid) off-url off-user off-password)
+(defn add-food-page [db {:keys [session localize]} mealid {:keys [off-url off-user off-password]}]
+  (let [products (if mealid (s-meal/get-products-from-meal db (read-string mealid) localize off-url off-user off-password)
                             (s-food/get-food-from-session session))]
     (layout/render "food/add-food.html" {:products   products}
                                         :delete-uri "/food/delete/session/")))
 
 
-(defn add-food-from-template-page [db {:keys [off-url off-user off-password]}]
+(defn add-food-from-template-page [db {:keys [off-url off-user off-password]} {:keys [localize]}]
   (let [user-id (s-user/get-logged-in-user-id db)
         meals (db-meal/meals-by-user-id user-id db)
         meals-with-products (mapv
                               (fn [meal]
                                 (let [products-in-meal (:products-edn meal)
-                                      products-with-off-products (s-off/add-product products-in-meal off-url off-user off-password)]
+                                      products-with-off-products (s-off/add-product products-in-meal localize off-url off-user off-password)]
                                   (assoc meal :products-edn products-with-off-products)))
                               meals)]
     (layout/render "food/add-food-from-template.html"
                    {:meals meals-with-products})))
 
 
-(defn add-product-to-session [productid {:keys [session]} {:keys [off-url off-user off-password]}]
-  (let [session (s-food/add-food-to-session session (s-off/get-by-id productid off-url off-user off-password))]
+(defn add-product-to-session [productid {:keys [session localize]} {:keys [off-url off-user off-password]}]
+  (let [session (s-food/add-food-to-session session (s-off/get-by-id productid localize off-url off-user off-password))]
     (assoc (redirect "/food/add") :session session)))
 
 
@@ -71,9 +71,9 @@
   (redirect "/food"))
 
 
-(defn contents-page [db {:keys [off-url off-user off-password]}]
+(defn contents-page [db {:keys [off-url off-user off-password]} {:keys [localize]}]
   (layout/render "food/contents.html"
-                 {:nutriments (-> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password)
+                 {:nutriments (-> (s-food/->foods-with-product-grouped-by-date localize db off-url off-user off-password)
                                   s-food/->nutriments-grouped-by-date)}))
 
 
@@ -81,13 +81,13 @@
 
 (defn food-routes [config db]
   (routes
-    (GET "/food" [] (index-page db config))
+    (GET "/food" req (index-page db config req))
     (GET "/food/add" req (add-food-page db req nil config))
     (GET "/food/add/:mealid" [mealid :as req] (add-food-page db req mealid config))
-    (GET "/food/add-from-template" req (add-food-from-template-page db config))
+    (GET "/food/add-from-template" req (add-food-from-template-page db config req))
     (POST "/food/add" [save_or_template meal-name date productid amount unit :as req]
       (save-food-to-db-or-as-template save_or_template meal-name date productid amount unit req db))
     (GET "/food/add/product/:productid" [productid :as req] (add-product-to-session productid req config))
     (GET "/food/delete/session/:productid" [productid :as req] (delete-product-from-session productid req))
     (GET "/food/delete/database/:productid" [productid] (delete-product-from-database productid db))
-    (GET "/food/contents" [] (contents-page db config))))
+    (GET "/food/contents" req (contents-page db config req))))

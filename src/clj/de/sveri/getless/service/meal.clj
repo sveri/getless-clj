@@ -23,11 +23,11 @@
 ;    (assoc-in session [:getless :food :products] products)))
 
 
-(s/fdef get-products-from-meal :args (s/cat :db any? :meal-id number? :off-url string? :off-user string? :off-password string?))
-(defn get-products-from-meal [db meal-id off-url off-user off-password]
+(s/fdef get-products-from-meal :args (s/cat :db any? :meal-id number? :localize fn? :off-url string? :off-user string? :off-password string?))
+(defn get-products-from-meal [db meal-id localize off-url off-user off-password]
   (let [meal (db-meal/meal-by-id db meal-id)
         products-edn (:products-edn meal)]
-    (mapv #(s-off/get-by-id (:product-id %) off-url off-user off-password) products-edn)))
+    (mapv #(s-off/get-by-id (:product-id %) localize off-url off-user off-password) products-edn)))
 
 
 

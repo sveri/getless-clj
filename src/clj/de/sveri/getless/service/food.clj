@@ -61,10 +61,10 @@
 
 (s/fdef ->foods-with-product-grouped-by-date :ret (s/coll-of ::db-food/foods))
 (defn ->foods-with-product-grouped-by-date
-  [db off-url off-user off-password & [last-x-days]]
+  [db localize off-url off-user off-password & [last-x-days]]
   (let [foods-grouped-by-date (-> (s-user/get-logged-in-user-id db)
                                   (db-food/->food-by-user-id db fetch-last-x-foods-from-user)
-                                  (s-off/add-product off-url off-user off-password)
+                                  (s-off/add-product localize off-url off-user off-password)
                                   foods->group-by-date
                                   (sort-grouped-products-by-date :eaten-at))
         last-x-days' (or last-x-days default-last-x-days)

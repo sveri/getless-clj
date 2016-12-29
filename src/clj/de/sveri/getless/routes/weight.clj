@@ -15,7 +15,7 @@
 (defn weight-page [{:keys [localize]} db {:keys [off-url off-user off-password]}]
   (let [weights-and-nutriments (s-w/merge-weights-and-nutriments
                                  (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
-                                 (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password default-last-x-days)
+                                 (->> (s-food/->foods-with-product-grouped-by-date db localize off-url off-user off-password default-last-x-days)
                                       s-food/->nutriments-grouped-by-date))
         data-map (s-w/format-weighted-at weights-and-nutriments s-w/weight-date-format)]
     (layout/render "weight/index.html"
