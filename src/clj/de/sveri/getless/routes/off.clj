@@ -5,16 +5,9 @@
             [de.sveri.getless.service.off :as off]
             [ring.util.response :refer [response]]))
 
-(defn ->referer [req]
-  (let [referer (-> req :headers (get "referer" ""))]
-    (cond
-      (.contains referer "food") "food"
-      (.contains referer "meal") "meal")))
-
-(defn search-page [{:keys [off-url off-user off-password]} search referer req]
-  (let [products (if-not (s/blank? search) (off/search-products search off-url off-user off-password) {})
-        referer (or referer (->referer req))]
-    (layout/render "off/search.html" {:products (:products products) :search search :referer referer})))
+(defn search-page [{:keys [off-url off-user off-password]} search]
+  (let [products (if-not (s/blank? search) (off/search-products search off-url off-user off-password) {})]
+    (layout/render "off/search.html" {:products (:products products) :search search})))
 
 (defn off-routes [config]
-  (routes (GET "/off/search" [search referer :as req] (search-page config search referer req))))
+  (routes (GET "/off/search" [search] (search-page config search))))
