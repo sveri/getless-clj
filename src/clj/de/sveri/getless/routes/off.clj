@@ -5,12 +5,12 @@
             [de.sveri.getless.service.off :as off]
             [ring.util.response :refer [response]]))
 
-(defn search-page [{:keys [off-url off-user off-password]} search only-one-locale {:keys [localize]}]
+(defn search-page [{:keys [off-url off-user off-password]} search only-one-locale]
   (let [only-one-locale? (= "on" only-one-locale)
         products (if-not (s/blank? search)
-                   (off/search-products search only-one-locale? localize off-url off-user off-password)
+                   (off/search-products search only-one-locale? off-url off-user off-password)
                    {})]
     (layout/render "off/search.html" {:products (:products products) :search search})))
 
 (defn off-routes [config]
-  (routes (GET "/off/search" [search only-one-locale :as req] (search-page config search only-one-locale req))))
+  (routes (GET "/off/search" [search only-one-locale :as req] (search-page config search only-one-locale))))

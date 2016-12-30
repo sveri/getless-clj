@@ -32,7 +32,7 @@
                     <td><a href="http://world.openfoodfacts.org/product/{{product.id}}">{{product.product_name}}</a></td>
                     <td><img src="{{product.image_small_url}}" alt="{{product.product_name}}" height="120"/></td>
                     <td>{{product.nutriments_text|safe}}</td>
-                    <td>{{product.ingredients_text}}</td>
+                    <td>{% nutrimentstext product %}</td>
                     <td><a href="/food/add/product/{{product.id}}" class="btn btn-primary pull-right">{% localize generic/add %} </a></td>
                 </tr>
             {% endfor %}

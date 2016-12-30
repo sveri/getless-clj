@@ -41,8 +41,6 @@
 (s/def ::ingredients (s/* ::ingredient))
 (s/def ::ingredients_text string?)
 
-(s/def ::nutriments_text string?)
-
 (s/def ::unit #{"g" "mg" "kJ" "kCal" "kcal"})
 
 (s/def ::string-or-number (s/or :number number? :string string?))
@@ -59,6 +57,11 @@
 (s/def ::nutriments
   (s/nilable (s/keys :opt-un [::sugars_100g ::sugars_unit ::energy_100g ::energy_unit ::salt ::salt_unit ::fat_100g ::fat_unit])))
 
+;(s/def ::value number?)
+; where name = the name from off like "sugars" "fat"
+;(s/def ::nutriments-sanitized (s/coll-of (s/keys :req-un [::name ::unit ::value])))
+
+
 (s/def ::product (s/keys :req-un [::id]
                          :opt-un [::product_name ::code ::product_name_de ::brands ::ingredients_text_de ::packaging
                                   ::serving_quantity ::nutrition_data_per ::quantity ::ingredients ::_keywords
@@ -66,7 +69,13 @@
                                   ::nutriments]))
 (s/def ::products (s/coll-of ::product))
 
-(s/def ::search-result (s/keys :req-un [::page-size ::count ::skip ::page ::products]))
+(s/def ::search-result (s/keys :opt-un [::page-size ::count ::skip ::page ::products]))
+
+
+
+(def nutriments-to-extract ["energy" "sugar" "fat" "cholesterol" "salt" "proteins" "monounsaturated-fat"
+                            "saturated-fat" "fiber" "polyunsaturated-fat" "carbohydrates"])
+
 
 
 (s/fdef add-ingredients :args (s/cat :product (s/keys :opt-un [::ingredients]))
@@ -80,22 +89,23 @@
                            "" ordered_ingredients))))
 
 
-(s/fdef add-nutriments :args (s/cat :product (s/keys :opt-un [::nutriments]) :localize fn?
-                                    :nutriments-to-extract (s/coll-of string?))
-        :ret (s/keys :req-un [::nutriments_text]))
-(defn add-nutriments [product localize nutriments-to-extract]
-  (let [nutriments (:nutriments product)
-        nutriments_text (str/join "<br />"
-                              (map (fn [nutriment-string]
-                                     (cond
-                                       (= "energy" nutriment-string)
-                                       (str (localize [:food/energy]) ": " (format "%.4s" (:energy-kcal nutriments)) " kCal")
-
-                                       :else
-                                       (str (localize [(keyword (str "food/" nutriment-string))])
-                                            ": " (get nutriments (keyword (str nutriment-string "_100g")) "0") " g")))
-                                   nutriments-to-extract))]
-    (assoc product :nutriments_text nutriments_text)))
+;(s/fdef add-nutriments :args (s/cat :product (s/keys :opt-un [::nutriments]) :localize fn?
+;                                    :nutriments-to-extract (s/coll-of string?))
+;        :ret (s/keys :req-un [::nutriments-sanitized]))
+;(defn add-nutriments [product localize nutriments-to-extract]
+;  (let [nutriments (:nutriments product)
+;        nutriments-sanitized (mapv)]
+;        ;nutriments_text (str/join "<br />"
+;        ;                      (map (fn [nutriment-string]
+;        ;                             (cond
+;        ;                               (= "energy" nutriment-string)
+;        ;                               (str (localize [:food/energy]) ": " (format "%.4s" (:energy-kcal nutriments)) " kCal")
+;        ;
+;        ;                               :else
+;        ;                               (str (localize [(keyword (str "food/" nutriment-string))])
+;        ;                                    ": " (get nutriments (keyword (str nutriment-string "_100g")) "0") " g")))
+;        ;                           nutriments-to-extract))]
+;    (assoc product :nutriments-sanitized nutriments_text)))
 
 
 
@@ -107,35 +117,35 @@
     (assoc-in product [:nutriments :energy-kcal] "0")))
 
 
-(defn sanitize-product [product localize]
+(defn sanitize-product [product]
   (-> product
       (select-keys [:id :code :product_name :product_name_de :quantity :brands :image_thumb_url :image_small_url
                     :lang :ingredients :ingredients_text_de :packaging :serving_quantity :nutrition_data_per
                     :rev :_keywords :name :nutriments])
       add-ingredients
-      kJ->kCal
-      (add-nutriments localize ["energy" "sugar" "fat" "cholesterol" "salt" "proteins" "monounsaturated-fat"
-                                "saturated-fat" "fiber" "polyunsaturated-fat" "carbohydrates"])))
+      kJ->kCal))
+      ;(add-nutriments localize ["energy" "sugar" "fat" "cholesterol" "salt" "proteins" "monounsaturated-fat"
+      ;                          "saturated-fat" "fiber" "polyunsaturated-fat" "carbohydrates"])))
 
 
 
-(s/fdef sanitize-products :args (s/cat :products any? :localize fn?)
+(s/fdef sanitize-products :args (s/cat :products any?)
         :ret ::products)
-(defn sanitize-products [products localize]
-  (map #(sanitize-product % localize) products))
+(defn sanitize-products [products]
+  (map sanitize-product products))
 
 
-(s/fdef search-products :args (s/cat :search string? :only-one-locale boolean? :localize fn? :off-url string?
+(s/fdef search-products :args (s/cat :search string? :only-one-locale boolean? :off-url string?
                                      :off-user string? :off-password string?)
         :ret ::search-result)
-(defn search-products [search only-one-locale localize off-url off-user off-password]
+(defn search-products [search only-one-locale off-url off-user off-password]
   (let [sanitized-search-term (.replace search " " "%20")
         search-uri (str off-url "cgi/search.pl?search_terms=" sanitized-search-term
                         (if only-one-locale (str "&tagtype_0=countries&tag_contains_0=contains&tag_0=" (sess/get :short-locale)) "")
                         "&search_simple=1&json=1&page_size=1000")
         json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password] :insecure? true}))
                                  :key-fn keyword)
-        sanitized-products (sanitize-products (get json-body :products) localize)]
+        sanitized-products (sanitize-products (get json-body :products))]
     (assoc json-body :products sanitized-products)))
 
 
@@ -154,22 +164,21 @@
           (.printStackTrace e))))))
 
 
-(s/fdef get-by-id :args (s/cat :id (s/or :int integer? :str string?) :localize fn? :off-url string?
+(s/fdef get-by-id :args (s/cat :id (s/or :int integer? :str string?) :off-url string?
                                :off-user string? :off-password string?)
         :ret ::product)
-(defn get-by-id [id localize off-url off-user off-password]
+(defn get-by-id [id off-url off-user off-password]
   (let [product (get-from-cache-or-api id off-url off-user off-password)]
-    (sanitize-product (get product :product {}) localize)))
+    (sanitize-product (get product :product {}))))
 
 
 (s/fdef add-product :args (s/cat :map-or-list (s/or :map (s/keys :req-un [::db-food/product-id])
                                                     :list (s/coll-of (s/keys :req-un [::db-food/product-id])))
-                                 :localize fn?
                                  :off-url string? :off-user string? :off-password string?))
 (defn add-product
   "adds the off product to the given map or maps. The map must contain the key :product-id"
-  [map-or-list localize off-url off-user off-password]
-  (let [f #(assoc % :product (get-by-id (:product-id %) localize off-url off-user off-password))]
+  [map-or-list off-url off-user off-password]
+  (let [f #(assoc % :product (get-by-id (:product-id %) off-url off-user off-password))]
     (if (map? map-or-list)
       (f map-or-list)
       (mapv f map-or-list))))
