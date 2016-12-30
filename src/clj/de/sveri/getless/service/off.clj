@@ -80,13 +80,21 @@
                            "" ordered_ingredients))))
 
 
-(s/fdef add-nutriments :args (s/cat :product (s/keys :opt-un [::nutriments]) :localize fn?)
+(s/fdef add-nutriments :args (s/cat :product (s/keys :opt-un [::nutriments]) :localize fn?
+                                    :nutriments-to-extract (s/coll-of string?))
         :ret (s/keys :req-un [::nutriments_text]))
-(defn add-nutriments [product localize]
+(defn add-nutriments [product localize nutriments-to-extract]
   (let [nutriments (:nutriments product)
-        nutriments_text (str (localize [:food/energy]) ": " (format "%.4s" (:energy-kcal nutriments)) " kCal<br />"
-                             (localize [:food/sugar]) ": " (get nutriments :sugars_100g "0") " g<br />"
-                             (localize [:food/fat]) ": " (get nutriments :fat_100g "0") " g<br />")]
+        nutriments_text (str/join "<br />"
+                              (map (fn [nutriment-string]
+                                     (cond
+                                       (= "energy" nutriment-string)
+                                       (str (localize [:food/energy]) ": " (format "%.4s" (:energy-kcal nutriments)) " kCal")
+
+                                       :else
+                                       (str (localize [(keyword (str "food/" nutriment-string))])
+                                            ": " (get nutriments (keyword (str nutriment-string "_100g")) "0") " g")))
+                                   nutriments-to-extract))]
     (assoc product :nutriments_text nutriments_text)))
 
 
@@ -106,7 +114,8 @@
                     :rev :_keywords :name :nutriments])
       add-ingredients
       kJ->kCal
-      (add-nutriments localize)))
+      (add-nutriments localize ["energy" "sugar" "fat" "cholesterol" "salt" "proteins" "monounsaturated-fat"
+                                "saturated-fat" "fiber" "polyunsaturated-fat" "carbohydrates"])))
 
 
 
@@ -138,8 +147,8 @@
       (try
         (let [product (json/read-str (:body @(client/request {:url uri :basic-auth [off-user off-password] :insecure? true}))
                                      :key-fn keyword)]
-         (swap! product-cache #(cache/miss % id product))
-         product)
+          (swap! product-cache #(cache/miss % id product))
+          product)
         (catch Exception e
           (log/error "Cannot retrieve off products.")
           (.printStackTrace e))))))

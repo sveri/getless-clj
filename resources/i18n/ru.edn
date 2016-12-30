@@ -62,12 +62,20 @@
  :product  {:add           "Добавить продукт"
             :save_template "Сохранить шаблон"
             :template_name "Имя шаблона"}
- :food     {:new           "Новый продукт"
-            :from_template "Из шаблона"
-            :select        "Выбрать"
-            :sugar         "Сахар"
-            :fat           "Жиры"
-            :energy        "Калорийность"}
+ :food     {:new                 "Новый продукт"
+            :from_template       "Из шаблона"
+            :select              "Выбрать"
+            :sugar               "Сахар"
+            :fat                 "Жиры"
+            :energy              "Калорийность"
+            :cholesterol         "Cholesterol"
+            :salt                "Salt"
+            :proteins            "Proteins"
+            :monounsaturated-fat "Monounsaturated Fat"
+            :saturated-fat       "Saturated Fat"
+            :fiber               "Fiber"
+            :polyunsaturated-fat "Polyunsaturated Fat"
+            :carbohydrates       "Carbohydrates"}
  :contact  {:contact            "Контакты"
             :content_belongs_to "Права принадлежат"}
  :weight   {:add "Добавить запись"

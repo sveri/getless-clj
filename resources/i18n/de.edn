@@ -62,12 +62,20 @@
  :product  {:add           "Produkt hinzufügen"
             :save_template "Als Vorlage Speichern"
             :template_name "Vorlagen Name"}
- :food     {:new           "Neues Essen"
-            :from_template "Von Vorlage"
-            :select        "Übernehmen"
-            :sugar         "Zucker"
-            :fat           "Fett"
-            :energy        "Energie"}
+ :food     {:new                 "Neues Essen"
+            :from_template       "Von Vorlage"
+            :select              "Übernehmen"
+            :sugar               "Zucker"
+            :fat                 "Fett"
+            :energy              "Energie"
+            :cholesterol         "Cholesterin"
+            :salt                "Salz"
+            :proteins            "Proteine"
+            :monounsaturated-fat "Einfach Ungesättigte Fette"
+            :saturated-fat       "Gesättigte Fette"
+            :fiber               "Ballaststoffe"
+            :polyunsaturated-fat "Vielfach Ungesättigte Fette"
+            :carbohydrates       "Kohlenhydrate"}
  :contact  {:contact            "Kontakt"
             :content_belongs_to "Der Inhalt gehört zu"}
  :weight   {:add "Eintrag hinzufügen"
