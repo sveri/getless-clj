@@ -9,6 +9,7 @@
             [noir.session :as sess]))
 
 (def product-cache (atom (cache/ttl-cache-factory {} :ttl 172800000)))
+(def product-search-cache (atom (cache/ttl-cache-factory {} :ttl 82800000)))
 
 
 
@@ -110,7 +111,7 @@
         ordered_ingredients (sort-by :rank ingredients)]
     (assoc product :ingredients_text
                    (reduce (fn [a b]
-                             (str a (when-not (str/blank? a) ", ") (str/replace (:text b)  #"\_|\ \*" "")))
+                             (str a (when-not (str/blank? a) ", ") (str/replace (:text b)  #"\_|\ \*|\*|\*\ " "")))
                            "" ordered_ingredients))))
 
 
@@ -137,22 +138,35 @@
   (map sanitize-product products))
 
 
+
+(defn get-search-products-from-cache-or-api [search only-one-locale off-url off-user off-password]
+  (let [sanitized-search-term (.replace search " " "%20")
+        cache-key (str sanitized-search-term (if only-one-locale (str "-" (sess/get :short-locale)) ""))]
+    (if (cache/has? @product-search-cache cache-key)
+      (cache/lookup @product-search-cache cache-key)
+      (try
+        (let [search-uri (str off-url "cgi/search.pl?search_terms=" sanitized-search-term
+                              (if only-one-locale (str "&tagtype_0=countries&tag_contains_0=contains&tag_0=" (sess/get :short-locale)) "")
+                              "&search_simple=1&json=1&page_size=1000")
+              json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password] :insecure? true}))
+                                       :key-fn keyword)
+              sanitized-products (sanitize-products (get json-body :products))]
+          (swap! product-search-cache #(cache/miss % cache-key (assoc json-body :products sanitized-products)))
+          (assoc json-body :products sanitized-products))
+        (catch Exception e
+          (log/error "Cannot retrieve off products.")
+          (.printStackTrace e))))))
+
+
 (s/fdef search-products :args (s/cat :search string? :only-one-locale boolean? :off-url string?
                                      :off-user string? :off-password string?)
         :ret ::search-result)
 (defn search-products [search only-one-locale off-url off-user off-password]
-  (let [sanitized-search-term (.replace search " " "%20")
-        search-uri (str off-url "cgi/search.pl?search_terms=" sanitized-search-term
-                        (if only-one-locale (str "&tagtype_0=countries&tag_contains_0=contains&tag_0=" (sess/get :short-locale)) "")
-                        "&search_simple=1&json=1&page_size=1000")
-        json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password] :insecure? true}))
-                                 :key-fn keyword)
-        sanitized-products (sanitize-products (get json-body :products))]
-    (assoc json-body :products sanitized-products)))
+  (get-search-products-from-cache-or-api search only-one-locale off-url off-user off-password))
 
 
 
-(defn get-from-cache-or-api [id off-url off-user off-password]
+(defn get-by-id-from-cache-or-api [id off-url off-user off-password]
   (let [uri (str off-url "api/v0/product/" id ".json")]
     (if (cache/has? @product-cache id)
       (cache/lookup @product-cache id)
@@ -170,7 +184,7 @@
                                :off-user string? :off-password string?)
         :ret ::product)
 (defn get-by-id [id off-url off-user off-password]
-  (let [product (get-from-cache-or-api id off-url off-user off-password)]
+  (let [product (get-by-id-from-cache-or-api id off-url off-user off-password)]
     (sanitize-product (get product :product {}))))
 
 
