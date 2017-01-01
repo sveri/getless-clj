@@ -57,10 +57,6 @@
 (s/def ::nutriments
   (s/nilable (s/keys :opt-un [::sugars_100g ::sugars_unit ::energy_100g ::energy_unit ::salt ::salt_unit ::fat_100g ::fat_unit])))
 
-;(s/def ::value number?)
-; where name = the name from off like "sugars" "fat"
-;(s/def ::nutriments-sanitized (s/coll-of (s/keys :req-un [::name ::unit ::value])))
-
 
 (s/def ::product (s/keys :req-un [::id]
                          :opt-un [::product_name ::code ::product_name_de ::brands ::ingredients_text_de ::packaging
@@ -73,8 +69,37 @@
 
 
 
-(def nutriments-to-extract ["energy" "sugar" "fat" "cholesterol" "salt" "proteins" "monounsaturated-fat"
-                            "saturated-fat" "fiber" "polyunsaturated-fat" "carbohydrates"])
+(def nutriments-to-extract ["energy" "fat" "saturated-fat" "carbohydrates" "sugars" "proteins" "salt"
+                            "fiber" "cholesterol" "monounsaturated-fat" "polyunsaturated-fat"])
+
+
+(defn get-non-empty-nutriments-to-extract [nutriments-to-extract' nutriments-from-product]
+  (filter
+    (fn [nte]
+      (let [nutriment (get nutriments-from-product (keyword (str nte "_100g")))]
+        (and (not (nil? nutriment))
+             (if (string? nutriment)
+               (< 0 (read-string nutriment))
+               (< 0 nutriment)))))
+    nutriments-to-extract'))
+
+(s/fdef add-nutriments :args (s/cat :product (s/keys :opt-un [::nutriments]) :localize fn?
+                                    :nutriments-to-extract (s/coll-of string?))
+        :ret (s/keys :req-un [::nutriments-sanitized]))
+(defn add-nutriments [product localize nutriments-to-extract]
+  (let [nutriments (:nutriments product)
+        non-empty-nutriments (get-non-empty-nutriments-to-extract nutriments-to-extract nutriments)
+        nutriments_text (str/join "<br />"
+                                  (map (fn [nutriment-string]
+                                         (cond
+                                           (= "energy" nutriment-string)
+                                           (str (localize [:food/energy]) ": " (format "%.3s" (read-string (:energy-kcal nutriments))) " kCal")
+
+                                           :else
+                                           (str (localize [(keyword (str "food/" nutriment-string))])
+                                                ": " (get nutriments (keyword (str nutriment-string "_100g")) "0") " g")))
+                                       non-empty-nutriments))]
+    (assoc product :nutriments-text nutriments_text)))
 
 
 
@@ -85,28 +110,8 @@
         ordered_ingredients (sort-by :rank ingredients)]
     (assoc product :ingredients_text
                    (reduce (fn [a b]
-                             (str a (when-not (str/blank? a) ", ") (:text b)))
+                             (str a (when-not (str/blank? a) ", ") (str/replace (:text b) "_" "")))
                            "" ordered_ingredients))))
-
-
-;(s/fdef add-nutriments :args (s/cat :product (s/keys :opt-un [::nutriments]) :localize fn?
-;                                    :nutriments-to-extract (s/coll-of string?))
-;        :ret (s/keys :req-un [::nutriments-sanitized]))
-;(defn add-nutriments [product localize nutriments-to-extract]
-;  (let [nutriments (:nutriments product)
-;        nutriments-sanitized (mapv)]
-;        ;nutriments_text (str/join "<br />"
-;        ;                      (map (fn [nutriment-string]
-;        ;                             (cond
-;        ;                               (= "energy" nutriment-string)
-;        ;                               (str (localize [:food/energy]) ": " (format "%.4s" (:energy-kcal nutriments)) " kCal")
-;        ;
-;        ;                               :else
-;        ;                               (str (localize [(keyword (str "food/" nutriment-string))])
-;        ;                                    ": " (get nutriments (keyword (str nutriment-string "_100g")) "0") " g")))
-;        ;                           nutriments-to-extract))]
-;    (assoc product :nutriments-sanitized nutriments_text)))
-
 
 
 (defn kJ->kCal
@@ -124,8 +129,8 @@
                     :rev :_keywords :name :nutriments])
       add-ingredients
       kJ->kCal))
-      ;(add-nutriments localize ["energy" "sugar" "fat" "cholesterol" "salt" "proteins" "monounsaturated-fat"
-      ;                          "saturated-fat" "fiber" "polyunsaturated-fat" "carbohydrates"])))
+;(add-nutriments localize ["energy" "sugar" "fat" "cholesterol" "salt" "proteins" "monounsaturated-fat"
+;                          "saturated-fat" "fiber" "polyunsaturated-fat" "carbohydrates"])))
 
 
 

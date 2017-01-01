@@ -65,7 +65,7 @@
  :food     {:new                 "New Food"
             :from_template       "From Template"
             :select              "Select"
-            :sugar               "Sugar"
+            :sugars              "Sugar"
             :fat                 "Fat"
             :energy              "Energy"
             :cholesterol         "Cholesterol"

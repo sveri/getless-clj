@@ -65,7 +65,7 @@
  :food     {:new                 "Neues Essen"
             :from_template       "Von Vorlage"
             :select              "Übernehmen"
-            :sugar               "Zucker"
+            :sugars              "Zucker"
             :fat                 "Fett"
             :energy              "Energie"
             :cholesterol         "Cholesterin"

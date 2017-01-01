@@ -65,7 +65,7 @@
  :food     {:new                 "Новый продукт"
             :from_template       "Из шаблона"
             :select              "Выбрать"
-            :sugar               "Сахар"
+            :sugars              "Сахар"
             :fat                 "Жиры"
             :energy              "Калорийность"
             :cholesterol         "Cholesterol"
