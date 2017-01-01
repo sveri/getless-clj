@@ -11,11 +11,16 @@
             [clojure.instant :as inst]
             [clojure.tools.logging :as log]))
 
-(defn index-page [db {:keys [off-url off-user off-password]}]
-  (layout/render "food/index.html"
-                 {:products-list (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password 10)
-                  :delete-uri "/food/delete/database/"}))
-
+(defn index-page [db {:keys [off-url off-user off-password]} {:keys [localize]}]
+  (let [products-list (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password 10)
+        products-with-nutriments (mapv (fn [products]
+                                         (mapv
+                                           #(assoc % :product (s-off/add-nutriments (:product %) localize s-off/nutriments-to-extract))
+                                           products))
+                                       products-list)]
+    (layout/render "food/index.html" {:products-list products-with-nutriments
+                                      :delete-uri    "/food/delete/database/"})))
+  
 
 (defn add-food-page [db {:keys [session]} mealid {:keys [off-url off-user off-password]}]
   (let [products (if mealid (s-meal/get-products-from-meal db (read-string mealid) off-url off-user off-password)
@@ -81,7 +86,7 @@
 
 (defn food-routes [config db]
   (routes
-    (GET "/food" req (index-page db config))
+    (GET "/food" req (index-page db config req))
     (GET "/food/add" req (add-food-page db req nil config))
     (GET "/food/add/:mealid" [mealid :as req] (add-food-page db req mealid config))
     (GET "/food/add-from-template" req (add-food-from-template-page db config))
