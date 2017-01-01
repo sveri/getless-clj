@@ -110,7 +110,7 @@
         ordered_ingredients (sort-by :rank ingredients)]
     (assoc product :ingredients_text
                    (reduce (fn [a b]
-                             (str a (when-not (str/blank? a) ", ") (str/replace (:text b) "_" "")))
+                             (str a (when-not (str/blank? a) ", ") (str/replace (:text b)  #"\_|\ \*" "")))
                            "" ordered_ingredients))))
 
 
@@ -129,9 +129,6 @@
                     :rev :_keywords :name :nutriments])
       add-ingredients
       kJ->kCal))
-;(add-nutriments localize ["energy" "sugar" "fat" "cholesterol" "salt" "proteins" "monounsaturated-fat"
-;                          "saturated-fat" "fiber" "polyunsaturated-fat" "carbohydrates"])))
-
 
 
 (s/fdef sanitize-products :args (s/cat :products any?)
