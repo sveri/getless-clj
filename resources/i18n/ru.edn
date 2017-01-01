@@ -22,7 +22,8 @@
             :amount            "Сумма"
             :search            "Поиск"
             :add               "Добавить"
-            :cancel            "Отменить"}
+            :cancel            "Отменить"
+            :no-results-found  "No results found."}
  :user
            {:email_invalid        "Адрес недействителен."
             :pass_min_length      "Пароль должен содержать не менее 5 символов."

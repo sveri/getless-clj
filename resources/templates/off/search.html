@@ -15,6 +15,12 @@
         <input type="submit" value="{% localize generic/search %}" class="btn btn-primary" style="margin-left: 30px;"/>
     </form>
 
+
+    {% if products|empty? %}
+
+        <p style="margin-top:30px">{% localize generic/no-results-found %}</p>
+    {% endif %}
+
     <table class="table" style="margin-top: 30px;">
         <thead>
             <tr>

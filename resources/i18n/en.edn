@@ -22,7 +22,8 @@
             :amount            "amount"
             :search            "Search"
             :add               "Add"
-            :cancel            "Cancel"}
+            :cancel            "Cancel"
+            :no-results-found  "No results found."}
  :user
            {:email_invalid        "A valid email is required."
             :pass_min_length      "Password must be at least 5 characters."
