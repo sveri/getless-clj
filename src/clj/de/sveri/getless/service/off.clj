@@ -77,8 +77,8 @@
 (defn get-non-empty-nutriments-to-extract [nutriments-to-extract' nutriments-from-product]
   (filter
     (fn [nte]
-      (let [nutriment (get nutriments-from-product (keyword (str nte "_100g")))]
-        (and (not (nil? nutriment))
+      (let [nutriment (str (get nutriments-from-product (keyword (str nte "_100g"))))]
+        (and (not (str/blank? nutriment))
              (if (string? nutriment)
                (< 0 (read-string nutriment))
                (< 0 nutriment)))))
