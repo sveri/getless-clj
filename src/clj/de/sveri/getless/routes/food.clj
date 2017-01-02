@@ -38,8 +38,7 @@
                                       products-with-off-products (s-off/add-product products-in-meal off-url off-user off-password)]
                                   (assoc meal :products-edn products-with-off-products)))
                               meals)]
-    (layout/render "food/add-food-from-template.html"
-                   {:meals meals-with-products})))
+    (layout/render "food/add-food-from-template.html" {:meals meals-with-products})))
 
 
 (defn add-product-to-session [productid {:keys [session]} {:keys [off-url off-user off-password]}]

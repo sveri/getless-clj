@@ -27,7 +27,9 @@
 (defn get-products-from-meal [db meal-id off-url off-user off-password]
   (let [meal (db-meal/meal-by-id db meal-id)
         products-edn (:products-edn meal)]
-    (mapv #(s-off/get-by-id (:product-id %) off-url off-user off-password) products-edn)))
+    (mapv #(let [off-product (s-off/get-by-id (:product-id %) off-url off-user off-password)]
+             (assoc off-product :amount (:amount %) :unit (:unit %)))
+          products-edn)))
 
 
 
