@@ -22,11 +22,11 @@
                                       :delete-uri    "/food/delete/database/"})))
   
 
-(defn add-food-page [db {:keys [session]} mealid {:keys [off-url off-user off-password]}]
+(defn add-food-page [db {:keys [session localize]} mealid {:keys [off-url off-user off-password]}]
   (let [products (if mealid (s-meal/get-products-from-meal db (read-string mealid) off-url off-user off-password)
-                            (s-food/get-food-from-session session))]
-    (layout/render "food/add-food.html" {:products   products}
-                                        :delete-uri "/food/delete/session/")))
+                            (s-food/get-food-from-session session))
+        products-with-nutriments (mapv #(s-off/add-nutriments % localize s-off/nutriments-to-extract) products)]
+    (layout/render "food/add-food.html" {:products   products-with-nutriments})))
 
 
 (defn add-food-from-template-page [db {:keys [off-url off-user off-password]}]

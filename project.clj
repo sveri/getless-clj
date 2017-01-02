@@ -7,16 +7,16 @@
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
   :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
-                 [org.clojure/clojurescript "1.7.170"]
+                 [org.clojure/clojurescript "1.9.293"]
 
                  [org.clojure/core.cache "0.6.5"]
-                 [org.clojure/core.async "0.2.391"]
+                 [org.clojure/core.async "0.2.395"]
 
                  [ring "1.4.0"]
                  [lib-noir "0.9.9"]
                  [ring/ring-anti-forgery "1.0.0"]
                  [compojure "1.5.1"]
-                 [reagent "0.5.1"]
+                 [reagent "0.6.0"]
                  [http-kit "2.2.0"]
                  [selmer "0.8.5"]
                  [prone "1.1.2"]
@@ -41,8 +41,7 @@
 
                  [org.danielsz/system "0.1.8"]
 
-                 [datascript "0.13.3"]
-                 [cljs-ajax "0.3.14"]
+                 [cljs-ajax "0.5.8"]
                  [ring-transit "0.1.3"]
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
 
