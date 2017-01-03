@@ -32,7 +32,7 @@
                 <td><a href="http://world.openfoodfacts.org/product/{{product.id}}">{{product.product_name}}</a>
                     <input type="hidden" name="productid[]" value="{{product.id}}">
                 </td>
-                <td><img src="{{product.image_small_url}}" alt="{{product.product_name}}" height="120"/></td>
+                <td><img src="{{product.image_small_url}}" alt="{{product.product_name}}" style="max-width: 120px; max-height: 120px"/></td>
                 <td>{{product.nutriments-text|safe}}</td>
                 <td>{{product.ingredients_text}}</td>
                 <td><input type="number" placeholder="{% localize generic/amount %}" name="amount[]" value="{{product.amount}}" required="required" class="form-control"></td>

@@ -33,7 +33,7 @@
 
                 <tr>
                     <td><a href="http://world.openfoodfacts.org/product/{{product.product.id}}">{{product.product.product_name}}</a></td>
-                    <td><img src="{{product.product.image_small_url}}" alt="{{product.product.product_name}}" height="120"/></td>
+                    <td><img src="{{product.product.image_small_url}}" alt="{{product.product.product_name}}" style="max-width: 120px; max-height: 120px"/></td>
                     <td>{{product.product.nutriments-text|safe}}</td>
                     <td>{{product.product.ingredients_text}}</td>
                     <td>{{product.amount}} {% ifequal product.unit "gramm" %}{% localize generic/gram %} {% endifequal %}</td>
