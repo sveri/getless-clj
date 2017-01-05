@@ -50,37 +50,37 @@
             :register             "Register"}
 
  :admin
-           {:title    "User Overview"
-            :add_user "Benutzer hinzufügen"
-            :new_user "New User"
-            :active   "Active"
-            :filter   "Filter Users"
-            :update   "Update"}
- :home     {:we-dont-judge         "We don't judge."
-            :we-support-each-other "We support each other."
-            :we-use-means          "We use means that do not harm anyone."}
+           {:title    "Gebruikers Overzicht"
+            :add_user "Gebruiker Toevoegen"
+            :new_user "Nieuwe Gebruiker"
+            :active   "Actief"
+            :filter   "Filter Gebuikers"
+            :update   "Bijwerken"}
+ :home     {:we-dont-judge         "Wij oordelen niet."
+            :we-support-each-other "Wij ondersteunen elkaar."
+            :we-use-means          "We use means that do not harm anyone."} ; TODO: Translate
  :activity {:planned "Geplant"}
- :product  {:add           "Add Product"
-            :save_template "Save As Template"
-            :template_name "Template Name"}
- :food     {:new                 "New Food"
-            :from_template       "From Template"
-            :select              "Select"
-            :sugars              "Sugar"
-            :fat                 "Fat"
-            :energy              "Energy"
+ :product  {:add           "Product Toevoegen"
+            :save_template "Opslaan als voorbeeld"
+            :template_name "Voorbeeld Naam"}
+ :food     {:new                 "Nieuw Eten"
+            :from_template       "Vanaf voorbeeld"
+            :select              "Selecteer"
+            :sugars              "Suiker"
+            :fat                 "Vet"
+            :energy              "Energie"
             :cholesterol         "Cholesterol"
-            :salt                "Salt"
-            :proteins            "Proteins"
-            :monounsaturated-fat "Monounsaturated Fat"
-            :saturated-fat       "Saturated Fat"
-            :fiber               "Fiber"
-            :polyunsaturated-fat "Polyunsaturated Fat"
-            :carbohydrates       "Carbohydrates"}
+            :salt                "Protein"
+            :proteins            "Proteine"
+            :monounsaturated-fat "Enkelvoudig onverzadigd vet"
+            :saturated-fat       "Verzadigd vet"
+            :fiber               "Vezels"
+            :polyunsaturated-fat "Meervoudig onverzadigd vet"
+            :carbohydrates       "Koolhydraten"}
 
  :contact  {:contact            "Contact"
             :content_belongs_to "Inhoud behoort tot"}
- :weight   {:add "Add Record"
+ :weight   {:add "Add Record" ; TODO: Translate
             :kg  "kg"
             :history "Historie"}
  :off      {:search-only-one-locale "Alleen Nederlandse producten"}}
