@@ -1,0 +1,86 @@
+{:generic
+           {:some_error        "Some error occured."
+            :deletion_canceled "Deletion canceled."
+            :email             "Email"
+            :password          "Password"
+            :password_confirm  "Confirm Password"
+            :logout            "Logout"
+            :diet              "Diet"
+            :activities        "Activities"
+            :food              "Food"
+            :ingredients       "Ingredients"
+            :weight-progress   "Weight Progress"
+            :tomorrow          "Tomorrow"
+            :today             "Today"
+            :yesterday         "Yesterday"
+            :done              "Done"
+            :delete            "Delete"
+            :save              "Save"
+            :gram              "gram"
+            :litre             "litre"
+            :date              "date"
+            :amount            "amount"
+            :search            "Search"
+            :add               "Add"
+            :cancel            "Cancel"
+            :no-results-found  "No results found."}
+ :user
+           {:email_invalid        "A valid email is required."
+            :pass_min_length      "Password must be at least 5 characters."
+            :pass_match           "Entered passwords do not match."
+            :pass_correct         "Please provide a correct password."
+            :pass_changed         "Password changed."
+            :change_password      "Change Password"
+            :wrong_cur_pass       "Current password was incorrect."
+            :username_exists      "This username already exists. Choose another."
+            :username_wrong       "Please provide a correct username."
+            :deleted              "User deleted successfully."
+            :updated              "User %s updated successfully."
+            :user_added           "User added."
+            :captcha_wrong        "Please provide the correct captcha input."
+            :email_failed         "Something went wrong sending the email, please contact us."
+            :signup               "Sign Up"
+            :signin               "Sign In"
+            :username             "Username"
+            :role                 "Role"
+            :current_password     "Current Password"
+            :new_password         "New Password"
+            :new_password_confirm "Confirm New Password"
+            :really_delete        "Do you really want to delete user: "
+            :register             "Register"}
+
+ :admin
+           {:title    "User Overview"
+            :add_user "Benutzer hinzufügen"
+            :new_user "New User"
+            :active   "Active"
+            :filter   "Filter Users"
+            :update   "Update"}
+ :home     {:we-dont-judge         "We don't judge."
+            :we-support-each-other "We support each other."
+            :we-use-means          "We use means that do not harm anyone."}
+ :activity {:planned "Geplant"}
+ :product  {:add           "Add Product"
+            :save_template "Save As Template"
+            :template_name "Template Name"}
+ :food     {:new                 "New Food"
+            :from_template       "From Template"
+            :select              "Select"
+            :sugars              "Sugar"
+            :fat                 "Fat"
+            :energy              "Energy"
+            :cholesterol         "Cholesterol"
+            :salt                "Salt"
+            :proteins            "Proteins"
+            :monounsaturated-fat "Monounsaturated Fat"
+            :saturated-fat       "Saturated Fat"
+            :fiber               "Fiber"
+            :polyunsaturated-fat "Polyunsaturated Fat"
+            :carbohydrates       "Carbohydrates"}
+
+ :contact  {:contact            "Contact"
+            :content_belongs_to "Content belongs to"}
+ :weight   {:add "Add Record"
+            :kg  "kg"}
+ :off      {:search-only-one-locale "Only English Products"}}
+
