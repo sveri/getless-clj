@@ -81,6 +81,7 @@
  :contact  {:contact            "Contact"
             :content_belongs_to "Inhoud behoort tot"}
  :weight   {:add "Add Record"
-            :kg  "kg" }
+            :kg  "kg"
+            :history "Historie"}
  :off      {:search-only-one-locale "Alleen Nederlandse producten"}}
 
