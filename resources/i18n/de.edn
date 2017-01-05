@@ -80,5 +80,6 @@
  :contact  {:contact            "Kontakt"
             :content_belongs_to "Der Inhalt gehört zu"}
  :weight   {:add "Eintrag hinzufügen"
-            :kg  "kg"}
+            :kg  "kg"
+            :history "Historie"}
  :off      {:search-only-one-locale "Nur Deutsche Produkte"}}

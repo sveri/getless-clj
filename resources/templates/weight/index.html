@@ -35,8 +35,36 @@
         <input type="submit" value="{% localize generic/save %}" class="btn btn-primary" style="margin-top:15px; "/>
     </form>
 
+<br />
+
+<h3>{% localize weight/history %} </h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <td class="col-md-2">&nbsp;</td>
+        <td class="col-md-2">&nbsp;</td>
+        <td class="col-md-2">&nbsp;</td>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    {% for weight in weights-raw %}
+
+        <tr>
+            <td>{{weight.weighted_at|date:"dd.MM.yyyy"}}</td>
+            <td>{{weight.weight}} {% localize weight/kg %} </td>
+            <td><a href="/weight/delete/{{weight.id}}" class="btn btn-danger pull-right">{% localize generic/delete %}</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
 
 {% endblock %}
+
+
 
 {% block js-bottom %}
 <script src="/js/Chart.min.js"></script>

@@ -4,4 +4,5 @@
 (def local-dict
   {:de (comm-edn/from-edn "i18n/de.edn")
    :en (comm-edn/from-edn "i18n/en.edn")
-   :ru (comm-edn/from-edn "i18n/ru.edn")})
+   :ru (comm-edn/from-edn "i18n/ru.edn")
+   :nl (comm-edn/from-edn "i18n/nl.edn")})

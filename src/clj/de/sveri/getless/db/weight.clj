@@ -26,3 +26,7 @@
   (j/insert! db :weight {:weight weight-measure
                          :weighted_at (new Timestamp date)
                          :users_id users_id}))
+
+
+(defn delete-weight [db id users-id]
+  (j/delete! db :weight ["id = ? and users_id = ?" id users-id]))

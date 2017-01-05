@@ -13,13 +13,15 @@
 (def default-last-x-days 10)
 
 (defn weight-page [{:keys [localize]} db {:keys [off-url off-user off-password]}]
-  (let [weights-and-nutriments (s-w/merge-weights-and-nutriments
-                                 (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days)
+  (let [weights (vec (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days))
+        weights-and-nutriments (s-w/merge-weights-and-nutriments
+                                 weights
                                  (->> (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password default-last-x-days)
                                       s-food/->nutriments-grouped-by-date))
         data-map (s-w/format-weighted-at weights-and-nutriments s-w/weight-date-format)]
     (layout/render "weight/index.html"
-                   {:weights (s-w/weight->js-string :weight data-map)
+                   {:weights-raw weights
+                    :weights (s-w/weight->js-string :weight data-map)
                     :dates   (s-w/weight->js-string :date data-map)
                     :sugars  (s-w/weight->js-string :sugars_100g data-map)
                     :fats  (s-w/weight->js-string :fat_100g data-map)
@@ -41,8 +43,13 @@
           (assoc (redirect "/weight") :flash validation-result)))))
 
 
+(defn delete [id db]
+  (db-w/delete-weight db (read-string id) (s-u/get-logged-in-user-id db))
+  (redirect "/weight"))
+
 (defn weight-routes [config db]
   (routes
     (GET "/weight" req (weight-page req db config))
+    (GET "/weight/delete/:id" [id :as req] (delete id db))
     (POST "/weight/add" [date weight] (add date weight db))))
 

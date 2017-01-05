@@ -80,5 +80,6 @@
  :contact  {:contact            "Контакты"
             :content_belongs_to "Права принадлежат"}
  :weight   {:add "Добавить запись"
-            :kg  "кг"}
+            :kg  "кг"
+            :history "Historie"}
  :off      {:search-only-one-locale "Искать продукты только на одном языке"}}
