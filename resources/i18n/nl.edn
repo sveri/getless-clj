@@ -9,7 +9,7 @@
             :activities        "Activiteiten"
             :food              "Eten"
             :ingredients       "Ingredienten"
-            :weight-progress   "Weight Progress" // TODO: Translate
+            :weight-progress   "Weight Progress" ; TODO: Translate
             :tomorrow          "Morgen"
             :today             "Vandaag"
             :yesterday         "Gisteren"
