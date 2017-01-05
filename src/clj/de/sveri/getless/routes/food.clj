@@ -26,7 +26,9 @@
   (let [products (if mealid (s-meal/get-products-from-meal db (read-string mealid) off-url off-user off-password)
                             (s-food/get-food-from-session session))
         products-with-nutriments (mapv #(s-off/add-nutriments % localize s-off/nutriments-to-extract) products)]
-    (layout/render "food/add-food.html" {:products   products-with-nutriments})))
+    (if (empty? products)
+      (redirect "/off/search")
+      (layout/render "food/add-food.html" {:products   products-with-nutriments}))))
 
 
 (defn add-food-from-template-page [db {:keys [off-url off-user off-password]}]
