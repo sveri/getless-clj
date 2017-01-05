@@ -25,29 +25,29 @@
             :cancel            "Annuleren"
             :no-results-found  "Geen resultaten gevonden."}
  :user
-           {:email_invalid        "A valid email is required."
-            :pass_min_length      "Password must be at least 5 characters."
-            :pass_match           "Entered passwords do not match."
-            :pass_correct         "Please provide a correct password."
-            :pass_changed         "Password changed."
-            :change_password      "Change Password"
-            :wrong_cur_pass       "Current password was incorrect."
-            :username_exists      "This username already exists. Choose another."
-            :username_wrong       "Please provide a correct username."
-            :deleted              "User deleted successfully."
-            :updated              "User %s updated successfully."
-            :user_added           "User added."
-            :captcha_wrong        "Please provide the correct captcha input."
-            :email_failed         "Something went wrong sending the email, please contact us."
-            :signup               "Sign Up"
-            :signin               "Sign In"
-            :username             "Username"
-            :role                 "Role"
-            :current_password     "Current Password"
-            :new_password         "New Password"
-            :new_password_confirm "Confirm New Password"
-            :really_delete        "Do you really want to delete user: "
-            :register             "Register"}
+           {:email_invalid        "Een geldig email is nodig."
+            :pass_min_length      "Wachtwoord moet minstens 5 karakters bevatten."
+            :pass_match           "Entered passwords do not match." ; TODO: Translate
+            :pass_correct         "Please provide a correct password." ; TODO: Translate
+            :pass_changed         "Wachtwoord bijgewerkt."
+            :change_password      "Wachtwoord aanpassen"
+            :wrong_cur_pass       "Current password was incorrect." ; TODO: Translate
+            :username_exists      "This username already exists. Choose another." ; TODO: Translate
+            :username_wrong       "Gelieve een geldigen gebruikersnaam op te geven."
+            :deleted              "User deleted successfully." ; TODO: Translate
+            :updated              "Gebruiker %s succesvol bijgewerkt."
+            :user_added           "Gebruiker toegevoegd."
+            :captcha_wrong        "Gelieve de captcha correct invullen."
+            :email_failed         "Er is iets fout gegaan met het verzenden van de mail, gelieve contact op te nemen."
+            :signup               "Registreren"
+            :signin               "Inloggen"
+            :username             "Gebruikersnaam"
+            :role                 "Rol"
+            :current_password     "Huidig Wachtwoord"
+            :new_password         "Nieuw Wachtwoord"
+            :new_password_confirm "Nieuw Wachtwoord Verifiëren"
+            :really_delete        "Wil je deze gebruiker verwijderen: "
+            :register             "Registreren"}
 
  :admin
            {:title    "Gebruikers Overzicht"
