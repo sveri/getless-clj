@@ -22,13 +22,18 @@
                                       :delete-uri    "/food/delete/database/"})))
   
 
-(defn add-food-page [db {:keys [session localize]} mealid {:keys [off-url off-user off-password]}]
-  (let [products (if mealid (s-meal/get-products-from-meal db (read-string mealid) off-url off-user off-password)
-                            (s-food/get-food-from-session session))
+(defn add-food-page [{:keys [session localize]}]
+  (let [products (s-food/get-food-from-session session)
         products-with-nutriments (mapv #(s-off/add-nutriments % localize s-off/nutriments-to-extract) products)]
     (if (empty? products)
       (redirect "/off/search")
-      (layout/render "food/add-food.html" {:products   products-with-nutriments}))))
+      (layout/render "food/add-food.html" {:products products-with-nutriments}))))
+
+
+(defn add-meal-to-session [db {:keys [session localize]} mealid {:keys [off-url off-user off-password]}]
+  (let [products (s-meal/get-products-from-meal db (read-string mealid) off-url off-user off-password)
+        products-with-nutriments (mapv #(s-off/add-nutriments % localize s-off/nutriments-to-extract) products)]
+    (assoc (redirect "/food/add") :session (s-food/add-products-to-session session products-with-nutriments))))
 
 
 (defn add-food-from-template-page [db {:keys [off-url off-user off-password]}]
@@ -84,13 +89,12 @@
 
 
 
-
 (defn food-routes [config db]
   (routes
     (GET "/food" req (index-page db config req))
-    (GET "/food/add" req (add-food-page db req nil config))
-    (GET "/food/add/:mealid" [mealid :as req] (add-food-page db req mealid config))
-    (GET "/food/add-from-template" req (add-food-from-template-page db config))
+    (GET "/food/add" req (add-food-page req))
+    (GET "/food/add/:mealid" [mealid :as req] (add-meal-to-session db req mealid config))
+    (GET "/food/add-from-template" [] (add-food-from-template-page db config))
     (POST "/food/add" [save_or_template meal-name date productid amount unit :as req]
       (save-food-to-db-or-as-template save_or_template meal-name date productid amount unit req db))
     (GET "/food/add/product/:productid" [productid :as req] (add-product-to-session productid req config))

@@ -17,6 +17,11 @@
   (s/coll-of (s/keys :opt-un [::eaten-at ::s-off/sugars ::s-off/energy-kcal ::s-off/fat_100g])))
 
 
+(s/fdef add-products-to-session :args (s/cat :session ::sess/session-map :products ::s-off/products))
+(defn add-products-to-session [session products]
+  (update-in session [:getless :food :products] concat products))
+
+
 (s/fdef get-food-from-session :args (s/cat :session ::sess/session-map))
 (defn get-food-from-session [session]
   (get-in session [:getless :food :products] {}))
