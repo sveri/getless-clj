@@ -9,7 +9,7 @@
             :activities        "Activiteiten"
             :food              "Eten"
             :ingredients       "Ingredienten"
-            :weight-progress   "Weight Progress" ; TODO: Translate
+            :weight-progress   "Gewitchts Voortgang"
             :tomorrow          "Morgen"
             :today             "Vandaag"
             :yesterday         "Gisteren"
@@ -27,14 +27,14 @@
  :user
            {:email_invalid        "Een geldig email is nodig."
             :pass_min_length      "Wachtwoord moet minstens 5 karakters bevatten."
-            :pass_match           "Entered passwords do not match." ; TODO: Translate
+            :pass_match           "Gekozen wachtwoorden komen niet overeen."
             :pass_correct         "Please provide a correct password." ; TODO: Translate
             :pass_changed         "Wachtwoord bijgewerkt."
             :change_password      "Wachtwoord aanpassen"
             :wrong_cur_pass       "Current password was incorrect." ; TODO: Translate
             :username_exists      "This username already exists. Choose another." ; TODO: Translate
             :username_wrong       "Gelieve een geldigen gebruikersnaam op te geven."
-            :deleted              "User deleted successfully." ; TODO: Translate
+            :deleted              "Gebruiker succesvol verwijderd."
             :updated              "Gebruiker %s succesvol bijgewerkt."
             :user_added           "Gebruiker toegevoegd."
             :captcha_wrong        "Gelieve de captcha correct invullen."

@@ -2,7 +2,8 @@
 
 ## Contributors
 
-* russian translation by: ekl-34 https://github.com/ekl-34
+* Russian translation by: ekl-34 ( https://github.com/ekl-34 )
+* Dutch translation by: Coddr ( https://github.com/xjoeyv )
 
 ## License
 
