@@ -9,6 +9,7 @@
             [de.sveri.getless.service.off :as s-off]
             [de.sveri.getless.service.meal :as s-meal]
             [clojure.instant :as inst]
+            [clj-time.coerce :as time-coerce]
             [clojure.tools.logging :as log]))
 
 (defn index-page [db {:keys [off-url off-user off-password]} {:keys [localize]}]
@@ -53,12 +54,12 @@
     (assoc (redirect "/food/add") :session session)))
 
 
-(defn save-food-to-db-or-as-template [save_or_template meal-name date productids amounts units {:keys [session]} db]
+(defn save-food-to-db-or-as-template [save_or_template meal-name date productids amounts units {:keys [session localize]} db]
   (let [user-id (s-user/get-logged-in-user-id db)
         amount-numbers (mapv read-string amounts)
         productid-numbers (mapv read-string productids)]
     (try
-      (if (= "Speichern" save_or_template)
+      (if (= (localize [:generic/save]) save_or_template)
         (db-food/insert-food db (.getTime (inst/read-instant-date date)) user-id productid-numbers
                                 amount-numbers units)
         (db-meal/insert-meal db user-id meal-name (s-meal/foods-to-products productid-numbers amount-numbers units)))
@@ -89,6 +90,11 @@
 
 
 
+(defn edit-day-page [timestamp db]
+  (let [products (db-food/food-by-user-and-date db (s-user/get-logged-in-user-id db) (time-coerce/from-long (read-string timestamp)))]
+    (clojure.pprint/pprint products))
+  (layout/render "food/edit.html" {:products }))
+
 (defn food-routes [config db]
   (routes
     (GET "/food" req (index-page db config req))
@@ -98,6 +104,7 @@
     (POST "/food/add" [save_or_template meal-name date productid amount unit :as req]
       (save-food-to-db-or-as-template save_or_template meal-name date productid amount unit req db))
     (GET "/food/add/product/:productid" [productid :as req] (add-product-to-session productid req config))
+    (GET "/food/editday/:timestamp" [timestamp] (edit-day-page timestamp db))
     (GET "/food/delete/session/:productid" [productid :as req] (delete-product-from-session productid req))
     (GET "/food/delete/database/:productid" [productid] (delete-product-from-database productid db))
     (GET "/food/contents" req (contents-page db config))))

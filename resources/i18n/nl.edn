@@ -23,7 +23,8 @@
             :search            "Zoek"
             :add               "Toevoegen"
             :cancel            "Annuleren"
-            :no-results-found  "Geen resultaten gevonden."}
+            :no-results-found  "Geen resultaten gevonden."
+            :edit              "Edit"}
  :user
            {:email_invalid        "Een geldig email is nodig."
             :pass_min_length      "Wachtwoord moet minstens 5 karakters bevatten."

@@ -23,7 +23,8 @@
             :search            "Поиск"
             :add               "Добавить"
             :cancel            "Отменить"
-            :no-results-found  "No results found."}
+            :no-results-found  "No results found."
+            :edit              "Edit"}
  :user
            {:email_invalid        "Адрес недействителен."
             :pass_min_length      "Пароль должен содержать не менее 5 символов."

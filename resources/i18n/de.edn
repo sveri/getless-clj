@@ -23,7 +23,8 @@
             :search            "Suchen"
             :add               "Hinzufügen"
             :cancel            "Abbrechen"
-            :no-results-found  "Keine Ergebnisse gefunden."}
+            :no-results-found  "Keine Ergebnisse gefunden."
+            :edit              "Bearbeiten"}
  :user
            {:email_invalid        "Bitte geben Sie eine gültige E-Mail Adresse an."
             :pass_min_length      "Das Passwort muss mindestens 5 Zeichen enthalten."
@@ -79,7 +80,7 @@
             :carbohydrates       "Kohlenhydrate"}
  :contact  {:contact            "Kontakt"
             :content_belongs_to "Der Inhalt gehört zu"}
- :weight   {:add "Eintrag hinzufügen"
-            :kg  "kg"
+ :weight   {:add     "Eintrag hinzufügen"
+            :kg      "kg"
             :history "Historie"}
  :off      {:search-only-one-locale "Nur Deutsche Produkte"}}
