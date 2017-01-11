@@ -7,24 +7,24 @@
             :logout            "Выход"
             :diet              "Диета"
             :activities        "Виды активности"
-            :food              "Питание"
-            :ingredients       "Ингредиенты"
-            :weight-progress   "Отслеживание веса"
+            :food              "Продукты"
+            :ingredients       "Рацион"
+            :weight-progress   "Контроль веса"
             :tomorrow          "Завтра"
             :today             "Сегодня"
             :yesterday         "Вчера"
             :done              "Выполнено"
             :delete            "Удалить"
             :save              "Сохранить"
-            :gram              "Грамм"
-            :litre             "Литр"
+            :gram              "грамм"
+            :litre             "литр"
             :date              "Дата"
-            :amount            "Сумма"
+            :amount            "Количество"
             :search            "Поиск"
             :add               "Добавить"
             :cancel            "Отменить"
-            :no-results-found  "No results found."
-            :edit              "Edit"}
+            :no-results-found  "Ничего не найдено."
+            :edit              "Изменить"}
  :user
            {:email_invalid        "Адрес недействителен."
             :pass_min_length      "Пароль должен содержать не менее 5 символов."
@@ -46,8 +46,8 @@
             :role                 "Роль"
             :current_password     "Текущий пароль"
             :new_password         "Новый пароль"
-            :new_password_confirm "Подтверждение нового пароля"
-            :really_delete        "Вы точно хотите удалить пользователя"
+            :new_password_confirm "Повторите новый пароль"
+            :really_delete        "Вы точно хотите удалить пользователя?"
             :register             "Регистрация"}
 
  :admin
@@ -59,7 +59,7 @@
             :update   "Сохранить изменения"}
  :home     {:we-dont-judge         "Мы не оцениваем."
             :we-support-each-other "Мы поддерживаем."
-            :we-use-means          "Мы используем средства без ущерба для других."}
+            :we-use-means          "Мы используем средства, которые не причиняют вреда."}
  :activity {:planned "Запланировать"}
  :product  {:add           "Добавить продукт"
             :save_template "Сохранить шаблон"
@@ -70,17 +70,17 @@
             :sugars              "Сахар"
             :fat                 "Жиры"
             :energy              "Калорийность"
-            :cholesterol         "Cholesterol"
-            :salt                "Salt"
-            :proteins            "Proteins"
-            :monounsaturated-fat "Monounsaturated Fat"
-            :saturated-fat       "Saturated Fat"
-            :fiber               "Fiber"
-            :polyunsaturated-fat "Polyunsaturated Fat"
-            :carbohydrates       "Carbohydrates"}
+            :cholesterol         "Холестерин"
+            :salt                "Соль"
+            :proteins            "Белки"
+            :monounsaturated-fat "Мононенасыщенных жиры"
+            :saturated-fat       "Насыщенные жиры"
+            :fiber               "Пищевые волокна"
+            :polyunsaturated-fat "Полиненасыщенные жиры"
+            :carbohydrates       "Углеводы"}
  :contact  {:contact            "Контакты"
             :content_belongs_to "Права принадлежат"}
  :weight   {:add "Добавить запись"
             :kg  "кг"
-            :history "Historie"}
- :off      {:search-only-one-locale "Искать продукты только на одном языке"}}
+            :history "Все записи"}
+ :off      {:search-only-one-locale "Искать продукты только на русском"}}
