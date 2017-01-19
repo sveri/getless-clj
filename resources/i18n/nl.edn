@@ -32,7 +32,7 @@
             :pass_correct         "Please provide a correct password." ; TODO: Translate
             :pass_changed         "Wachtwoord bijgewerkt."
             :change_password      "Wachtwoord aanpassen"
-            :wrong_cur_pass       "Current password was incorrect." ; TODO: Translate
+            :wrong_cur_pass       "Huidigen wachtwoord is incorrecct."
             :username_exists      "This username already exists. Choose another." ; TODO: Translate
             :username_wrong       "Gelieve een geldigen gebruikersnaam op te geven."
             :deleted              "Gebruiker succesvol verwijderd."
