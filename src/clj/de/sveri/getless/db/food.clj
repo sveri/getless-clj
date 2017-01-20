@@ -63,4 +63,10 @@
 (defn delete-food [db productid userid]
   (j/delete! db :food ["id = ? and users_id = ?" productid userid]))
 
+(defn update-food [db date user-id productid-numbers amount-numbers units]
+  (clojure.pprint/pprint productid-numbers)
+  (for [i (range 0 (count productid-numbers))]
+    (j/update! db :food {:eaten-at (new Timestamp date) :amount (get amount-numbers i) :unit (-> (get units i) ->unit)}
+               ["id = ? and users_id = ?" (get productid-numbers i) user-id])))
+
 

@@ -10,7 +10,8 @@
             [de.sveri.getless.service.meal :as s-meal]
             [clojure.instant :as inst]
             [clj-time.coerce :as time-coerce]
-            [clojure.tools.logging :as log]))
+            [clojure.tools.logging :as log]
+            [noir.session :as sess]))
 
 (defn index-page [db {:keys [off-url off-user off-password]} {:keys [localize]}]
   (let [products-list (s-food/->foods-with-product-grouped-by-date db off-url off-user off-password 10)
@@ -64,7 +65,7 @@
                                 amount-numbers units)
         (db-meal/insert-meal db user-id meal-name (s-meal/foods-to-products productid-numbers amount-numbers units)))
       (catch Exception e
-        (layout/flash-result "Etwas schlug beim Speichern fehl." "alert-danger")
+        (layout/flash-result (localize [:generic/save-failed]) "alert-danger")
         (log/error "Error adding food")
         (.printStackTrace e)))
     (assoc (redirect "/food") :session (s-food/remove-products-from-session session))))
@@ -90,10 +91,26 @@
 
 
 
-(defn edit-day-page [timestamp db]
-  (let [products (db-food/food-by-user-and-date db (s-user/get-logged-in-user-id db) (time-coerce/from-long (read-string timestamp)))]
-    (clojure.pprint/pprint products))
-  (layout/render "food/edit.html" {:products }))
+(defn edit-day-page [timestamp db {:keys [localize]} {:keys [off-url off-user off-password]}]
+  (let [products (db-food/food-by-user-and-date db (s-user/get-logged-in-user-id db) (time-coerce/from-long (read-string timestamp)))
+        products-with-off-products (s-off/add-product products off-url off-user off-password)
+        products-with-nutriments (mapv #(assoc % :product (s-off/add-nutriments (:product %) localize s-off/nutriments-to-extract))
+                                       products-with-off-products)]
+    (layout/render "food/edit.html" {:products products-with-nutriments :eaten-at (-> products first :eaten-at)})))
+
+(defn edit-day [date productids amounts units {:keys [localize]} db]
+  (let [user-id (sess/get :user-id)
+        amount-numbers (mapv read-string amounts)
+        productid-numbers (mapv read-string productids)]
+    (try
+      (db-food/update-food db (.getTime (inst/read-instant-date date)) user-id productid-numbers
+                           amount-numbers units)
+      (catch Exception e
+        (layout/flash-result (localize [:generic/save-failed]) "alert-danger")
+        (log/error "Error adding food")
+        (.printStackTrace e)))
+    (redirect "/food")))
+
 
 (defn food-routes [config db]
   (routes
@@ -104,7 +121,8 @@
     (POST "/food/add" [save_or_template meal-name date productid amount unit :as req]
       (save-food-to-db-or-as-template save_or_template meal-name date productid amount unit req db))
     (GET "/food/add/product/:productid" [productid :as req] (add-product-to-session productid req config))
-    (GET "/food/editday/:timestamp" [timestamp] (edit-day-page timestamp db))
+    (GET "/food/editday/:timestamp" [timestamp :as req] (edit-day-page timestamp db req config))
+    (POST "/food/editday" [productid amount unit date :as req] (edit-day date productid amount unit req db))
     (GET "/food/delete/session/:productid" [productid :as req] (delete-product-from-session productid req))
     (GET "/food/delete/database/:productid" [productid] (delete-product-from-database productid db))
     (GET "/food/contents" req (contents-page db config))))

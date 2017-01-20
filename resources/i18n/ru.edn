@@ -24,7 +24,8 @@
             :add               "Добавить"
             :cancel            "Отменить"
             :no-results-found  "Ничего не найдено."
-            :edit              "Изменить"}
+            :edit              "Изменить"
+            :save-failed       "Etwas schlug beim Speichern fehl"}
  :user
            {:email_invalid        "Адрес недействителен."
             :pass_min_length      "Пароль должен содержать не менее 5 символов."

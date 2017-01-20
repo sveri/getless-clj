@@ -61,7 +61,10 @@
                  [org.clojure/tools.logging "0.3.1"]
                  [org.postgresql/postgresql "9.4-1205-jdbc42"]
                  [org.clojure/java.jdbc "0.6.2-alpha3"]
-                 [org.clojure/tools.nrepl "0.2.12"]]
+                 [org.clojure/tools.nrepl "0.2.12"]
+
+
+                 [criterium "0.4.4"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]]
 

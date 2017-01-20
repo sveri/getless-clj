@@ -10,7 +10,7 @@
             [clojure.string :as str]
             [de.sveri.getless.service.food :as s-food]))
 
-(def default-last-x-days 10)
+(def default-last-x-days 50)
 
 (defn weight-page [{:keys [localize]} db {:keys [off-url off-user off-password]}]
   (let [weights (vec (db-w/get-weights db (s-u/get-logged-in-user-id db) default-last-x-days))

@@ -7,7 +7,6 @@
 {% block content %}
 
 
-
 <form class="form" action="/food/editday" method="post">
     <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
@@ -27,15 +26,14 @@
         <tbody>
         {% for product in products %}
             <tr>
-                <td><a href="http://world.openfoodfacts.org/product/{{product.id}}">{{product.product_name}}</a>
+                <td><a href="http://world.openfoodfacts.org/product/{{product.product.id}}">{{product.product.product_name}}</a>
                     <input type="hidden" name="productid[]" value="{{product.id}}">
                 </td>
-                <td><img src="{{product.image_small_url}}" alt="{{product.product_name}}" style="max-width: 120px; max-height: 120px"/></td>
-                <td>{{product.nutriments-text|safe}}</td>
-                <td>{{product.ingredients_text}}</td>
+                <td><img src="{{product.product.image_small_url}}" alt="{{product.product.product_name}}" style="max-width: 120px; max-height: 120px"/></td>
+                <td>{{product.product.nutriments-text|safe}}</td>
+                <td>{{product.product.ingredients_text}}</td>
                 <td><input type="number" placeholder="{% localize generic/amount %}" name="amount[]" value="{{product.amount}}" required="required" class="form-control"></td>
-                <td><select name="unit[]"><option value="gramm">{% localize generic/gram %}</option><option value="liter">{% localize generice/litre %}</option></select></td>
-                <td><a href="/food/delete/session/{{product.id}}" class="btn btn-danger pull-right">{% localize generic/delete %}</a></td>
+                <td><select name="unit[]"><option value="gramm">{% localize generic/gram %}</option><option value="liter">{% localize generic/litre %}</option></select></td>
             </tr>
         {% endfor %}
         </tbody>
@@ -45,14 +43,9 @@
     <div class="row">
         <div class="col-md-6">
             <input class="form-control" type="date" name="date" id="date" placeholder="{% localize generic/date %}" style="margin-bottom:10px"
-                   value="{% now yyyy-MM-dd %}"/>
+                   value="{{eaten-at|date:yyyy-MM-dd}}"/>
 
-            <input type="submit" name="save_or_template" value="{% localize generic/save %}" class="btn btn-primary" style="margin-top:15px; "/>
-        </div>
-
-        <div class="col-md-6">
-            <input type="text" placeholder="{% localize product/template_name %}" name="meal-name" class="form-control">
-            <input type="submit" name="save_or_template" value="{% localize product/save_template %}" class="btn btn-primary" style="margin-top:15px; "/>
+            <input type="submit" value="{% localize generic/save %}" class="btn btn-primary" style="margin-top:15px; "/>
         </div>
 
     </div>

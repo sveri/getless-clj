@@ -24,7 +24,8 @@
             :add               "Toevoegen"
             :cancel            "Annuleren"
             :no-results-found  "Geen resultaten gevonden."
-            :edit              "Edit"}
+            :edit              "Edit"
+            :save-failed       "Etwas schlug beim Speichern fehl"}
  :user
            {:email_invalid        "Een geldig email is nodig."
             :pass_min_length      "Wachtwoord moet minstens 5 karakters bevatten."
