@@ -1,10 +1,8 @@
 (ns de.sveri.getless.user
   (:require [reloaded.repl :refer [go reset stop]]
-          [de.sveri.getless.components.components :refer [dev-system]]
-          [schema.core :as s]))
+          [de.sveri.getless.components.components :refer [dev-system]]))
 
 (defn start-dev-system []
-  (s/set-fn-validation! true)
+  (reloaded.repl/set-init! dev-system)
   (go))
 
-(reloaded.repl/set-init! dev-system)

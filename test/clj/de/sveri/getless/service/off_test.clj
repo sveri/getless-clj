@@ -6,12 +6,12 @@
             [clojure.spec.test :as stest]))
 
 
-(deftest ^:integration find-off-steak
+(deftest ^:off-integration find-off-steak
   (let [steaks (off/search-products "Steak" true offh/off-url  offh/off-user  offh/off-password)]
     (is (< 0 (count (:products steaks))))))
 
 
-(deftest ^:integration find-by-id
+(deftest ^:off-integration find-by-id
   (let [product (off/get-by-id 22114166 offh/off-url  offh/off-user  offh/off-password)]
     (is = (:code product "22114166"))))
 
@@ -21,15 +21,15 @@
         textified (off/add-ingredients {:ingredients ingredients})]
     (is (= "first, second, third" (:ingredients_text textified)))))
 
-(deftest ^:integration check-one-with-ingredients
+(deftest ^:off-integration check-one-with-ingredients
   (let [product (off/get-by-id 3273220086056 offh/off-url  offh/off-user  offh/off-password)]
     (is (not (str/blank? (:ingredients_text product))))))
 
-(deftest ^:integration nutriments-exist
+(deftest ^:off-integration nutriments-exist
   (let [product (off/get-by-id 3273220086056 offh/off-url  offh/off-user  offh/off-password)]
     (is (not-empty (:nutriments product)))))
 
-(deftest ^:integration kj->kcal
+(deftest ^:off-integration kj->kcal
   (let [product (off/get-by-id 3273220086056 offh/off-url  offh/off-user  offh/off-password)]
     (is (str/starts-with? (:energy-kcal (:nutriments product)) "178."))))
 

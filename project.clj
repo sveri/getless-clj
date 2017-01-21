@@ -62,9 +62,7 @@
                  [org.postgresql/postgresql "9.4-1205-jdbc42"]
                  [org.clojure/java.jdbc "0.6.2-alpha3"]
                  [org.clojure/tools.nrepl "0.2.12"]
-
-
-                 [criterium "0.4.4"]]
+                 [kerodon "0.8.0"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]]
 
@@ -124,6 +122,7 @@
   :test-paths ["test/clj" "integtest/clj"]
 
   :test-selectors {:unit        (fn [m] (not (or (:selenium m) (:integration m) (:rest m))))
+                   :off-integration :off-integration
                    :integration :integration
                    :selenium    :selenium
                    :rest        :rest

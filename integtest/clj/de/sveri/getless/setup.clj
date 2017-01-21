@@ -9,7 +9,8 @@
             [de.sveri.getless.components.config :as c]
             [de.sveri.getless.components.db :refer [new-db]]
             [de.sveri.getless.components.components :refer [prod-system]]
-            [de.sveri.getless.locale :as l]))
+            [de.sveri.getless.locale :as l]
+            [de.sveri.getless.components.selmer :as selm]))
 
 (def db-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless")
 (def db {:connection-uri db-uri})
@@ -34,14 +35,11 @@
 (defn test-system []
   (component/system-map
     :config (c/new-config test-config)
-    :db (component/using (new-db) [:config])
-    :handler (component/using (new-handler) [:config :db])
-    :web (component/using (new-web-server) [:handler :config]))
-  (component/system-map
-    :config (c/new-config test-config)
+    :selmer (selm/new-selmer false)
     :db (component/using (new-db) [:config])
     :handler (component/using (new-handler) [:config :db])
     :web (component/using (new-web-server) [:handler :config])))
+
 
 
 (def test-base-url (str "http://localhost:3001/"))
