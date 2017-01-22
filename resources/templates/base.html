@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>{% block title %}Besser - Jeden Tag{% endblock %}</title>
+    <title>{% block title %}{% localize generic/better-every-day %}{% endblock %}</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     {% style "/css/screen.css" %}
@@ -11,7 +11,7 @@
 </head>
 <body>
 <div id="loading-screen">
-    <p><img src="/img/loading.gif" /> Please Wait</p>
+    <p><img src="/img/loading.gif" />{% localize generic/please-wait %}</p>
 </div>
 
 {% if flash-message %}
@@ -23,12 +23,12 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Besser - Jeden Tag</span>
+                <span class="sr-only">{% localize generic/better-every-day %}</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="/">{% localize generic/home %}</a>
         </div>
 
         {% include "templates/menu.html" %}
@@ -48,9 +48,9 @@
     <div class="container">
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav" id="header-menu-wrapper">
-                <li field="link-list"><a href="/contact">Kontakt</a></li>
-                <li field="link-list"><a href="/dataprivacypolicy">Datenschutzerklärung - Data Privacy Policy</a></li>
-                <li field="link-list"><a href="http://world.openfoodfacts.org/terms-of-use">Alle Daten werden von OFF bereitgestellt - The data used is from OFF</a></li>
+                <li field="link-list"><a href="/contact">{% localize generic/contact %}</a></li>
+                <li field="link-list"><a href="/dataprivacypolicy">{% localize generic/data-privacy-policy %}</a></li>
+                <li field="link-list"><a href="http://world.openfoodfacts.org/terms-of-use">{% localize generic/data-used-from-off %}</a></li>
             </ul>
         </div>
     </div>
