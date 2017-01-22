@@ -15,4 +15,4 @@
   ;(s/start-server)
   (clojure.pprint/pprint (:handler (:handler reloaded.repl/system)))
   (-> (k/session (:handler (:handler reloaded.repl/system)))
-      (k/visit "/")))
+      (k/visit "/food")))
