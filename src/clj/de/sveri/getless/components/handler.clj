@@ -45,7 +45,7 @@
 (def secret (:jwt-secret (s-c/prod-conf-or-dev)))
 (def jws-backend (backends/jws {:secret secret}))
 
-(defn get-handler [config {:keys [db]}]
+(defn get-handler [config db]
   (routes
     (-> (auth-routes config db)
         (wrap-routes wrap-restful-format :formats [:json-kw]))
@@ -77,7 +77,7 @@
 (defrecord Handler [config db]
   comp/Lifecycle
   (start [comp]
-    (assoc comp :handler (get-handler (:config config) db)))
+    (assoc comp :handler (get-handler (:config config) (:db db))))
   (stop [comp]
     (assoc comp :handler nil)))
 

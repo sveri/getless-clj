@@ -1,7 +1,8 @@
 (ns de.sveri.getless.routes.food-test
   (:require [clojure.test :refer :all]
             [kerodon.core :as k]
-            [de.sveri.getless.setup :as s]))
+            [de.sveri.getless.setup :as s]
+            [de.sveri.getless.components.handler :as h]))
 
 
 

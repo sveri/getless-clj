@@ -25,7 +25,7 @@
 (defn add-locale [handler]
   (fn [req]
     (let [accept-language (get-in req [:headers "accept-language"])
-          parsed-languages (tempura/parse-http-accept-header accept-language)]
+          parsed-languages (or (tempura/parse-http-accept-header accept-language) ["en"])]
       (sess/put! :exact-locale (first parsed-languages))
       (sess/put! :short-locale (subs (first parsed-languages) 0 2))
       (handler (assoc req :localize (partial tr
