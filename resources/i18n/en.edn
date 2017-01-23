@@ -65,7 +65,9 @@
             :update   "Update"}
  :home     {:we-dont-judge         "We don't judge."
             :we-support-each-other "We support each other."
-            :we-use-means          "We use means that do not harm anyone."}
+            :we-use-means          "We use means that do not harm anyone."
+            :hey-friend            "Hey there, fellow friend"
+            :service-in-beta       "This service is in beta status and we would like to have any feedback you have for us"}
  :activity {:planned "Geplant"}
  :product  {:add           "Add Product"
             :save_template "Save As Template"

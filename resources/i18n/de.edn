@@ -66,7 +66,9 @@
             :update   "Änderungen speichern"}
  :home     {:we-dont-judge         "Wir urteilen nicht."
             :we-support-each-other "Wir unterstützen uns."
-            :we-use-means          "Wir nutzen Mittel die niemandem schaden."}
+            :we-use-means          "Wir nutzen Mittel die niemandem schaden."
+            :hey-friend            "Hallo lieber Benutzer"
+            :service-in-beta       "Dieser Dienst ist in der Erprobungsphase and wir sind dankbar über jedes Feedback"}
  :activity {:planned "Geplant"}
  :product  {:add           "Produkt hinzufügen"
             :save_template "Als Vorlage Speichern"

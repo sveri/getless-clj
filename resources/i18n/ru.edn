@@ -66,7 +66,9 @@
             :update   "Сохранить изменения"}
  :home     {:we-dont-judge         "Мы не оцениваем."
             :we-support-each-other "Мы поддерживаем."
-            :we-use-means          "Мы используем средства, которые не причиняют вреда."}
+            :we-use-means          "Мы используем средства, которые не причиняют вреда."
+            :hey-friend            "Hey there, fellow friend"
+            :service-in-beta       "This service is in beta status and we would like to have any feedback you have for us"}
  :activity {:planned "Запланировать"}
  :product  {:add           "Добавить продукт"
             :save_template "Сохранить шаблон"

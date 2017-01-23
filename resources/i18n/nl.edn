@@ -66,7 +66,9 @@
             :update   "Bijwerken"}
  :home     {:we-dont-judge         "Wij oordelen niet."
             :we-support-each-other "Wij ondersteunen elkaar."
-            :we-use-means          "We use means that do not harm anyone."} ; TODO: Translate
+            :we-use-means          "We use means that do not harm anyone."
+            :hey-friend            "Hey there, fellow friend"
+            :service-in-beta       "This service is in beta status and we would like to have any feedback you have for us"} ; TODO: Translate
  :activity {:planned "Geplant"}
  :product  {:add           "Product Toevoegen"
             :save_template "Opslaan als voorbeeld"
