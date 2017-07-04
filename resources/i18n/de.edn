@@ -31,7 +31,9 @@
             :home                "Start"
             :contact             "Kontakt"
             :data-privacy-policy "Datenschutzerklärung"
-            :data-used-from-off  "Die Daten werden von Open Food Facts bereit gestellt"}
+            :data-used-from-off  "Die Daten werden von Open Food Facts bereit gestellt"
+            :links "Links"
+            :finance "Finanzen"}
  :user
            {:email_invalid        "Bitte geben Sie eine gültige E-Mail Adresse an."
             :pass_min_length      "Das Passwort muss mindestens 5 Zeichen enthalten."
@@ -92,4 +94,5 @@
  :weight   {:add     "Eintrag hinzufügen"
             :kg      "kg"
             :history "Historie"}
- :off      {:search-only-one-locale "Nur Deutsche Produkte"}}
+ :off      {:search-only-one-locale "Nur Deutsche Produkte"}
+ :finance {:inout "Einkommen / Ausgaben"}}

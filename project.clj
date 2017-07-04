@@ -31,6 +31,8 @@
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]
 
+                 [fipp "0.6.8"]
+
                  [com.draines/postal "1.11.3"]
 
                  [jarohen/nomad "0.7.1"]
