@@ -32,8 +32,8 @@
             :contact             "Kontakt"
             :data-privacy-policy "Datenschutzerklärung"
             :data-used-from-off  "Die Daten werden von Open Food Facts bereit gestellt"
-            :links "Links"
-            :finance "Finanzen"}
+            :links               "Links"
+            :finance             "Finanzen"}
  :user
            {:email_invalid        "Bitte geben Sie eine gültige E-Mail Adresse an."
             :pass_min_length      "Das Passwort muss mindestens 5 Zeichen enthalten."
@@ -57,7 +57,8 @@
             :new_password         "Neues Passwort"
             :new_password_confirm "Neues Passwort bestätigen"
             :really_delete        "Möchten Sie den Nutzer wirklich löschen: "
-            :register             "Registrieren"}
+            :register             "Registrieren"
+            :goals                "Ziele"}
 
  :admin
            {:title    "Benutzer Übersicht"
@@ -95,4 +96,9 @@
             :kg      "kg"
             :history "Historie"}
  :off      {:search-only-one-locale "Nur Deutsche Produkte"}
- :finance {:inout "Einkommen / Ausgaben"}}
+ :finance  {:inout "Einkommen / Ausgaben"}
+ :goals    {:short "Kurzfristig"
+            :mid   "Mittelfristig"
+            :long  "Langfristig"
+            :new   "Neues Ziel"
+            :done  "Erledigt"}}

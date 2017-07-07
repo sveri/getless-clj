@@ -5,8 +5,8 @@
             [de.sveri.getless.service.off :as s-off]))
 
 
-(s/fdef foods-to-products :args (s/cat :productids (s/coll-of ::db-food/product-id) :amounts ::db-food/amounts :units (s/coll-of ::db-food/unit))
-        :ret ::db-meal/product-edn)
+;(s/fdef foods-to-products :args (s/cat :productids (s/coll-of ::db-food/product-id) :amounts ::db-food/amounts :units (s/coll-of ::db-food/unit))
+;        :ret ::db-meal/product-edn)
 
 (defn foods-to-products [productids amounts units]
   (map (fn [productid amount unit] {:product-id productid :amount amount :unit unit}) productids amounts units))

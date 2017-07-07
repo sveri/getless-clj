@@ -1,0 +1,47 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+<div>
+
+    <form class="form" action="/goals/edit" method="post">
+        <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+        <input name="id" type="hidden" value="{{goal.id}}"/>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" name="goal" class="form-control" value="{{goal.goal}}"/>
+            </div>
+
+            <div class="col-md-4">
+
+                <select name="s-m-l" class="form-control">
+                    <option value="s" {% ifequal "s" goal.s_m_l %} selected="selected" {% endifequal %}>
+                        {% localize goals/short %}</option>
+                    <option value="m" {% ifequal "m" goal.s_m_l %} selected="selected" {% endifequal %}>
+                        {% localize goals/mid %}</option>
+                    <option value="l" {% ifequal "l" goal.s_m_l %} selected="selected" {% endifequal %}>
+                        {% localize goals/long %}</option>
+                </select>
+
+            </div>
+
+            <div class="col-md-4">
+                <input type="checkbox" name="done" class="form-control"
+                       {% if goal.done %} checked="checked" {% endif %}/>
+            </div>
+
+
+        </div>
+
+        <input type="submit" value="{% localize generic/save %}" class="btn btn-primary" style="margin-top:15px;"/>
+
+        <a href="/goals/delete/{{goal.id}}" class="pull-right btn btn-danger">{% localize generic/delete %}</a>
+
+
+    </form>
+
+</div>
+
+
+{% endblock %}

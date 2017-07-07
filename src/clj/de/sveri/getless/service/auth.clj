@@ -28,6 +28,12 @@
              :handler loggedin-access}
             {:pattern #"^/user.*"
              :handler unauthorized-access}
+            {:pattern #"^/finance/links.*"
+             :handler unauthorized-access}
+            {:pattern #"^/finance.*"
+             :handler loggedin-access}
+            {:pattern #"^/goals.*"
+             :handler loggedin-access}
             {:pattern #"^/"
              :handler unauthorized-access}])
 

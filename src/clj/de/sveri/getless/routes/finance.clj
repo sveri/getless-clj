@@ -12,6 +12,9 @@
 (defn links-page []
   (layout/render "finance/links.html"))
 
-(defn finance-routes []
-  (routes (GET "/finance/links" [] (links-page))))
-          ;(GET "/" req (home-page req))))
+(defn inout-page [config db])
+
+
+(defn finance-routes [config db]
+  (routes (GET "/finance/links" [] (links-page))
+          (GET "/finance/inout" req (inout-page config db))))

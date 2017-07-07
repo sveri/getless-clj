@@ -31,8 +31,9 @@
             :contact             "Contact"
             :data-privacy-policy "Data Privacy Policy"
             :data-used-from-off  "Product data is provided by Open Food Facts"
-            :links "Links"
-            :finance "Finance"}
+            :links               "Links"
+            :finance             "Finance"
+            :goals               "Goals"}
  :user
            {:email_invalid        "A valid email is required."
             :pass_min_length      "Password must be at least 5 characters."
@@ -95,5 +96,10 @@
             :kg      "kg"
             :history "History"}
  :off      {:search-only-one-locale "Only English Products"}
- :finance {:inout "Income / Outcome"}}
+ :finance  {:inout "Income / Outcome"}
+ :goals    {:short "Shortterm"
+            :mid   "Midterm"
+            :long  "Longterm"
+            :new   "New Goal"
+            :done  "Done"}}
 

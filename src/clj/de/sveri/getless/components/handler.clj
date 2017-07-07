@@ -12,6 +12,7 @@
             [com.stuartsierra.component :as comp]
             [de.sveri.getless.routes.home :refer [home-routes]]
             [de.sveri.getless.routes.finance :refer [finance-routes]]
+            [de.sveri.getless.routes.goals :refer [goal-routes]]
             [de.sveri.getless.routes.off :refer [off-routes]]
             [de.sveri.getless.routes.weight :refer [weight-routes]]
             [de.sveri.getless.routes.auth :refer [auth-routes]]
@@ -60,7 +61,7 @@
                          ;; add your application routes here
                          [(cc-routes config) (weight-routes config db) (off-routes config) home-routes
                           (user-routes config db) (food-routes config db) (habit-routes config db)
-                          (finance-routes)
+                          (goal-routes config db) (finance-routes config db)
                           (activity-routes config db) base-routes]))
           ;; add custom middleware here
           :middleware (load-middleware config)

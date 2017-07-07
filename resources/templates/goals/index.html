@@ -1,0 +1,81 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+<div>
+
+    <a href="/goals/add" class="btn btn-primary">{% localize goals/new %}</a>
+
+
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-4">
+            <h5><b>{% localize goals/short %}</b></h5>
+
+            {% for goal in shorts-todo %}
+            {% include "templates/goals/goal-list-item.html" %}
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <h5><b>{% localize goals/mid %}</b></h5>
+
+            <ul class="list-group">
+                {% for goal in mids-todo %}
+                {% include "templates/goals/goal-list-item.html" %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <h5><b>{% localize goals/long %}</b></h5>
+
+            <ul class="list-group">
+                {% for goal in longs-todo %}
+                {% include "templates/goals/goal-list-item.html" %}
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+    
+    <hr>
+    
+    <h3>{% localize goals/done %}</h3>
+
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-4">
+            <h5><b>{% localize goals/short %}</b></h5>
+
+            {% for goal in shorts-done %}
+            {% include "templates/goals/goal-list-item.html" %}
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <h5><b>{% localize goals/mid %}</b></h5>
+
+            <ul class="list-group">
+                {% for goal in mids-done %}
+                {% include "templates/goals/goal-list-item.html" %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <h5><b>{% localize goals/long %}</b></h5>
+
+            <ul class="list-group">
+                {% for goal in longs-done %}
+                {% include "templates/goals/goal-list-item.html" %}
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+{% endblock %}

@@ -31,7 +31,10 @@
             :home                "Home"
             :contact             "Contact"
             :data-privacy-policy "Data Privacy Policy"
-            :data-used-from-off  "Product data is provided by Open Food Facts"}
+            :data-used-from-off  "Product data is provided by Open Food Facts"
+            :links "Links"
+            :finance "Finance"
+            :goals "Goals"}
  :user
            {:email_invalid        "Een geldig email is nodig."
             :pass_min_length      "Wachtwoord moet minstens 5 karakters bevatten."
@@ -93,5 +96,11 @@
  :weight   {:add     "Gewicht tussenstand toevoegenn"
             :kg      "kg"
             :history "Historie"}
- :off      {:search-only-one-locale "Alleen Nederlandse producten"}}
+ :off      {:search-only-one-locale "Alleen Nederlandse producten"}
+ :finance {:inout "Income / Outcome"}
+ :goals {:short "Shortterm"
+         :mid "Midterm"
+         :long "Longterm"
+         :new "New Goal"
+         :done "Done"}}
 

@@ -1,0 +1,36 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+<div>
+
+    <form class="form" action="/goals/add" method="post">
+        <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <input type="text" name="goal" class="form-control"/>
+
+            </div>
+            <div class="col-md-4">
+
+                <select name="s-m-l" class="form-control">
+                    <option value="s">{% localize goals/short %}</option>
+                    <option value="m">{% localize goals/mid %}</option>
+                    <option value="l">{% localize goals/long %}</option>
+                </select>
+
+            </div>
+
+        </div>
+
+        <input type="submit" value="{% localize generic/add %}" class="btn btn-primary" style="margin-top:15px;"/>
+
+
+    </form>
+
+</div>
+
+
+{% endblock %}
