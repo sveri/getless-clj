@@ -101,5 +101,7 @@
             :mid   "Midterm"
             :long  "Longterm"
             :new   "New Goal"
-            :done  "Done"}}
+            :done  "Done"}
+ :about    {:text        "is service to help you improve your life by setting goals and fullfilling them"
+            :paypal-text "You can support me via paypal"}}
 

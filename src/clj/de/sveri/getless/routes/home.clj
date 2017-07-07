@@ -18,8 +18,14 @@
 (defn ajax-initial-data []
   (response {:ok "fooo" :loaded true}))
 
+(defn about-page [{:keys [localize]}]
+  (layout/render "home/about.html" {:about-text (localize [:about/text])
+                                    :paypal-text (localize [:about/paypal-text])}))
+
+
 (defroutes home-routes
            (GET "/contact" [] (contact-page))
            (GET "/dataprivacypolicy" [] (tos-page))
            (GET "/" req (home-page req))
+           (GET "/about" req (about-page req))
            (GET "/ajax/page/init" [] (ajax-initial-data)))

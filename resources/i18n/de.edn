@@ -33,7 +33,8 @@
             :data-privacy-policy "Datenschutzerklärung"
             :data-used-from-off  "Die Daten werden von Open Food Facts bereit gestellt"
             :links               "Links"
-            :finance             "Finanzen"}
+            :finance             "Finanzen"
+            :about "Über"}
  :user
            {:email_invalid        "Bitte geben Sie eine gültige E-Mail Adresse an."
             :pass_min_length      "Das Passwort muss mindestens 5 Zeichen enthalten."
@@ -101,4 +102,6 @@
             :mid   "Mittelfristig"
             :long  "Langfristig"
             :new   "Neues Ziel"
-            :done  "Erledigt"}}
+            :done  "Erledigt"}
+ :about {:text "ist ein Service um gezielt Fortschritte im eigenen Leben zu machen"
+         :paypal-text "Sie können mich via paypal unterstützen"}}
