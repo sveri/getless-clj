@@ -25,16 +25,16 @@
             :cancel              "Отменить"
             :no-results-found    "Ничего не найдено."
             :edit                "Изменить"
-            :save-failed         "Something failed while saving"
-            :please-wait         "Please wait"
+            :save-failed         "Во время сохранения произошла ошибка"
+            :please-wait         "Пожалуйста, подождите"
             :better-every-day    "Better - every day"
-            :home                "Home"
-            :contact             "Contact"
-            :data-privacy-policy "Data Privacy Policy"
-            :data-used-from-off  "Product data is provided by Open Food Facts"
-            :links "Links"
-            :finance "Finance"
-            :goals "Goals"}
+            :home                "Домой"
+            :contact             "Контакты"
+            :data-privacy-policy "Политика конфиденциальности"
+            :data-used-from-off  "Данные о продуктах предоставлены Open Food Facts"
+            :links "Ссылки"
+            :finance "Финансы"
+            :goals "Цели"}
  :user
            {:email_invalid        "Адрес недействителен."
             :pass_min_length      "Пароль должен содержать не менее 5 символов."
@@ -70,8 +70,8 @@
  :home     {:we-dont-judge         "Мы не оцениваем."
             :we-support-each-other "Мы поддерживаем."
             :we-use-means          "Мы используем средства, которые не причиняют вреда."
-            :hey-friend            "Hey there, fellow friend"
-            :service-in-beta       "This service is in beta status and we would like to have any feedback you have for us"}
+            :hey-friend            "Привет, друг"
+            :service-in-beta       "Сервис находится на стадии бета, и чтобы сделать его лучше, нам важно узнать твоё мнение"}
  :activity {:planned "Запланировать"}
  :product  {:add           "Добавить продукт"
             :save_template "Сохранить шаблон"
@@ -96,11 +96,11 @@
             :kg      "кг"
             :history "Все записи"}
  :off      {:search-only-one-locale "Искать продукты только на русском"}
- :finance {:inout "Income / Outcome"}
- :goals {:short "Shortterm"
-         :mid "Midterm"
-         :long "Longterm"
-         :new "New Goal"
-         :done "Done"}
- :about {:text "is service to help you improve your life by setting goals and fullfilling them"
-         :paypal-text "You can support me via paypal"}}
+ :finance {:inout "Доходы / Расходы"}
+ :goals {:short "Краткосрочные"
+         :mid "Среднесрочные"
+         :long "Долгосрочные"
+         :new "Новая цель"
+         :done "Выполнено"}
+ :about {:text "Это сервис, который поможет вам улучшить свою жизнь, ставя цели и достигая их"
+         :paypal-text "Вы можете поддержать проект с помощью paypal"}}
