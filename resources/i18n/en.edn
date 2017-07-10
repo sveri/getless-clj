@@ -33,7 +33,9 @@
             :data-used-from-off  "Product data is provided by Open Food Facts"
             :links               "Links"
             :finance             "Finance"
-            :goals               "Goals"}
+            :goals               "Goals"
+            :about "About"
+            :notes "Notes"}
  :user
            {:email_invalid        "A valid email is required."
             :pass_min_length      "Password must be at least 5 characters."
@@ -103,5 +105,7 @@
             :new   "New Goal"
             :done  "Done"}
  :about    {:text        "is service to help you improve your life by setting goals and fullfilling them"
-            :paypal-text "You can support me via paypal"}}
+            :paypal-text "You can support me via paypal"}
+ :notes   {:new   "New Note"
+           :title "Title"}}
 

@@ -34,7 +34,9 @@
             :data-used-from-off  "Die Daten werden von Open Food Facts bereit gestellt"
             :links               "Links"
             :finance             "Finanzen"
-            :about "Über"}
+            :goals                "Ziele"
+            :about "Über"
+            :notes "Notizen"}
  :user
            {:email_invalid        "Bitte geben Sie eine gültige E-Mail Adresse an."
             :pass_min_length      "Das Passwort muss mindestens 5 Zeichen enthalten."
@@ -58,8 +60,7 @@
             :new_password         "Neues Passwort"
             :new_password_confirm "Neues Passwort bestätigen"
             :really_delete        "Möchten Sie den Nutzer wirklich löschen: "
-            :register             "Registrieren"
-            :goals                "Ziele"}
+            :register             "Registrieren"}
 
  :admin
            {:title    "Benutzer Übersicht"
@@ -104,4 +105,6 @@
             :new   "Neues Ziel"
             :done  "Erledigt"}
  :about {:text "ist ein Service um gezielt Fortschritte im eigenen Leben zu machen"
-         :paypal-text "Sie können mich via paypal unterstützen"}}
+         :paypal-text "Sie können mich via paypal unterstützen"}
+ :notes   {:new   "Neue Notiz"
+           :title "Titel"}}

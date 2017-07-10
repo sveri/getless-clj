@@ -1,0 +1,24 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+<div>
+
+    <form class="form" action="/notes/add" method="post">
+        <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+
+
+        <input type="text" name="title" class="form-control" placeholder="{% localize notes/title %}"/>
+
+<br><br>
+        <textarea class="form-control" name="content" placeholder="{% localize notes/notes %}"></textarea>
+
+
+        <input type="submit" value="{% localize generic/add %}" class="btn btn-primary" style="margin-top:15px;"/>
+
+
+    </form>
+
+</div>
+
+
+{% endblock %}
