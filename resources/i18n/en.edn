@@ -35,7 +35,8 @@
             :finance             "Finance"
             :goals               "Goals"
             :about "About"
-            :notes "Notes"}
+            :notes "Notes"
+            :timemanagement "Timemanagement"}
  :user
            {:email_invalid        "A valid email is required."
             :pass_min_length      "Password must be at least 5 characters."

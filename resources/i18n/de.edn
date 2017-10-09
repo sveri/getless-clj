@@ -36,7 +36,8 @@
             :finance             "Finanzen"
             :goals                "Ziele"
             :about "Über"
-            :notes "Notizen"}
+            :notes "Notizen"
+            :timemanagement "Zeitmanagement"}
  :user
            {:email_invalid        "Bitte geben Sie eine gültige E-Mail Adresse an."
             :pass_min_length      "Das Passwort muss mindestens 5 Zeichen enthalten."
