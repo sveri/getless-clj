@@ -1,7 +1,7 @@
 (ns de.sveri.getless.service.food-test
   (:require [clojure.test :refer :all]
             [de.sveri.getless.service.food :as food]
-            [clojure.spec.test :as stest]))
+            [clojure.spec.test.alpha :as stest]))
 
 
 (def foods [{:id 1, :eaten-at #inst "2016-10-16T10:00:00.000000000-00:00", :users-id 1, :product-id 4008400401621}

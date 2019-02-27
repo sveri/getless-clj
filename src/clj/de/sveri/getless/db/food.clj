@@ -1,6 +1,6 @@
 (ns de.sveri.getless.db.food
   (:require [clojure.java.jdbc :as j]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [clj-time.format :as time-format])
   (:import (java.sql Timestamp)
            (java.text SimpleDateFormat)

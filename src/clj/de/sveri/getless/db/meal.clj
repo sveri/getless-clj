@@ -1,5 +1,5 @@
 (ns de.sveri.getless.db.meal
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [de.sveri.getless.db.food :as db-food]
             [clojure.java.jdbc :as j]))
 

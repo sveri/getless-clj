@@ -1,5 +1,5 @@
 (ns de.sveri.getless.service.spec-validation
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [clojure.string :as str]))
 
 (def not-blank '(not (blank? %)))

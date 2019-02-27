@@ -1,5 +1,5 @@
 (ns de.sveri.getless.service.weight
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [clj-time.coerce :as time-coerce]
             [clj-time.format :as time-f]
             [de.sveri.getless.db.weight :as db-w]

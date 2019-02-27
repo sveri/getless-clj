@@ -1,5 +1,5 @@
 (ns de.sveri.getless.service.session
-  (:require [clojure.spec :as s]))
+  (:require [clojure.spec.alpha :as s]))
             ;[de.sveri.getless.db.meal :as db-m]))
 
 ;(s/def ::getless (s/keys :opt [::db-m/meal]))

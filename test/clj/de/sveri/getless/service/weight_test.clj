@@ -1,7 +1,7 @@
 (ns de.sveri.getless.service.weight-test
   (:require [clojure.test :refer :all]
             [de.sveri.getless.service.weight :as w]
-            [clojure.spec.test :as stest]
+            [clojure.spec.test.alpha :as stest]
             [clojure.instant :as inst]))
 
 (deftest convert-weight_at

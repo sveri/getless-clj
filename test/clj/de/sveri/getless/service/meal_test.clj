@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [de.sveri.getless.service.meal :as meal]
             [de.sveri.getless.db.meal :as db-meal]
-            [clojure.spec.test :as stest]
+            [clojure.spec.test.alpha :as stest]
             [de.sveri.getless.service.off :as off]
             [de.sveri.getless.service.off-helper :as offh]))
 

@@ -3,7 +3,7 @@
             [de.sveri.getless.service.off :as off]
             [de.sveri.getless.service.off-helper :as offh]
             [clojure.string :as str]
-            [clojure.spec.test :as stest]))
+            [clojure.spec.test.alpha :as stest]))
 
 
 (deftest ^:off-integration find-off-steak

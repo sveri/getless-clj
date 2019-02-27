@@ -3,7 +3,7 @@
             [de.sveri.getless.service.activity :as act]
             [clj-time.core :as t-core]
             [clj-time.coerce :as t-coerce]
-            [clojure.spec.test :as stest])
+            [clojure.spec.test.alpha :as stest])
   (:import (java.sql Date)))
 
 (def from-yesterday [{:id 1, :for-date (:yesterday (act/get-three-dates)), :users-id 1, :planned "cont-1"}])

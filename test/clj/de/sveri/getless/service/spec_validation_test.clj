@@ -1,6 +1,6 @@
 (ns de.sveri.getless.service.spec-validation-test
   (:require [clojure.test :refer :all]
-            [clojure.spec.test :as stest]
+            [clojure.spec.test.alpha :as stest]
             [de.sveri.getless.service.spec-validation :as sv]
             [de.sveri.getless.service.spec-common :as s-comm]
             [de.sveri.getless.db.meal :as db-meal]

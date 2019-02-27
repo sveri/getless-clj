@@ -1,5 +1,5 @@
 (ns de.sveri.getless.service.meal
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [de.sveri.getless.db.meal :as db-meal]
             [de.sveri.getless.db.food :as db-food]
             [de.sveri.getless.service.off :as s-off]))

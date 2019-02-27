@@ -1,10 +1,10 @@
 (ns de.sveri.getless.service.food
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [de.sveri.getless.service.session :as sess]
             [de.sveri.getless.db.food :as db-food]
             [de.sveri.getless.service.off :as s-off]
             [de.sveri.getless.service.user :as s-user]
-            [clojure.spec :as s])
+            [clojure.spec.alpha :as s])
   (:import (java.text SimpleDateFormat)))
 
 

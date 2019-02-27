@@ -1,7 +1,7 @@
 (ns de.sveri.getless.service.off
   (:require [org.httpkit.client :as client]
             [de.sveri.getless.db.food :as db-food]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [clojure.data.json :as json]
             [clojure.core.cache :as cache]

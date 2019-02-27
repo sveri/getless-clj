@@ -1,6 +1,6 @@
 (ns de.sveri.getless.db.notes
   (:require [clojure.java.jdbc :as j]
-            [clojure.spec :as s])
+            [clojure.spec.alpha :as s])
   (:import (java.sql Timestamp)))
 
 

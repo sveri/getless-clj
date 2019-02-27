@@ -12,7 +12,7 @@
             [de.sveri.getless.service.auth :refer [auth-session-backend]]
             [de.sveri.getless.service.auth :as auth]
             [de.sveri.getless.locale :as loc]
-            [clojure.spec.test :as stest]))
+            [clojure.spec.test.alpha :as stest]))
 
 (defonce in-memory-store-instance (in-memory-store))
 

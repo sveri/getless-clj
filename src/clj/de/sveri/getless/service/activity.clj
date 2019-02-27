@@ -1,5 +1,5 @@
 (ns de.sveri.getless.service.activity
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [de.sveri.getless.db.activity :as db-act]
             [clj-time.core :as t-core]
             [clj-time.coerce :as t-coerce]))

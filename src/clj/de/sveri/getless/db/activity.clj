@@ -1,6 +1,6 @@
 (ns de.sveri.getless.db.activity
   (:require [clojure.java.jdbc :as j]
-            [clojure.spec :as s]))
+            [clojure.spec.alpha :as s]))
 
 (s/def ::id number?)
 (s/def ::users_id number?)
