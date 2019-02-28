@@ -1,0 +1,24 @@
+{% extends "templates/base.html" %}
+
+{% block add-css %}
+{% style "/css/home.css" %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <h3>Import</h3>
+
+    <form method="post" enctype="multipart/form-data" action="/banking/upload" >
+        <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+
+        <div class="form-group">
+            <label for="upload_input"> {% localize generic/choose-file %}. </label>
+            <input id="upload_input"  name="filename" type="file" accept="text/*" />
+        </div>
+
+        <div class="form-group">
+            <input class="btn btn-primary" tabindex="4" type="submit" value="{% localize generic/ok %}">
+        </div>
+    </form>
+</div>
+{% endblock %}

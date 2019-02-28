@@ -32,11 +32,13 @@
             :data-privacy-policy "Data Privacy Policy"
             :data-used-from-off  "Product data is provided by Open Food Facts"
             :links               "Links"
-            :finance             "Finance"
+            :banking             "Banking"
             :goals               "Goals"
-            :about "About"
-            :notes "Notes"
-            :timemanagement "Timemanagement"}
+            :about               "About"
+            :notes               "Notes"
+            :timemanagement      "Timemanagement"
+            :choose-file "Choose File"
+            :ok "Ok"}
  :user
            {:email_invalid        "A valid email is required."
             :pass_min_length      "Password must be at least 5 characters."
@@ -99,7 +101,7 @@
             :kg      "kg"
             :history "History"}
  :off      {:search-only-one-locale "Only English Products"}
- :finance  {:inout "Income / Outcome"}
+
  :goals    {:short "Shortterm"
             :mid   "Midterm"
             :long  "Longterm"
@@ -107,6 +109,6 @@
             :done  "Done"}
  :about    {:text        "is service to help you improve your life by setting goals and fullfilling them"
             :paypal-text "You can support me via paypal"}
- :notes   {:new   "New Note"
-           :title "Title"}}
+ :notes    {:new   "New Note"
+            :title "Title"}}
 
