@@ -23,5 +23,25 @@
                   (Timestamp. (.getMillis (.toDateTimeAtStartOfDay date)))
                   balance]))
 
+(defn create-banking-account-transaction [db banking-account-id data]
+  (j/execute! db ["INSERT INTO banking_account_transaction (banking_account_id, booking_date, value_date, booking_text,
+                    contractor_beneficiary, purpose, banking_account_number, blz, amount, amount_currency, creditor_id,
+                    mandate_reference, customer_reference)
+                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT DO NOTHING"
+                  banking-account-id
+                  (Timestamp. (.getMillis (.toDateTimeAtStartOfDay (:booking-date data))))
+                  (Timestamp. (.getMillis (.toDateTimeAtStartOfDay (:value-date data))))
+                  (get data :booking-text "")
+                  (get data :contractor-beneficiary "")
+                  (get data :purpose "")
+                  (:banking-account-number data)
+                  (get data :blz "")
+                  (:amount data)
+                  (get data :amount-currency "")
+                  (get data :creditor-id "")
+                  (get data :mandate-reference "")
+                  (get data :customer-reference "")]))
+
 (defn get-bank-account-by-iban [db iban]
   (first (j/query db ["SELECT * FROM banking_account WHERE iban = ?" iban])))
