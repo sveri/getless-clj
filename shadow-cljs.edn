@@ -1,0 +1,17 @@
+{
+ ;:lein true
+ :source-paths ["src/cljs"]
+ :builds
+               {:banking {:target     :browser
+                          :output-dir "resources/public/js/banking"
+                          :asset-path "/js/banking"
+                          :modules    {:banking {:entries [de.sveri.getless.banking.main]}}
+
+                          :devtools {:after-load de.sveri.getless.banking.main/render}}}
+
+
+ :dependencies [[reagent  "0.8.1"]
+                [re-frame "0.10.5"]
+
+                [day8.re-frame/http-fx "0.1.6"]
+                [cljs-ajax "0.8.0"]]}

@@ -20,5 +20,14 @@
             <input class="btn btn-primary" tabindex="4" type="submit" value="{% localize generic/ok %}">
         </div>
     </form>
+
+
+    <div id="banking_js"></div>
 </div>
+{% endblock %}
+
+
+{% block js-bottom %}
+<script src="/js/banking/banking.js"></script>
+<script type="text/javascript">de.sveri.getless.banking.main.run();</script>
 {% endblock %}

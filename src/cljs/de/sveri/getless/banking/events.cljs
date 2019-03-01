@@ -1,0 +1,33 @@
+(ns de.sveri.getless.banking.events
+  (:require [re-frame.core :as rf]
+            [day8.re-frame.http-fx]
+            [de.sveri.getless.banking.common :as comm]
+            [ajax.core :as ajax]))
+
+
+(rf/reg-event-fx
+  ::initialize-db
+  (fn [_ [_ _]]
+    {:http-xhrio {:method     :get
+                  :uri        "/banking/api/data/initial"
+                  :response-format (ajax/json-response-format {:keywords? true})
+                  :on-success [::initial-data-loaded]
+                  :on-failure [::initial-data-error]}
+     :db         (-> {}
+                     comm/show-loading-screen)}))
+
+(rf/reg-event-db
+  ::initial-data-loaded
+  (fn [db [_ response]]
+    (-> db
+        ;(fev/set-files (:files response))
+        ;(u-e/add-user-to-db (:user response))
+        comm/hide-loading-screen)))
+
+(rf/reg-event-fx
+  ::initial-data-error
+  (fn [{db :db} [_ response]]
+    {:db (-> db
+             (assoc :generic-error (:error response))
+             comm/hide-loading-screen)}))
+     ;:navigate-to :login}))

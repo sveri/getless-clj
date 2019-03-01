@@ -7,11 +7,13 @@
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
   :dependencies [[org.clojure/clojure "1.10.0"]
-                 [org.clojure/clojurescript "1.10.520"]
                  [org.clojure/spec.alpha "0.2.176"]
 
                  [org.clojure/core.cache "0.7.2"]
                  [org.clojure/core.async "0.4.490"]
+
+                 [org.clojure/data.json "0.2.6"]
+                 [org.clojure/data.csv "0.1.4"]
 
                  [ring "1.7.1"]
                  [lib-noir "0.9.9"]
@@ -40,69 +42,43 @@
 
                  [de.sveri/clojure-commons "0.2.2"]
 
-                 [clojure-miniprofiler "0.5.0"]
-
                  [reloaded.repl "0.2.4"]
                  [org.danielsz/system "0.4.2"]
 
-                 [cljs-ajax "0.8.0"]
                  [ring-transit "0.1.6"]
-                 [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
                  [com.taoensso/tempura "1.2.1"]
 
-                 [org.clojure/core.typed "0.6.0"]
-                 [prismatic/plumbing "0.5.5"]
-                 [prismatic/schema "1.1.10"]
-
                  [com.rpl/specter "1.1.2"]
 
-                 [de.sveri/closp-crud "0.3.0"]
                  [org.clojure/test.check "0.9.0"]
+
                  [clj-time "0.15.1"]
+
                  [org.clojure/tools.logging "0.4.1"]
                  [org.postgresql/postgresql "42.2.5"]
                  [org.clojure/java.jdbc "0.7.9"]
+
                  [org.clojure/tools.nrepl "0.2.13"]
-                 [kerodon "0.9.0"]
-
-                 [org.clojure/data.csv "0.1.4"]]
-
-  :plugins [[lein-cljsbuild "1.1.1"]]
+                 [kerodon "0.9.0"]]
 
   :min-lein-version "2.5.0"
 
   :jvm-opts ["-Duser.timezone=UTC"]
 
-  ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
-  ;:hooks [leiningen.cljsbuild]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
-
-  :cljsbuild
-  {:builds {:dev {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
-                  :figwheel {:css-dirs ["resources/public/css"]             ;; watch and update CSS
-                             :on-jsload "getless.dev/main"}
-                  :compiler     {:main           "getless.dev"
-                                 :asset-path     "/js/compiled/out"
-                                 :output-to      "resources/public/js/compiled/app.js"
-                                 :output-dir     "resources/public/js/compiled/out"}}
-            :adv {:source-paths ["src/cljs" "src/cljc"]
-                  :compiler     {:output-to     "resources/public/js/compiled/app.js"
-                                 ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
-                                 ;:jar           true
-                                 :optimizations :advanced
-                                 :pretty-print  false}}}}
 
   :profiles {:dev     {:repl-options {:init-ns          de.sveri.getless.user}
 
                        :plugins      [[lein-ring "0.9.0"]
-                                      [lein-figwheel "0.5.0-2"]
+                                      ;[lein-figwheel "0.5.0-2"]
                                       [test2junit "1.1.1"]]
 
                        :dependencies [
+
                                       ;[org.bouncycastle/bcprov-jdk15on "1.52"]
                                       ;[ring/ring-mock "0.3.0"]
                                       [org.apache.httpcomponents/httpclient "4.5.7"]
@@ -115,7 +91,16 @@
 
                                       ;[ring-mock "0.3.0"]
                                       [ring/ring-devel "1.7.1"]
-                                      [pjstadig/humane-test-output "0.9.0"]]
+                                      [pjstadig/humane-test-output "0.9.0"]
+
+                                      ; needed for shadow-cljs
+                                      [org.clojure/clojurescript "1.10.520"]
+                                      [reagent  "0.8.1"]
+                                      [re-frame "0.10.5"]
+                                      [day8.re-frame/http-fx "0.1.6"]
+                                      [cljs-ajax "0.8.0"]]
+
+
 
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]}
@@ -145,6 +130,8 @@
   :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "uberjar"]
             "unit" ["do" "test" ":unit"]
             "integ" ["do" "test" ":integration"]})
+            ;"fig" ["trampoline" "run" "-m" "figwheel.main"]
+            ;"build-dev" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]})
 
             ; migration utilities
             ;"migrate" ["run" "-m" "joplin.alias/migrate" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]

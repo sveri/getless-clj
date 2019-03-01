@@ -6,7 +6,6 @@
             [taoensso.tempura :refer [tr] :as tempura]
             [noir.session :as sess]
             [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
-            [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
             [ring.middleware.transit :refer [wrap-transit-response]]
             [ring.middleware.reload :refer [wrap-reload]]
             [de.sveri.getless.service.auth :refer [auth-session-backend]]
@@ -34,8 +33,7 @@
                                              parsed-languages))))))
 
 (def development-middleware
-  [#(wrap-miniprofiler % {:store in-memory-store-instance})
-   #(prone/wrap-exceptions % {:app-namespaces ['de.sveri]})
+  [#(prone/wrap-exceptions % {:app-namespaces ['de.sveri]})
    wrap-reload])
 
 (defn production-middleware [config]

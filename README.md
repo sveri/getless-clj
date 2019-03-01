@@ -1,4 +1,12 @@
+
+
 # getless
+
+## setup
+
+* npm install react
+* npm install create-react-class
+* npm install react-dom
 
 ## Contributors
 

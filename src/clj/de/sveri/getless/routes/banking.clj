@@ -13,13 +13,18 @@
 
 
 
-(defn upload-csv [config db filename req]
+(defn upload-csv [db req]
   (let [user-id (s-u/get-logged-in-user-id db)
         temp-file (-> req :params :filename :tempfile)]
     (with-open [reader (io/reader (.getPath temp-file) :encoding "Cp1252")]
       (bi/parse-and-insert-banking-data db user-id (csv/read-csv reader :separator \;)))
     (redirect "/banking")))
 
+(defn initial-data [db]
+  (let [user-id (s-u/get-logged-in-user-id db)]
+    (response {:fo :bar})))
+
 (defn banking-routes [config db]
   (routes (GET "/banking" [] (links-page))
-          (POST "/banking/upload" [filename :as req] (upload-csv config db filename req))))
+          (GET "/banking/api/data/initial" [] (initial-data db))
+          (POST "/banking/upload" req (upload-csv db req))))
