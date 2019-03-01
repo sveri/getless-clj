@@ -48,7 +48,7 @@
 
 
 (defn get-all-banking-data-by-user [db user-id]
-  (j/query db ["select * from banking_account ba
-               join banking_account_transaction bat ON ba.id = bat.banking_account_id
+  (j/query db ["select * from banking_account_transaction bat
+               join banking_account ba ON bat.banking_account_id = ba.id
                where users_id = ?"
                user-id]))

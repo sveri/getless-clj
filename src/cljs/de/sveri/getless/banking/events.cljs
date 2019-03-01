@@ -20,7 +20,7 @@
   ::initial-data-loaded
   (fn [db [_ response]]
     (-> db
-        (assoc :banking-transactions response)
+        (assoc :transactions response)
         comm/hide-loading-screen)))
 
 (rf/reg-event-fx

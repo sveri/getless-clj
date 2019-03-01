@@ -1,11 +1,12 @@
 (ns de.sveri.getless.banking.main
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
-            [de.sveri.getless.banking.events :as ev]))
+            [de.sveri.getless.banking.events :as ev]
+            [de.sveri.getless.banking.views :as v]))
 
 
 (defn ui []
-  [:h3 "sdfsdfs"])
+  [v/transaction-table])
 
 
 (rf/reg-event-db
