@@ -66,7 +66,9 @@
                  [org.postgresql/postgresql "42.2.5"]
                  [org.clojure/java.jdbc "0.7.9"]
                  [org.clojure/tools.nrepl "0.2.13"]
-                 [kerodon "0.9.0"]]
+                 [kerodon "0.9.0"]
+
+                 [org.clojure/data.csv "0.1.4"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]]
 

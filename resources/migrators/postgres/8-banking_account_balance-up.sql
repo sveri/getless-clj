@@ -15,3 +15,6 @@ CREATE INDEX ON banking_account_balance USING btree (banking_account_id);
 
 ALTER TABLE ONLY banking_account_balance
     ADD FOREIGN KEY (banking_account_id) REFERENCES banking_account(id);
+
+
+ALTER TABLE banking_account_balance ADD UNIQUE (banking_account_id, balance_date);

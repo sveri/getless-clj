@@ -34,6 +34,8 @@
              :handler loggedin-access}
             {:pattern #"^/goals.*"
              :handler loggedin-access}
+            {:pattern #"^/banking.*"
+             :handler loggedin-access}
             {:pattern #"^/"
              :handler unauthorized-access}])
 
