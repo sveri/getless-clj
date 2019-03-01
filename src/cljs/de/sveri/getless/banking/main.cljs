@@ -14,7 +14,6 @@
     {}))
 
 (defn render []
-  ;(rf/dispatch-sync [::initialize-db])
   (rf/dispatch-sync [::ev/initialize-db])
   (reagent/render [ui] (js/document.getElementById "banking_js")))
 

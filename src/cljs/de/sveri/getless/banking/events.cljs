@@ -20,8 +20,7 @@
   ::initial-data-loaded
   (fn [db [_ response]]
     (-> db
-        ;(fev/set-files (:files response))
-        ;(u-e/add-user-to-db (:user response))
+        (assoc :banking-transactions response)
         comm/hide-loading-screen)))
 
 (rf/reg-event-fx

@@ -45,3 +45,10 @@
 
 (defn get-bank-account-by-iban [db iban]
   (first (j/query db ["SELECT * FROM banking_account WHERE iban = ?" iban])))
+
+
+(defn get-all-banking-data-by-user [db user-id]
+  (j/query db ["select * from banking_account ba
+               join banking_account_transaction bat ON ba.id = bat.banking_account_id
+               where users_id = ?"
+               user-id]))

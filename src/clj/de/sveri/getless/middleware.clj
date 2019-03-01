@@ -8,12 +8,13 @@
             [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
             [ring.middleware.transit :refer [wrap-transit-response]]
             [ring.middleware.reload :refer [wrap-reload]]
+            ;[ring.middleware.format :refer [wrap-restful-format]]
             [de.sveri.getless.service.auth :refer [auth-session-backend]]
             [de.sveri.getless.service.auth :as auth]
             [de.sveri.getless.locale :as loc]
             [clojure.spec.test.alpha :as stest]))
 
-(defonce in-memory-store-instance (in-memory-store))
+;(defonce in-memory-store-instance (in-memory-store))
 
 (defn add-req-properties [handler config]
   (fn [req]
@@ -41,6 +42,7 @@
    add-locale
    #(wrap-access-rules % {:rules auth/rules})
    #(wrap-authorization % auth/auth-session-backend)
+   ;#(wrap-restful-format % :formats [:json-kw :transit-json])
    #(wrap-transit-response % {:encoding :json :opts {}})
    wrap-anti-forgery
    wrap-trimmings])

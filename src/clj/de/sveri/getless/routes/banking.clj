@@ -6,6 +6,7 @@
             [clojure.java.io :as io]
             [de.sveri.getless.layout :as layout]
             [de.sveri.getless.service.banking-import :as bi]
+            [de.sveri.getless.db.banking :as db-b]
             [de.sveri.getless.service.user :as s-u]))
 
 (defn links-page []
@@ -22,7 +23,7 @@
 
 (defn initial-data [db]
   (let [user-id (s-u/get-logged-in-user-id db)]
-    (response {:fo :bar})))
+    (response (db-b/get-all-banking-data-by-user db user-id))))
 
 (defn banking-routes [config db]
   (routes (GET "/banking" [] (links-page))
