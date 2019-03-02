@@ -1,7 +1,8 @@
 (ns de.sveri.getless.db.banking
   (:require [clojure.java.jdbc :as j])
   (:import (org.joda.time LocalDate)
-           (java.sql Timestamp)))
+           (java.sql Timestamp)
+           (java.text SimpleDateFormat)))
 
 
 (defn create-banking-account [db data]
@@ -47,8 +48,21 @@
   (first (j/query db ["SELECT * FROM banking_account WHERE iban = ?" iban])))
 
 
+(defn sql-date-to-string [d]
+  (let [df (SimpleDateFormat. "dd.MM.yyyy")]
+    (.format df d)))
+
+
+
 (defn get-all-banking-data-by-user [db user-id]
   (j/query db ["select * from banking_account_transaction bat
                join banking_account ba ON bat.banking_account_id = ba.id
                where users_id = ?"
-               user-id]))
+               user-id]
+           {:identifiers #(.replace % \_ \-)
+            :row-fn (fn [t]
+                      (-> t
+                          (assoc :amount (double (:amount t)))
+                          (assoc :booking-date (sql-date-to-string (:booking-date t)))
+                          (assoc :value-date (sql-date-to-string (:value-date t)))))}))
+

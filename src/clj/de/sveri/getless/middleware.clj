@@ -8,7 +8,7 @@
             [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
             [ring.middleware.transit :refer [wrap-transit-response]]
             [ring.middleware.reload :refer [wrap-reload]]
-            ;[ring.middleware.format :refer [wrap-restful-format]]
+            [ring.middleware.format :refer [wrap-restful-format]]
             [de.sveri.getless.service.auth :refer [auth-session-backend]]
             [de.sveri.getless.service.auth :as auth]
             [de.sveri.getless.locale :as loc]

@@ -4,11 +4,20 @@
 
 (defn transaction-table []
   [:div
-   (let [transactions (<sub [::b-sub/transactions])]
-     (println transactions)
-
-     (for [transaction transactions]
-       ^{:key (:id transaction)}
-       ;[:h3 "sf"]))])
-       [:tr (:amount transaction)]))])
+   [:table.table
+    [:thead
+     [:tr
+      [:th "Amount"]
+      [:th "Date"]
+      [:th "Purpose"]
+      [:th "Contractor / Beneficiary"]]]
+    [:tbody
+     (let [transactions (<sub [::b-sub/transactions])]
+       (for [transaction transactions]
+         ^{:key (:id transaction)}
+         [:tr
+          [:td (:amount transaction)]
+          [:td (:booking-date transaction)]
+          [:td (str (:booking-text transaction) " - " (:purpose transaction))]
+          [:td (str (:contractor-beneficiary transaction) " - "(:creditor-id transaction))]]))]]])
 

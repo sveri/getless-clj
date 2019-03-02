@@ -10,7 +10,7 @@
   (fn [_ [_ _]]
     {:http-xhrio {:method     :get
                   :uri        "/banking/api/data/initial"
-                  :response-format (ajax/json-response-format {:keywords? true})
+                  :response-format (ajax/detect-response-format)
                   :on-success [::initial-data-loaded]
                   :on-failure [::initial-data-error]}
      :db         (-> {}

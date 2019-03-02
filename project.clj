@@ -15,6 +15,8 @@
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/data.csv "0.1.4"]
 
+                 [com.cognitect/transit-clj "0.8.313"]
+
                  [ring "1.7.1"]
                  [lib-noir "0.9.9"]
                  [ring/ring-anti-forgery "1.3.0"]

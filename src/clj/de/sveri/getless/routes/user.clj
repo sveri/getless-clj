@@ -4,7 +4,6 @@
             [ring.util.response :as resp]
             [noir.session :as sess]
             [noir.validation :as vali]
-            [clojure-miniprofiler :as cjmp]
             [de.sveri.getless.layout :as layout]
             [de.sveri.getless.db.user :as db]
             [de.sveri.getless.service.user :as uservice]
@@ -44,7 +43,7 @@
   (not (vali/errors? :id :pass :confirm :captcha)))
 
 (defn admin-page [params localize db]
-  (let [users (cjmp/trace "all users" (db/get-all-users db (get params :filter)))
+  (let [users (db/get-all-users db (get params :filter))
         users-cleaned (map #(assoc % :is_active (if (or (= (:is_active %) false) (= (:is_active %) 0)) false true)) users)]
     (layout/render "user/admin.html" (merge {:users       users-cleaned :roles auth/available-roles
                                              :admin_title (localize [:admin/title])}
