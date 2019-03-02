@@ -11,13 +11,13 @@
 
 (rf/reg-event-db
   ::initialize-db
-  (fn [db _]
+  (fn [_ _]
     {}))
 
 (defn render []
-  (rf/dispatch-sync [::ev/initialize-db])
   (reagent/render [ui] (js/document.getElementById "banking_js")))
 
 (defn ^:export run []
+  (rf/dispatch-sync [::ev/initialize-db])
   ;(rf/dispatch-sync [::ev/initialize-db])
   (render))
