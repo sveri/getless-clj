@@ -13,7 +13,7 @@
                   :response-format (ajax/detect-response-format)
                   :on-success [::initial-data-loaded]
                   :on-failure [::initial-data-error]}
-     :db         (-> {}
+     :db         (-> {:selected-range "all"}
                      comm/show-loading-screen)}))
 
 (rf/reg-event-db
@@ -29,4 +29,10 @@
     {:db (-> db
              (assoc :generic-error (:error response))
              comm/hide-loading-screen)}))
-     ;:navigate-to :login}))
+
+
+(rf/reg-event-db
+  ::selected-range
+  (fn [db [_ range]]
+    (-> db
+        (assoc :selected-range range))))

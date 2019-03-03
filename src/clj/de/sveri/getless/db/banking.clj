@@ -62,7 +62,7 @@
            {:identifiers #(.replace % \_ \-)
             :row-fn (fn [t]
                       (-> t
-                          (assoc :amount (double (:amount t)))
-                          (assoc :booking-date (sql-date-to-string (:booking-date t)))
-                          (assoc :value-date (sql-date-to-string (:value-date t)))))}))
+                          (assoc :amount (double (:amount t)))))}))
+                          ;(assoc :booking-date (sql-date-to-string (:booking-date t)))
+                          ;(assoc :value-date (sql-date-to-string (:value-date t)))))}))
 

@@ -1,6 +1,8 @@
 (ns de.sveri.getless.banking.common
   (:require [re-frame.core :as rf]
-            [cljs.pprint :as pprint]))
+            [cljs.pprint :as pprint]
+            [cljs-time.format :as t-f]
+            [cljs-time.coerce :as t-c]))
 
 
 (def <sub (comp deref rf/subscribe))
@@ -11,7 +13,10 @@
 (defn format-amount [a]
   (pprint/cl-format nil  "~,2f €" a))
 
+(def german-date-formatter (t-f/formatter "dd.MM.yyyy"))
 
+(defn format-js-date-german [d]
+  (t-f/unparse german-date-formatter (t-c/from-date d)))
 
 ; loading screen
 

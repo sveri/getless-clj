@@ -5,23 +5,28 @@
 {% endblock %}
 
 {% block content %}
-<h3>Import</h3>
 
-<form method="post" enctype="multipart/form-data" action="/banking/upload" >
-    <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
-    <div class="form-group">
-        <input id="upload_input"  name="filename" type="file" accept="text/*" />
-    </div>
+<div class="container-fluid">
+    <h3>Import</h3>
 
-    <div class="form-group">
-        <input class="btn btn-primary" tabindex="4" type="submit" value="{% localize generic/ok %}">
-    </div>
-</form>
+    <form method="post" enctype="multipart/form-data" action="/banking/upload">
+        <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
-<hr />
+        <div class="form-group">
+            <input id="upload_input" name="filename" type="file" accept="text/*"/>
+        </div>
 
-<div id="banking_js"></div>
+        <div class="form-group">
+            <input class="btn btn-primary" tabindex="4" type="submit" value="{% localize generic/ok %}">
+        </div>
+    </form>
+
+    <hr/>
+
+    <div id="banking_js"></div>
+
+</div>
 {% endblock %}
 
 
