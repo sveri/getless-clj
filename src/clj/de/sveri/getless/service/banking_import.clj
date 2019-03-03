@@ -67,20 +67,22 @@
     bank-account-id))
 
 (defn insert-banking-account-balance-for-dkb-credit [db bank-account-id data]
-  (let [account-balance-raw (nth data 3)
+  (let [line-offset (if (.startsWith (first (nth data 2)) "Von:") 1 0)
+        account-balance-raw (nth data (+ 3 line-offset))
         balance (convert-german-number-to-numeric (first (str/split (second account-balance-raw) #" ")))
-        date (convert-german-date-string-to-date (second (nth data 4)))]
+        date (convert-german-date-string-to-date (second (nth data (+ line-offset 4))))]
     (db-b/create-banking-account-balance db bank-account-id date balance)))
 
 (defn insert-banking-account-transaction-for-dkb-credit [db bank-account-id data]
-  (doseq [transaction-raw (subvec (vec data) 7 (- (count data) 1))]
-    (let [transaction {:booking-date (convert-german-date-string-to-date (nth transaction-raw 2))
-                       :value-date (convert-german-date-string-to-date (nth transaction-raw 1))
-                       :booking-text (nth transaction-raw 3)
-                       :amount (convert-german-number-to-numeric (nth transaction-raw 4))
-                       :amount-currency "EUR"}]
+  (let [line-offset (if (.startsWith (first (nth data 2)) "Von:") 1 0)]
+    (doseq [transaction-raw (subvec (vec data) (+ line-offset 7) (- (count data) 1))]
+      (let [transaction {:booking-date    (convert-german-date-string-to-date (nth transaction-raw 2))
+                         :value-date      (convert-german-date-string-to-date (nth transaction-raw 1))
+                         :booking-text    (nth transaction-raw 3)
+                         :amount          (convert-german-number-to-numeric (nth transaction-raw 4))
+                         :amount-currency "EUR"}]
 
-      (db-b/create-banking-account-transaction db bank-account-id transaction))))
+        (db-b/create-banking-account-transaction db bank-account-id transaction)))))
 
 (defn parse-and-insert-banking-data-dkb-credit [db user-id data]
   (let [bank-account-id (insert-banking-account-for-dkb-credit db user-id data)
