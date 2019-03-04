@@ -13,6 +13,9 @@ pom.xml.asc
 *.iml
 **/out/*
 /resources/public/js/compiled
+**/cljs-runtime/**
+/node_modules
+.shadow-cljs
 profiles.clj
 Procfile
 /db
