@@ -13,7 +13,7 @@
                   :response-format (ajax/detect-response-format)
                   :on-success [::initial-data-loaded]
                   :on-failure [::initial-data-error]}
-     :db         (-> {:selected-range "all"}
+     :db         (-> {:selected-range "this_month"}
                      comm/show-loading-screen)}))
 
 (rf/reg-event-db

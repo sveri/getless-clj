@@ -1,6 +1,7 @@
 (ns de.sveri.getless.banking.service
   (:require [cljs-time.core :as t]
-            [cljs-time.coerce :as t-c]))
+            [cljs-time.coerce :as t-c]
+            [clojure.string :as str]))
 
 
 (defn get-transactions-for-this-month [transactions]
@@ -15,25 +16,21 @@
             transactions)))
 
 
-(defn get-transactions-for-last-month [transactions]
-  (let [now (t/now)
-        year (t/year now)
-        month (t/month now)
-        year-before (t/year (t/minus now (t/months 1)))
-        month-before (t/month (t/minus now (t/months 1)))]
-    (filter #(t/within? (t/interval (t/date-time year-before month-before)
-                                    (t/date-time year month))
+(defn get-transactions-for-month [transactions time-range]
+  (let [[m y] (str/split time-range #"/")
+        month-year-now (t/local-date (int y) (int m) 1)
+        month-year-after (t/plus month-year-now (t/months 1))]
+    (filter #(t/within? (t/interval month-year-now
+                                    month-year-after)
                         (t-c/from-date (:booking-date %)))
             transactions)))
 
 
-(defn get-transactions-for-forlast-month [transactions]
-  (let [now (t/now)
-        year-before (t/year (t/minus now (t/months 1)))
-        month-before (t/month (t/minus now (t/months 1)))
-        forlastmonth-before (t/month (t/minus now (t/months 2)))]
-    (filter #(t/within? (t/interval (t/date-time year-before forlastmonth-before)
-                                    (t/date-time year-before month-before))
+(defn get-transactions-for-year [transactions year]
+  (let [year-now (t/local-date (int year) 1 1)
+        year-after (t/plus year-now (t/years 1))]
+    (filter #(t/within? (t/interval year-now
+                                    year-after)
 
                         (t-c/from-date (:booking-date %)))
             transactions)))
@@ -42,6 +39,6 @@
 (defn get-transactions-in-time-range [transactions time-range]
   (cond
     (= "this_month" time-range) (get-transactions-for-this-month transactions)
-    (= "last_month" time-range) (get-transactions-for-last-month transactions)
-    (= "forlast_month" time-range) (get-transactions-for-forlast-month transactions)
-    :else transactions))
+    (str/includes? time-range "/") (get-transactions-for-month transactions time-range)
+    (= "all" time-range) transactions
+    :else (get-transactions-for-year transactions time-range)))
