@@ -26,4 +26,4 @@ ALTER TABLE ONLY banking_account_transaction
     ADD FOREIGN KEY (banking_account_id) REFERENCES banking_account(id);
 
 
-ALTER TABLE banking_account_transaction ADD UNIQUE (banking_account_id, booking_date, banking_account_number, amount);
+ALTER TABLE banking_account_transaction ADD UNIQUE (banking_account_id, booking_date, booking_text, amount);

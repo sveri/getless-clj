@@ -64,7 +64,9 @@
                  [org.clojure/java.jdbc "0.7.9"]
 
                  [org.clojure/tools.nrepl "0.2.13"]
-                 [kerodon "0.9.0"]]
+                 [kerodon "0.9.0"]
+
+                 [funcool/cuerdas "2.0.5"]]
 
   :min-lein-version "2.5.0"
 

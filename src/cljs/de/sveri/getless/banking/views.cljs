@@ -3,6 +3,9 @@
             [de.sveri.getless.banking.subs :as b-sub]
             [de.sveri.getless.banking.events :as b-ev]))
 
+(defn get-value-of-event [e]
+  (.-value (.-target e)))
+
 (defn transaction-table []
   [:div
    [:div.row
@@ -13,8 +16,12 @@
          :value selected-range}
         [:option {:value "all"} "All"]
         [:option {:value "this_month"} "This Month"]
-        [:option {:value "last_month"} "Last Month"]])]
-    [:div.col-md-8]
+        [:option {:value "last_month"} "Last Month"]
+        [:option {:value "forlast_month"} "Forlast Month"]])]
+    [:div.col-md-5
+     [:input.form-control {:value (<sub [::b-sub/search-text])
+                           :on-change #(>evt [::b-ev/set-search-text (-> % (.-target) (.-value))])}]]
+    [:div.col-md-3]
     [:div.col-md-2 (str "Amount Summary: " (comm/format-amount (<sub [::b-sub/amount-summary])))]]
 
    [:hr]

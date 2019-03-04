@@ -18,3 +18,4 @@
 
                 [com.cognitect/transit-cljs "0.8.256"]
                 [com.andrewmcveigh/cljs-time "0.5.2"]]}
+                ;[funcool/cuerdas "2.0.5"]]}

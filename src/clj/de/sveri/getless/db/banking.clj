@@ -57,7 +57,8 @@
 (defn get-all-banking-data-by-user [db user-id]
   (j/query db ["select * from banking_account_transaction bat
                join banking_account ba ON bat.banking_account_id = ba.id
-               where users_id = ?"
+               where users_id = ?
+               ORDER BY booking_date DESC"
                user-id]
            {:identifiers #(.replace % \_ \-)
             :row-fn (fn [t]
