@@ -44,7 +44,8 @@
       [:th "Amount"]
       [:th "Date"]
       [:th "Purpose"]
-      [:th "Contractor / Beneficiary"]]]
+      [:th "Contractor / Beneficiary"]
+      [:th "Recurring (Monthly)"]]]
     [:tbody
      (let [transactions (<sub [::b-sub/filtered-transactions])]
        (for [transaction transactions]
@@ -53,5 +54,11 @@
           [:td (comm/format-amount (:amount transaction))]
           [:td (comm/format-js-date-german (:booking-date transaction))]
           [:td (str (:booking-text transaction) " - " (:purpose transaction))]
-          [:td (str (:contractor-beneficiary transaction) " - "(:creditor-id transaction))]]))]]])
+          [:td (str (:contractor-beneficiary transaction) " - "(:creditor-id transaction))]
+          [:td [:input.form-control
+                {:type "checkbox"
+                 :checked (get transaction :recurring)
+                 :on-change #(>evt [::b-ev/set-transaction-recurring
+                                    (:id transaction)
+                                    (get-value-of-event %)])}]]]))]]])
 

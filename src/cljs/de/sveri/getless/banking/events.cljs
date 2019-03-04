@@ -43,3 +43,16 @@
     (println search-text)
     (-> db
         (assoc :search-text search-text))))
+
+
+(rf/reg-event-fx
+  ::set-transaction-recurring
+  (fn [{db :db} [_ id checked?]]
+    (println id checked?)
+    {
+     ;:http-xhrio {:method     :put
+     ;             :uri        "/banking/api/transaction/recurring"
+     ;             :response-format (ajax/detect-response-format)
+     ;             :on-success [::initial-data-loaded]
+     ;             :on-failure [::initial-data-error]}
+     :db         db}))
