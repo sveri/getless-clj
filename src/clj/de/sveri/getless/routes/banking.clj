@@ -22,8 +22,9 @@
     (redirect "/banking")))
 
 (defn initial-data [db]
-  (let [user-id (s-u/get-logged-in-user-id db)]
-    (response (db-b/get-all-banking-data-by-user db user-id))))
+  (let [user-id (s-u/get-logged-in-user-id db)
+        transactions-list (db-b/get-all-banking-data-by-user db user-id)]
+    (response (reduce #(assoc %1 (:id %2) %2) {} transactions-list))))
 
 (defn banking-routes [config db]
   (routes (GET "/banking" [] (links-page))

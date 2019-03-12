@@ -55,4 +55,4 @@
      ;             :response-format (ajax/detect-response-format)
      ;             :on-success [::initial-data-loaded]
      ;             :on-failure [::initial-data-error]}
-     :db         db}))
+     :db         (assoc-in db [:transactions id :recurring] checked?)}))
