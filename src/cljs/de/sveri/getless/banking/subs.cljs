@@ -6,7 +6,7 @@
 (rf/reg-sub
   ::transactions
   (fn [db _]
-    (-> db :transactions vals)))
+    (reverse (sort-by :booking-date (-> db :transactions vals)))))
 
 (rf/reg-sub
   ::selected-range

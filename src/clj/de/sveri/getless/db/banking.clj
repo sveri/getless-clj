@@ -25,24 +25,39 @@
                   balance]))
 
 (defn create-banking-account-transaction [db banking-account-id data]
-  (j/execute! db ["INSERT INTO banking_account_transaction (banking_account_id, booking_date, value_date, booking_text,
+  (let [cleaned-data (if (= "ONLINE-UEBERWEISUNG" (:booking-text data))
+                       (assoc data :booking-text "Überweisung")
+                       data)
+        cleaned-data (if (or (.contains (:booking-text cleaned-data) "LOHN")
+                             (.contains (:booking-text cleaned-data) "GEHALT"))
+                       (assoc cleaned-data :booking-text "Lohn, Gehalt, Rente")
+                       cleaned-data)
+        cleaned-data (if (or (.contains (:booking-text cleaned-data) "KARTENZAHLUNG"))
+                       (assoc cleaned-data :booking-text "Kartenzahlung/-abrechnung")
+                       cleaned-data)
+        cleaned-data (if (or (.contains (:booking-text cleaned-data) "SEPA-ELV-LASTSCHRIFT")
+                             (.contains (:booking-text cleaned-data) "LASTSCHRIFT")
+                             (.contains (:booking-text cleaned-data) "FOLGELASTSCHRIFT"))
+                       (assoc cleaned-data :booking-text "Lastschrift")
+                       cleaned-data)]
+    (j/execute! db ["INSERT INTO banking_account_transaction (banking_account_id, booking_date, value_date, booking_text,
                     contractor_beneficiary, purpose, banking_account_number, blz, amount, amount_currency, creditor_id,
                     mandate_reference, customer_reference)
                     values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     ON CONFLICT DO NOTHING"
-                  banking-account-id
-                  (Timestamp. (.getMillis (.toDateTimeAtStartOfDay (:booking-date data))))
-                  (Timestamp. (.getMillis (.toDateTimeAtStartOfDay (:value-date data))))
-                  (get data :booking-text "")
-                  (get data :contractor-beneficiary "")
-                  (get data :purpose "")
-                  (:banking-account-number data)
-                  (get data :blz "")
-                  (:amount data)
-                  (get data :amount-currency "")
-                  (get data :creditor-id "")
-                  (get data :mandate-reference "")
-                  (get data :customer-reference "")]))
+                    banking-account-id
+                    (Timestamp. (.getMillis (.toDateTimeAtStartOfDay (:booking-date cleaned-data))))
+                    (Timestamp. (.getMillis (.toDateTimeAtStartOfDay (:value-date cleaned-data))))
+                    (get cleaned-data :booking-text "")
+                    (get cleaned-data :contractor-beneficiary "")
+                    (get cleaned-data :purpose "")
+                    (:banking-account-number cleaned-data)
+                    (get cleaned-data :blz "")
+                    (:amount cleaned-data)
+                    (get cleaned-data :amount-currency "")
+                    (get cleaned-data :creditor-id "")
+                    (get cleaned-data :mandate-reference "")
+                    (get cleaned-data :customer-reference "")])))
 
 (defn get-bank-account-by-iban [db iban]
   (first (j/query db ["SELECT * FROM banking_account WHERE iban = ?" iban])))
