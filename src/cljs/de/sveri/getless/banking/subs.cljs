@@ -19,6 +19,20 @@
     (-> db :search-text)))
 
 
+
+(defn search-by-search-text [search-text transactions]
+  (let [search-words (if (str/includes? search-text " ")
+                       (str/split search-text #" ")
+                       [search-text])]
+    (flatten (mapv (fn [search-word]
+                     (let [search-small (str/lower-case search-word)]
+                       (filter #(or (str/includes? (str/lower-case (:booking-text %)) search-small)
+                                    (str/includes? (str/lower-case (:purpose %)) search-small)
+                                    (str/includes? (str/lower-case (:contractor-beneficiary %)) search-small))
+                               transactions)))
+                  search-words))))
+
+
 (rf/reg-sub
   ::filtered-transactions
   (fn []
@@ -28,11 +42,7 @@
   (fn [[transactions selected-range search-text]]
     (let [time-filtered-transactions (b-s/get-transactions-in-time-range transactions selected-range)]
       (if search-text
-        (let [search-small (str/lower-case search-text)]
-          (filter #(or (str/includes? (str/lower-case (:booking-text %)) search-small)
-                       (str/includes? (str/lower-case (:purpose %)) search-small)
-                       (str/includes? (str/lower-case (:contractor-beneficiary %)) search-small))
-                  time-filtered-transactions))
+        (search-by-search-text search-text time-filtered-transactions)
         time-filtered-transactions))))
 
 

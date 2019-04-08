@@ -40,7 +40,6 @@
 (rf/reg-event-db
   ::set-search-text
   (fn [db [_ search-text]]
-    (println search-text)
     (-> db
         (assoc :search-text search-text))))
 
