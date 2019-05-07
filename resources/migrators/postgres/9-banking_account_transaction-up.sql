@@ -25,8 +25,10 @@ CREATE INDEX ON banking_account_transaction USING btree (banking_account_id);
 ALTER TABLE ONLY banking_account_transaction
     ADD FOREIGN KEY (banking_account_id) REFERENCES banking_account(id);
 
-
+--
 ALTER TABLE banking_account_transaction ADD UNIQUE (banking_account_id, booking_date, booking_text, amount);
+--
+--CREATE UNIQUE INDEX ON banking_account_transaction (banking_account_id, booking_date, (lower(booking_text)), (lower(contractor_beneficiary)), amount)
+--WHERE contractor_beneficiary IS NOT NULL AND booking_text IS NOT NULL;
 
-CREATE UNIQUE INDEX ON banking_account_transaction (banking_account_id, booking_date, (lower(booking_text)), (lower(contractor_beneficiary)), amount)
-WHERE contractor_beneficiary IS NOT NULL AND booking_text IS NOT NULL;
+--CREATE UNIQUE INDEX ON banking_account_transaction (banking_account_id, booking_date, amount);

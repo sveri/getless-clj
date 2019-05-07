@@ -35,6 +35,9 @@
         cleaned-data (if (or (.contains (:booking-text cleaned-data) "KARTENZAHLUNG"))
                        (assoc cleaned-data :booking-text "Kartenzahlung/-abrechnung")
                        cleaned-data)
+        cleaned-data (if (or (.contains (:booking-text cleaned-data) "GUTSCHR. UEBERWEISUNG"))
+                       (assoc cleaned-data :booking-text "Gutschrift")
+                       cleaned-data)
         cleaned-data (if (or (.contains (:booking-text cleaned-data) "SEPA-ELV-LASTSCHRIFT")
                              (.contains (:booking-text cleaned-data) "LASTSCHRIFT")
                              (.contains (:booking-text cleaned-data) "FOLGELASTSCHRIFT"))
@@ -79,6 +82,16 @@
             :row-fn (fn [t]
                       (-> t
                           (assoc :amount (double (:amount t)))))}))
-                          ;(assoc :booking-date (sql-date-to-string (:booking-date t)))
-                          ;(assoc :value-date (sql-date-to-string (:value-date t)))))}))
+
+(defn get-last-banking-data-by-user-account-id [db bank-account-id]
+  (j/query db ["select * from banking_account_transaction
+               WHERE banking_account_id = ?
+               ORDER BY booking_date DESC
+               LIMIT 1"
+               bank-account-id]
+           {:identifiers #(.replace % \_ \-)
+            :row-fn (fn [t]
+                      (-> t
+                          (assoc :amount (double (:amount t)))))}))
+
 

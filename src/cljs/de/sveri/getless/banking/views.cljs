@@ -57,8 +57,8 @@
           [:td (str (:contractor-beneficiary transaction) " - "(:creditor-id transaction))]
           [:td [:input.form-control
                 {:type "checkbox"
-                 :checked (get transaction :recurring)
-                 :on-change #(>evt [::b-ev/set-transaction-recurring
-                                    (:id transaction)
-                                    (get-value-of-event %)])}]]]))]]])
+                 :checked (get transaction :recurring)}]]]))]]])
+                 ;:on-change #(>evt [::b-ev/set-transaction-recurring
+                 ;                   (:id transaction)
+                 ;                   (.. % -target -checked)])}]]]))]]])
 
