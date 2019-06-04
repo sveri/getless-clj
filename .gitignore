@@ -19,3 +19,4 @@ pom.xml.asc
 profiles.clj
 Procfile
 /db
+/resources/public/js/banking
