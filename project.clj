@@ -111,7 +111,7 @@
                                       (pjstadig.humane-test-output/activate!)]}
                        ;:ring {:stacktrace-middleware prone.middleware/wrap-exceptions}}
 
-             :uberjar {:auto-clean false                    ; not sure about this one
+             :uberjar {:auto-clean true
                        :omit-source true
                        :aot         :all}}
 

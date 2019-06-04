@@ -53,8 +53,8 @@
                            (convert-german-date-string-to-date-time (nth % booking-date-index))
                            last-inserted-date)
                         data))]
-        data
-        data))))
+        data)
+      data)))
 
 (defn insert-banking-account-transaction-for-dkb-giro [db bank-account-id data]
   (println (count data))
