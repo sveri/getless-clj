@@ -61,7 +61,6 @@
   (let [transactions-raw (subvec (vec data) 7 (- (count data) 1))
         transactions-raw (remove-already-inserted-data db transactions-raw bank-account-id 0)]
     (println "inserting last " (count transactions-raw) " entries for " bank-account-id)
-    (clojure.pprint/pprint transactions-raw)
     (doseq [transaction-raw transactions-raw]
       (let [value-date (if (str/blank? (nth transaction-raw 1))
                          (nth transaction-raw 0)
