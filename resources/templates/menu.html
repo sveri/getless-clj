@@ -1,112 +1,89 @@
-<div field="menu">
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
-    <ul class="nav navbar-nav" id="header-menu-wrapper">
+        <a class="navbar-brand" href="/">{% localize generic/home %}</a>
+
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+
+            {% if identity %}
+            <ul class="navbar-nav mr-auto">
+                <li class='nav-item {% active goals %}'>
+                    <a class="nav-link" href="/goals">{% localize generic/goals %} <span class="sr-only">(current)</span></a>
+                </li>
+                <li class='nav-item {% active banking %}'>
+                    <a class="nav-link" href="/banking">{% localize generic/banking %}</a>
+                </li>
+                <li class='nav-item {% active activity %}'>
+                    <a class="nav-link" href="/activity">{% localize generic/activities %}</a>
+                </li>
+                <li class='nav-item dropdown {% active food weight %}'>
+                    <a class="nav-link dropdown-toggle"
+                       href="#" id="food-dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% localize generic/diet %}</a>
+                    <div class="dropdown-menu" aria-labelledby="food-dropdown-menu">
+                        <a class="dropdown-item" href="/food">{% localize generic/food %}</a>
+                        <a class="dropdown-item" href="/food/contents">{% localize generic/ingredients %}</a>
+                        <a class="dropdown-item" href="/weight">{% localize generic/weight-progress %}</a>
+                    </div>
+                </li>
+
+
+
+                {% ifequal "admin" role %}
+                <li class='nav-item dropdown {% active admin %}'>
+                    <a class="nav-link dropdown-toggle"
+                       href="#" id="admin-dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                    <div class="dropdown-menu" aria-labelledby="admin-dropdown-menu">
+                        <a class="dropdown-item" href="/admin/users">Users</a>
+                    </div>
+                </li>
+                {% endifequal %}
+
+
+            </ul>
+
+            {% endif %}
+        </div>
+
+
+
 
         {% if identity %}
 
-        <li field="link-list" {% ifequal page "goals/index.html" %} class="active"{%endifequal%}>
-        <a href="/goals">{% localize generic/goals %}</a></li>
-
-        <!--<li field="link-list" {% ifequal page "notes/index.html" %} class="active"{%endifequal%}>-->
-        <!--<a href="/notes">{% localize generic/notes %}</a></li>-->
-
-        <!--<li field="link-list" {% ifequal page "timemanagement/index.html" %} class="active"{%endifequal%}>-->
-        <!--<a href="/notes">{% localize generic/timemanagement %}</a></li>-->
-
-        <li field="link-list" {% ifequal page "banking/index.html" %} class="active"{%endifequal%}>
-        <a href="/banking">{% localize generic/banking %}</a></li>
-
-        <li field="link-list" {% ifequal page "activity/index.html" %} class="active"{%endifequal%}>
-        <a href="/activity">{% localize generic/activities %}</a></li>
-
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {% localize generic/diet %}
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li field="link-list" {% ifequal page "food/index.html" %} class="active"{%endifequal%}>
-                <a href="/food">{% localize generic/food %}</a></li>
-                <li field="link-list" {% ifequal page "food/contents.html" %} class="active"{%endifequal%}>
-                <a href="/food/contents">{% localize generic/ingredients %}</a></li>
-                <li field="link-list" {% ifequal page "weight/index.html" %} class="active"{%endifequal%}>
-                <a href="/weight">{% localize generic/weight-progress %}</a></li>
-            </ul>
-        </li>
-
-        <!--<li class="dropdown">-->
-            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-                <!--{% localize generic/finance %}-->
-                <!--<b class="caret"></b>-->
-            <!--</a>-->
-
-            <!--<ul class="dropdown-menu">-->
-                <!--<li field="link-list" {% ifequal page "finance/inout.html" %} class="active"{%endifequal%}>-->
-                <!--<a href="/finance/inout">{% localize finance/inout %}</a></li>-->
-                <!--<li field="link-list" {% ifequal page "finance/links.html" %} class="active"{%endifequal%}>-->
-                <!--<a href="/finance/links">{% localize generic/links %}</a></li>-->
-            <!--</ul>-->
-        <!--</li>-->
-
-        {% endif %}
-
-
-        {% ifequal "admin" role %}
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Admin
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li field="link-list"  {% ifequal page "user/admin.html" %} class="active"{%endifequal%}>
-                        <a href="/admin/users">Users</a></li>
-                    <li field="link-list"  {% ifequal page "cc/index.html" %} class="active"{%endifequal%}>
-                        <a href="/admin/cc">CRUD</a></li>
-                </ul>
-            </li>
-        {% endifequal %}
-    </ul>
-    
-    {% if identity %}
-
-    <div id="logout" class="navbar-right">
-        <ul class="navbar-right nav navbar-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    {{identity}}
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/user/changepassword">{% localize user/change_password %}</a></li>
-                    <li><a href="/user/logout">{% localize generic/logout %}</a></li>
-                </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class='nav-item dropdown {% active user %}'>
+                <a class="nav-link dropdown-toggle"
+                   href="#" id="user-dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{identity}}</a>
+                <div class="dropdown-menu" aria-labelledby="user-dropdown-menu">
+                    <a class="dropdown-item" href="/user/changepassword">{% localize user/change_password %}</a>
+                    <a class="dropdown-item" href="/user/logout">{% localize generic/logout %}</a>
+                </div>
             </li>
         </ul>
-    </div>
 
-    {% else %}
+        {% else %}
 
-    <div class="navbar-collapse collapse">
-
-        <form class="navbar-form navbar-right" role="form" action="/user/login" method="POST">
+        <form class="form-inline mt-2 mt-md-0" action="/user/login" method="POST">
             <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
             {% if nexturl %}
-                <input name="nexturl" type="hidden" value="{{nexturl}}"/>
+            <input name="nexturl" type="hidden" value="{{nexturl}}"/>
             {% endif %}
 
-            <div class="form-group">
-                <input id="upper_email" type="text" placeholder="{% localize generic/email %}" name="username" class="form-control">
-            </div>
-            <div class="form-group">
-                <input id="upper_password" type="password" placeholder="{% localize generic/password %}" name="password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">{% localize user/signin %}</button>
+            <input class="form-control mr-sm-2" id="upper_email" type="text" placeholder="{% localize generic/email %}"
+                   name="username">
 
-            {% if registration-allowed? %}
-                <a href="/user/signup" class="btn btn-success">{% localize user/signup %}</a>
-            {% endif %}
+            <input class="form-control mr-sm-2" id="upper_password" type="password"
+                   placeholder="{% localize generic/password %}" name="password">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">{% localize user/signin %}</button>
         </form>
-    </div>
-    {% endif %}
-</div>
+
+
+        {% endif %}
+    </nav>
+</header>
+

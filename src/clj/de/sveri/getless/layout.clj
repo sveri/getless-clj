@@ -33,7 +33,7 @@
              :identity (sess/get :identity)
              :role (sess/get :role)
              :af-token af/*anti-forgery-token*
-             :page template
+             :page (s/replace template #"templates/" "")
              :registration-allowed? (sess/get :registration-allowed?)
              :captcha-enabled? (sess/get :captcha-enabled?)
              :flash-message (sess/flash-get :flash-message)
