@@ -37,7 +37,7 @@
                 <td>{{product.ingredients_text}}</td>
                 <td><input type="number" placeholder="{% localize generic/amount %}" name="amount[]" value="{{product.amount}}" required="required" class="form-control"></td>
                 <td><select name="unit[]"><option value="gramm">{% localize generic/gram %}</option><option value="liter">{% localize generic/litre %}</option></select></td>
-                <td><a href="/food/delete/session/{{product.id}}" class="btn btn-danger pull-right">{% localize generic/delete %}</a></td>
+                <td><a href="/food/delete/session/{{product.id}}" class="btn btn-danger float-right">{% localize generic/delete %}</a></td>
             </tr>
         {% endfor %}
         </tbody>

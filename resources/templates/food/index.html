@@ -4,7 +4,7 @@
 {% block content %}
 
 <a href="/food/add" class="btn btn-primary">{% localize food/new %}</a>
-<a href="/food/add-from-template" class="btn btn-primary pull-right">{% localize food/from_template %}</a>
+<a href="/food/add-from-template" class="btn btn-primary float-right">{% localize food/from_template %}</a>
 
 <br /><br />
 
@@ -28,7 +28,7 @@
                 {% if forloop.first %}
                     <tr>
                         <td colspan="5"><h3>{{product.eaten-at|date:"dd.MM.yyyy"}}</h3></td>
-                        <td><a href="/food/editday/{{product.eaten-at|timestamp}}" class="btn btn-primary pull-right">{% localize generic/edit %} </a></td>
+                        <td><a href="/food/editday/{{product.eaten-at|timestamp}}" class="btn btn-primary float-right">{% localize generic/edit %} </a></td>
                     </tr>
                 {% endif %}
 
@@ -38,7 +38,7 @@
                     <td>{{product.product.nutriments-text|safe}}</td>
                     <td>{{product.product.ingredients_text}}</td>
                     <td>{{product.amount}} {% ifequal product.unit "gramm" %}{% localize generic/gram %} {% endifequal %}</td>
-                    <td><a href="/food/delete/database/{{product.id}}" class="btn btn-danger pull-right">{% localize generic/delete %}</a></td>
+                    <td><a href="/food/delete/database/{{product.id}}" class="btn btn-danger float-right">{% localize generic/delete %}</a></td>
                 </tr>
             {% endfor %}
         </tbody>
