@@ -47,7 +47,6 @@
 (rf/reg-event-fx
   ::set-transaction-recurring
   (fn [{db :db} [_ id checked?]]
-    (println id checked?)
     {
      ;:http-xhrio {:method     :put
      ;             :uri        "/banking/api/transaction/recurring"

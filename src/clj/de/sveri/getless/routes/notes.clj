@@ -5,8 +5,7 @@
             [ring.util.response :refer [response redirect]]
             [de.sveri.getless.service.user :as s-user]
             [clojure.tools.logging :as log]
-            [de.sveri.getless.db.notes :as db-notes]
-            [clojure.edn :as edn]))
+            [de.sveri.getless.db.notes :as db-notes]))
 
 
 (defn notes-page [db]

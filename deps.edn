@@ -1,4 +1,4 @@
-{:paths ["src/clj" "src/cljc" "resources"]
+{:paths ["src/clj" "src/cljc" "src/cljs" "resources"]
 
 
  :deps

@@ -1,7 +1,7 @@
 (ns de.sveri.getless.db.goals
   (:require [clojure.java.jdbc :as j]
-            [clojure.spec.alpha :as s])
-  (:import (java.sql Timestamp)))
+            [clojure.spec.alpha :as s]
+            [clojure.tools.logging :as log]))
 
 
 (defn get-goals [db users_id]
@@ -19,7 +19,7 @@
   (try
       (j/delete! db :goals ["id = ? and users_id = ?" id user-id])
     (catch Exception e
-      (println (.getNextException e))
+      (log/error (.getNextException e))
       (throw (Exception. e)))))
 
 (defn edit-goal [db id goal s-m-l done user-id]

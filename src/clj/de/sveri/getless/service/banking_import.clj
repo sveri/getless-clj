@@ -2,7 +2,8 @@
   (:require [clojure.string :as str]
             [de.sveri.getless.db.banking :as db-b]
             [clj-time.coerce :as t-coer]
-            [clj-time.core :as t-c])
+            [clj-time.core :as t-c]
+            [clojure.tools.logging :as log])
   (:import (java.util Locale)
            (java.text NumberFormat)
            (org.joda.time.format DateTimeFormat)))
@@ -57,10 +58,9 @@
       data)))
 
 (defn insert-banking-account-transaction-for-dkb-giro [db bank-account-id data]
-  (println (count data))
   (let [transactions-raw (subvec (vec data) 7 (- (count data) 1))
         transactions-raw (remove-already-inserted-data db transactions-raw bank-account-id 0)]
-    (println "inserting last " (count transactions-raw) " entries for " bank-account-id)
+    (log/info "inserting last " (count transactions-raw) " transaction entries for banking id: " bank-account-id)
     (doseq [transaction-raw transactions-raw]
       (let [value-date (if (str/blank? (nth transaction-raw 1))
                          (nth transaction-raw 0)
@@ -109,7 +109,7 @@
   (let [line-offset (if (.startsWith (first (nth data 2)) "Von:") 1 0)
         transactions-raw (subvec (vec data) (+ line-offset 7) (- (count data) 1))
         transactions-raw (remove-already-inserted-data db transactions-raw bank-account-id 2)]
-    (println "inserting last " (count transactions-raw) " entries for " bank-account-id)
+    (log/info "inserting last " (count transactions-raw) " transcation entries for banking id: " bank-account-id)
     (doseq [transaction-raw transactions-raw]
       (let [transaction {:booking-date    (convert-german-date-string-to-local-date (nth transaction-raw 2))
                          :value-date      (convert-german-date-string-to-local-date (nth transaction-raw 1))
