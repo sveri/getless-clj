@@ -1,5 +1,6 @@
 (ns de.sveri.getless.service.off
-  (:require [org.httpkit.client :as client]
+  (:require [clj-http.client :as client]
+    ;[org.httpkit.client :as client]
             [de.sveri.getless.db.food :as db-food]
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
@@ -148,8 +149,7 @@
         (let [search-uri (str off-url "cgi/search.pl?search_terms=" sanitized-search-term
                               (if only-one-locale (str "&tagtype_0=countries&tag_contains_0=contains&tag_0=" (sess/get :short-locale)) "")
                               "&search_simple=1&json=1&page_size=1000")
-              json-body (json/read-str (:body @(client/request {:url search-uri :basic-auth [off-user off-password] :insecure? true}))
-                                       :key-fn keyword)
+              json-body (:body (client/get search-uri {:basic-auth [off-user off-password] :insecure? true :as :json}))
               sanitized-products (sanitize-products (get json-body :products))]
           (swap! product-search-cache #(cache/miss % cache-key (assoc json-body :products sanitized-products)))
           (assoc json-body :products sanitized-products))
@@ -171,12 +171,11 @@
     (if (cache/has? @product-cache id)
       (cache/lookup @product-cache id)
       (try
-        (let [product (json/read-str (:body @(client/request {:url uri :basic-auth [off-user off-password] :insecure? true}))
-                                     :key-fn keyword)]
+        (let [product (:body (client/get uri {:basic-auth [off-user off-password] :insecure? true :as :json}))]
           (swap! product-cache #(cache/miss % id product))
           product)
         (catch Exception e
-          (log/error "Cannot retrieve off products.")
+          (log/error "Cannot retrieve off products for id: " uri)
           (.printStackTrace e))))))
 
 
