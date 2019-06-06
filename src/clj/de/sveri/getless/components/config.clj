@@ -6,12 +6,12 @@
   (s-c/prod-conf-or-dev))
 
 
-(defrecord Config [config]
+(defrecord Config []
   component/Lifecycle
   (start [component]
-    (assoc component :config config))
+    (assoc component :config (prod-conf-or-dev)))
   (stop [component]
     (assoc component :config nil)))
 
-(defn new-config [config]
-  (->Config config))
+(defn new-config []
+  (->Config))

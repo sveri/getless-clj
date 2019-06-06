@@ -21,7 +21,6 @@
             [de.sveri.getless.routes.food :refer [food-routes]]
             [de.sveri.getless.routes.habit :refer [habit-routes]]
             [de.sveri.getless.routes.activity :refer [activity-routes]]
-            [de.sveri.getless.routes.cc :refer [cc-routes]]
             [de.sveri.getless.routes.user :refer [user-routes registration-routes]]
             [de.sveri.getless.middleware :refer [load-middleware]]
             [de.sveri.getless.service.config :as s-c]
@@ -60,7 +59,7 @@
     (-> (app-handler
           (into [] (concat (when (:registration-allowed? config) [(registration-routes config db)])
                          ;; add your application routes here
-                         [(cc-routes config) (weight-routes config db) (off-routes config) home-routes
+                         [(weight-routes config db) (off-routes config) home-routes
                           (user-routes config db) (food-routes config db) (habit-routes config db)
                           (goal-routes config db) (notes-routes config db) (banking-routes config db)
                           (activity-routes config db) base-routes]))

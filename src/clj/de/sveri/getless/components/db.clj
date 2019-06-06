@@ -5,6 +5,7 @@
   component/Lifecycle
   (start [component]
     (let [db-url (get-in config [:config :jdbc-url])]
+      (println db-url)
       (assoc component :db {:connection-uri db-url})))
   (stop [component] component))
 

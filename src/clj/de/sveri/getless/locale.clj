@@ -1,8 +1,17 @@
 (ns de.sveri.getless.locale
-  (:require [de.sveri.clojure.commons.files.edn :as comm-edn]))
+  (:require [clojure.edn :as edn]
+            [clojure.java.io :as io])
+  (:import (java.io PushbackReader)))
+
+(defn from-edn [fname]
+  "reads an edn file from classpath"
+  (with-open [rdr (-> (io/resource fname)
+                      io/reader
+                      PushbackReader.)]
+    (edn/read rdr)))
 
 (def local-dict
-  {:de (comm-edn/from-edn "i18n/de.edn")
-   :en (comm-edn/from-edn "i18n/en.edn")
-   :ru (comm-edn/from-edn "i18n/ru.edn")
-   :nl (comm-edn/from-edn "i18n/nl.edn")})
+  {:de (from-edn "i18n/de.edn")
+   :en (from-edn "i18n/en.edn")
+   :ru (from-edn "i18n/ru.edn")
+   :nl (from-edn "i18n/nl.edn")})

@@ -10,6 +10,7 @@
         products (if-not (s/blank? search)
                    (off/search-products search only-one-locale? off-url off-user off-password)
                    {})
+        _ (clojure.pprint/pprint (:products products))
         products-with-nutriments (mapv #(off/add-nutriments % localize off/nutriments-to-extract) (:products products))]
     (layout/render "off/search.html" {:products products-with-nutriments :search search})))
 

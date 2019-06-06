@@ -1,8 +1,8 @@
 (ns de.sveri.getless.components.components
   (:require
     [com.stuartsierra.component :as component]
-    (system.components
-      [repl-server :refer [new-repl-server]])
+    ;(system.components
+    ;  [repl-server :refer [new-repl-server]])
     [de.sveri.getless.components.server :refer [new-web-server]]
     [de.sveri.getless.components.handler :refer [new-handler]]
     [de.sveri.getless.components.config :as c]
@@ -12,7 +12,7 @@
 
 (defn dev-system []
   (component/system-map
-    :config (c/new-config (c/prod-conf-or-dev))
+    :config (c/new-config)
     :selmer (selm/new-selmer false)
     :db (component/using (new-db) [:config])
     :handler (component/using (new-handler) [:config :db])
@@ -21,7 +21,7 @@
 
 (defn prod-system []
   (component/system-map
-    :config (c/new-config (c/prod-conf-or-dev))
+    :config (c/new-config)
     :selmer (selm/new-selmer true)
     :db (component/using (new-db) [:config])
     :handler (component/using (new-handler) [:config :db])
