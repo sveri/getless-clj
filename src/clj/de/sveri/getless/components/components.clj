@@ -1,8 +1,6 @@
 (ns de.sveri.getless.components.components
   (:require
     [com.stuartsierra.component :as component]
-    ;(system.components
-    ;  [repl-server :refer [new-repl-server]])
     [de.sveri.getless.components.server :refer [new-web-server]]
     [de.sveri.getless.components.handler :refer [new-handler]]
     [de.sveri.getless.components.config :as c]

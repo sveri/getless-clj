@@ -1,7 +1,6 @@
 (ns de.sveri.getless.db.notes
   (:require [clojure.java.jdbc :as j]
-            [clojure.spec.alpha :as s])
-  (:import (java.sql Timestamp)))
+            [clojure.spec.alpha :as s]))
 
 
 (defn get-notes [db users_id]

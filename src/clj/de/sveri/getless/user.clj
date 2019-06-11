@@ -1,22 +1,8 @@
 (ns de.sveri.getless.user
-  (:require [clojure.tools.namespace.repl :as tn]
-            [de.sveri.getless.components.components :refer [dev-system]]
-            [com.stuartsierra.component :as component]))
+  (:require [de.sveri.getless.components.components :refer [dev-system]]
+            [system.repl :refer [system set-init! start stop reset]]
+            [clojure.tools.logging :as log]))
 
-
-(defonce system (dev-system))
-
-(defn start
-  []
-  (alter-var-root #'system component/start-system)
-  :started)
-
-(defn stop
-  []
-  (alter-var-root #'system component/stop-system)
-  :stopped)
-
-(defn reset []
-  (stop)
-  (tn/refresh-all)
+(defn startup []
+  (set-init! #'dev-system)
   (start))

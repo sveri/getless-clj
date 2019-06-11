@@ -48,8 +48,8 @@
                                              parsed-languages))))))
 
 (def development-middleware
-  [#(prone/wrap-exceptions % {:app-namespaces ['de.sveri]})
-     wrap-reload]) ; still needed with tools-deps
+  [;#(prone/wrap-exceptions % {:app-namespaces ['de.sveri]})
+   wrap-reload])                                            ; still needed with tools-deps
 
 (defn production-middleware [config]
   [#(add-req-properties % config)
