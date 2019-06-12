@@ -2,8 +2,6 @@
   (:require [selmer.parser :as parser]
             [clojure.string :as s]
             [ring.util.response :refer [content-type response]]
-            ;[ring.util.response :refer [response]]
-            ;[ring.util.http-response :refer [content-type ok]]
             [ring.middleware.anti-forgery :as af]
             [compojure.response :refer [Renderable]]
             [noir.session :as sess]))
@@ -45,33 +43,3 @@
 
 (defn render [template & [params]]
   (RenderableTemplate. (str "templates/" template) params))
-
-;(parser/set-resource-path!  (clojure.java.io/resource "templates/"))
-;
-;(defn render
-;  "renders the HTML template located relative to resources/templates"
-;  [template & [params]]
-;  (content-type
-;    (ok
-;      (parser/render-file
-;        template
-;        (assoc params
-;          :page template
-;          :csrf-token af/*anti-forgery-token*
-;          ;:servlet-context (if-let [context (:servlet-context request)]
-;          ;                   ;; If we're not inside a serlvet environment (for
-;          ;                   ;; example when using mock requests), then
-;          ;                   ;; .getContextPath might not exist
-;          ;                   (try (.getContextPath context)
-;          ;                        (catch IllegalArgumentException _ context)))
-;          :identity (sess/get :identity)
-;          :role (sess/get :role)
-;          :af-token af/*anti-forgery-token*
-;          :page template
-;          :registration-allowed? (sess/get :registration-allowed?)
-;          :captcha-enabled? (sess/get :captcha-enabled?)
-;          :flash-message (sess/flash-get :flash-message)
-;          :flash-alert-type (sess/flash-get :flash-alert-type))))
-;          ;:localize-fn (:localize request))))
-;    "text/html; charset=utf-8"))
-

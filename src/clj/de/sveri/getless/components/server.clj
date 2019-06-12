@@ -14,7 +14,7 @@
                                    :error-logger (fn [msg ex]
                                                    (log/error msg)
                                                    (log/error (-> ex Throwable->map clojure.main/ex-triage clojure.main/ex-str))
-                                                   (.printStackTrace ex))})]
+                                                   (log/error ex))})]
       (log/info "added server to component")
       (assoc component :server server)))
   (stop [component]

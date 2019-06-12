@@ -198,6 +198,24 @@
       (mapv f map-or-list))))
 
 
+(defn add-missing-unit [product unit]
+  (if (str/blank? (get-in product [:nutriments unit]))
+    (assoc-in product [:nutriments unit] "g")
+    product))
+
+(defn sanitize
+  "Adds default g to units if it is empty"
+  [products]
+  (map
+    (fn [product]
+      (let [product (add-missing-unit product :sugars_unit)
+            product (add-missing-unit product :fat_unit)
+            product (add-missing-unit product :salt_unit)]
+        product))
+    products))
+
+
+
 
 
 
